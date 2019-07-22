@@ -1,4 +1,6 @@
 # SummerSchool
+Environment setup:
+
  sudo apt-get install python3
 
  If pip3 not installed run:
@@ -8,10 +10,13 @@
 
  git clone https://github.com/Liliia111/SummerSchool.git
 
-  cd SummerSchool
-  virtualenv env
-  env/bin/activate
-  pip3 install -r requirements.txt
+ cd SummerSchool
+ 
+ virtualenv env
+ 
+ env/bin/activate
+ 
+ pip3 install -r requirements.txt
   
 
 
