@@ -17,8 +17,21 @@ Environment setup:
  env/bin/activate
  
  pip3 install -r requirements.txt
-  
 
 
+installing psycopg2: 
+ pip3 install psycopg2 
+
+if u have some troubles try:
+ sudo apt-get install libpq-dev
+
+in file 'local_settings.py' u have to initialize two variables 
+POSTGRES_DB_USERNAME = 'name'
+POSTGRES_DB_PASSWORD = 'password'
+and change database user and password in 'settings.py' to this variables
+
+ python3 manage.py makemigrations
+ python3 manage.py migrate
  
-
+ To run project:
+ python3 manage.py runserver
