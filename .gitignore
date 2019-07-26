@@ -125,3 +125,6 @@ dmypy.json
 
 #local settings
 local_settings.py
+
+.idea/
+node_modules/
