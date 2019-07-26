@@ -36,7 +36,7 @@ and change database user and password in 'settings.py' to this variables
  To run project:
  python3 manage.py runserver
 
-##UI setup
+## UI setup
 Install Node.js:
 ```bash
 sudo apt install node.js
