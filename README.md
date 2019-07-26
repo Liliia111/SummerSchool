@@ -45,7 +45,7 @@ Once installed, you verify it by checking the installed version of Node.js with 
 ```bash
 nodejs --version
 ```
-The version must be 10 or upper, if the version is older, use nvm to change version.
+The version must be 10 or upper, if the version is older, use [nvm](https://www.digitalocean.com/community/tutorials/node-js-ubuntu-18-04-ru) to change version.
 
 To install npm, use the following command:
 ```bash
