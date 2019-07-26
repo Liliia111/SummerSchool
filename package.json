@@ -1,0 +1,22 @@
+{
+  "name": "summerschool",
+  "version": "1.0.0",
+  "description": "Environment setup:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liliia111/SummerSchool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liliia111/SummerSchool/issues"
+  },
+  "homepage": "https://github.com/Liliia111/SummerSchool#readme",
+  "dependencies": {
+    "create-react-app": "^3.0.1"
+  }
+}
