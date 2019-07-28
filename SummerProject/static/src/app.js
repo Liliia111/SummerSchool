@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import Button from '@material-ui/core/Button';
 
 const App = () => (
