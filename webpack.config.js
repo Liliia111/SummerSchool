@@ -2,8 +2,8 @@ var path = require('path');
 module.exports = {
     entry: './SummerProject/static/src/app.js',
     output: {
-        path: path.join(__dirname, 'static/public'),
-        filename: './SummerProject/static/public/bundle.js' // this is the compiled final javascript file which we will include in the index.html
+        path: path.join(__dirname, 'SummerProject/static/public'),
+        filename: 'bundle.js' // this is the compiled final javascript file which we will include in the index.html
     },
     module: {
         rules: [{
