@@ -20,4 +20,9 @@ from main import views
 urlpatterns = [
     path('', views.index),
     path('admin/', admin.site.urls),
+    path('html_endpoint/', views.html_endpoint, name="html_endpoint"),
+    path('txt_endpoint/', views.txt_endpoint, name="txt_endpoint"),
+    path('jsn_endpoint/', views.jsn_endpoint,name="jsn_endpoint"),
+
+
 ]
