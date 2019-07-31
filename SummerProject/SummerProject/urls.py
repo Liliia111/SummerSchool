@@ -19,5 +19,7 @@ from main import views
 
 urlpatterns = [
     path('', views.index),
+    path('txt_test/', views.txt_test),
+    path('json_test/', views.json_test),
     path('admin/', admin.site.urls),
 ]
