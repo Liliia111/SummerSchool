@@ -18,6 +18,8 @@ from django.urls import path
 from main import views
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.handler.index),
     path('admin/', admin.site.urls),
+    path('random_string', views.handler.random_string),
+    path('json_bitch', views.handler.json_bitch),
 ]

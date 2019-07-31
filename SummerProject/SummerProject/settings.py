@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from local_settings import *
+from .local_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'summer_pr_db',
-        'USER': POSTGRES_DB_USERNAME,
-        'PASSWORD': POSTGRES_DB_PASSWORD,
+        'USER': 'milaviex',
+        'PASSWORD': '210800',
         'HOST': 'localhost',
         'PORT': '',
     }

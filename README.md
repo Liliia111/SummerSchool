@@ -35,3 +35,35 @@ and change database user and password in 'settings.py' to this variables
  
  To run project:
  python3 manage.py runserver
+
+## UI setup
+Install Node.js:
+```bash
+sudo apt install node.js
+```
+Once installed, you verify it by checking the installed version of Node.js with this command:
+```bash
+nodejs --version
+```
+The version must be 10 or upper, if the version is older, use [nvm](https://www.digitalocean.com/community/tutorials/node-js-ubuntu-18-04-ru) to change version.
+
+To install npm, use the following command:
+```bash
+sudo apt install npm
+```
+
+To install all requirements for UI use next commands:
+```bash
+cd SummerSchool
+npm install 
+```
+
+To add bundle.js:
+```bash
+npm run build
+```
+
+To check if everything is installed, use the following command:
+```bash
+npm run dev-server
+```
