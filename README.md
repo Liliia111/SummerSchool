@@ -58,11 +58,17 @@ cd SummerSchool
 npm install 
 ```
 
+<<<<<<< HEAD
 To add bundle.js:
 ```bash
 npm run build
 ```
 
+To check if everything is installed, use the following command:
+```bash
+npm run dev-server
+```
+=======
 To check if everything is installed, use the following command:
 ```bash
 npm run dev-server
