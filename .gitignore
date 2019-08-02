@@ -129,5 +129,5 @@ local_settings.py
 .idea/
 node_modules/
 package-lock.json
-static/public/bundle.js
+SummerProject/static/public/bundle.js
 
