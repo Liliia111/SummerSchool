@@ -130,4 +130,5 @@ local_settings.py
 node_modules/
 package-lock.json
 static/public/bundle.js
-
+bootstrap/
+django-rest-framework/
