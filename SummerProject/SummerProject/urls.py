@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main import views
+from main.views import index, json_test, txt_test
+from rest_framework.urlpatterns import format_suffix_patterns
+from articles.views import CreateView
+
 
 urlpatterns = [
-    path('', views.index),
-    path('txt_test/', views.txt_test),
-    path('json_test/', views.json_test),
+    path('', index),
+    path('api/v1/articles/', CreateView.as_view(), name="create"),
+    path('txt_test/', txt_test),
+    path('json_test/', json_test),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
