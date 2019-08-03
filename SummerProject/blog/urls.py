@@ -1,14 +1,10 @@
-from django.conf.urls import url
 from django.urls import path
-from .views import ListArticleView
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
-
-from . import views
+from .views import ArticleView, EditArticleView
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    path('api/v1/articles/', ListArticleView.as_view(), name='create'),
-    path('api/v1/articles/<int:pk>/', views.ArticleDetail.as_view()),
+    path('articles/', ArticleView.as_view()),
+    path('articles/<int:pk>', EditArticleView.as_view())
 ]
 
+urlpatterns = format_suffix_patterns(urlpatterns)

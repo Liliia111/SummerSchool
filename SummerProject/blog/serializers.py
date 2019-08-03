@@ -1,9 +1,18 @@
+
 from rest_framework import serializers
+
 from .models import Article
-from django.contrib.auth.models import Group, Permission
 
 
-class ArticleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Article
-        fields = ("id", "title", "content")
+class ArticleSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=30)
+    content = serializers.CharField(max_length=300)
+
+    def create(self, data):
+        return Article.objects.create(**data)
+
+    def update(self, instance, data):
+        instance.title = data.get('title', instance.title)
+        instance.content = data.get('content', instance.content)
+        instance.save()
+        return instance
