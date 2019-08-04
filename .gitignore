@@ -129,4 +129,9 @@ local_settings.py
 .idea/
 node_modules/
 package-lock.json
-static/public/
+SummerProject/static/public/bundle.js
+SummerProject/pytest.ini
+SummerProject/.coverage
+SummerProject/.coveragerc
+SummerProject/.pytest_cache
+.eslintrc.js
