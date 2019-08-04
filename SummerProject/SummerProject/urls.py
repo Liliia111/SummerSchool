@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from main.views import index, json_test, txt_test
 from rest_framework.urlpatterns import format_suffix_patterns
-from articles.views import CreateView
+from articles.views import CreateView, DetailsView
 
 
 urlpatterns = [
     path('', index),
     path('api/v1/articles/', CreateView.as_view(), name="create"),
+    path('api/v1/articles/<int:pk>/', DetailsView.as_view(), name="details"),
     path('txt_test/', txt_test),
     path('json_test/', json_test),
     path('admin/', admin.site.urls),
