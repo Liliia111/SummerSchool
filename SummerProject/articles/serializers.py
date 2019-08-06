@@ -9,5 +9,5 @@ class ArticlesSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
         model = Article
-        fields = ('id', 'title', 'content')
-        # read_only_fields = ('title', 'content')
+        fields = ['id', 'title', 'content']
+        read_only_fields = ('title', 'content')

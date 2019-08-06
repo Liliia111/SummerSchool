@@ -14,4 +14,13 @@ class Test(unittest.TestCase):
         self.assertEqual(tmp.status_code, 201)
         self.assertFalse(tmp.is_redirect)
         self.assertEqual(tmp.headers['Content-Type'], "application/json")
-        # self.assertEqual(tmp.text, {"title": "new_title", "content": "new_content"})
+        data = tmp.content.json()
+        self.assertEqual(data["title"], "new_title")
+
+#
+# import pytest
+#
+# @pytest.mark.django_db
+# def test_my_user():
+#     me = User.objects.get(username='me')
+#     assert me.is_superuser
