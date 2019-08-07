@@ -34,4 +34,4 @@ def test_delete(client, existing_article):
 
 
     response = client.delete('/api/v1/articles/{}'.format(existing_article.id))
-    assert response.status_code == 204
+    assert response.status_code == 200
