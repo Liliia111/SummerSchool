@@ -1,20 +1,29 @@
-from django.http import HttpResponse
-from django.http import JsonResponse
-from django.utils.decorators import method_decorator
-from django.views import View
 import json
-from blog.models import Article
+from django.views import View
+from django.http import HttpResponse, JsonResponse
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from blog.models import Article
 
 
-def index(request):
+def index():
     return HttpResponse("Hello, world. You're at the blog index.")
 
 
 class ArticleList(View):
     def get(self, request):
         article_list = list(Article.objects.values())
-        return JsonResponse(article_list, safe=False)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(article_list, 10)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
+        return JsonResponse(articles.object_list, safe=False)
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -23,20 +32,27 @@ class ArticleList(View):
     def post(self, request):
         data = request.body.decode('utf8')
         data = json.loads(data)
+
         try:
             new_article = Article(title=data["title"], content=data["content"])
+            new_article.full_clean()
             new_article.save()
-            return JsonResponse(data, safe=False)
+            return JsonResponse(status=201, data=data, safe=False)
         except:
-            return JsonResponse({"error": "not valid data"}, safe=False)
+            message = "not valid data"
+            return JsonResponse(status=400, data={'error': message})
 
 
 class ArticleDetail(View):
 
     def get(self, request, pk):
-        article = Article.objects.get(pk=pk)
-        article_list = {'title': article.title, 'content': article.content}
-        return JsonResponse(article_list, safe=False)
+        try:
+            article = Article.objects.get(pk=pk)
+            article_object = {'title': article.title, 'content': article.content}
+            return JsonResponse(article_object, safe=False)
+        except Article.DoesNotExist:
+            message = "primary key does not exist"
+            return JsonResponse(status=404, data={'error': message})
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -53,57 +69,22 @@ class ArticleDetail(View):
                     new_article.title = data[key]
                 if key == "content":
                     new_article.content = data[key]
+            new_article.full_clean()
             new_article.save()
-            return JsonResponse(data, safe=False)
+            new_article.save()
+            return JsonResponse(status=201, data=data, safe=False)
         except Article.DoesNotExist:
-            return JsonResponse({"error": "primary key does not exist"}, safe=False)
+            message = "primary key does not exist"
+            return JsonResponse(status=404, data={'error': message})
         except:
-            return JsonResponse({"error": "not valid data"}, safe=False)
+            message = "not valid data"
+            return JsonResponse(status=400, data={'error': message})
 
     def delete(self, request, pk):
         try:
             new_article = Article.objects.get(pk=pk)
             new_article.delete()
-            return JsonResponse({"deleted": True}, safe=False)
-        except:
-            return JsonResponse({"error": "not valid primary key"}, safe=False)
-# class ArticleList(APIView):
-#
-#     def get(self, request, format=None):
-#         articles = Article.objects.all()
-#         serializer = ArticleSerializer(articles, many=True)
-#         return Response(serializer.data)
-#
-#     def post(self, request, format=None):
-#         serializer = ArticleSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# class ArticleDetail(APIView):
-#
-#     def get_object(self, pk):
-#         try:
-#             return Article.objects.get(pk=pk)
-#         except Article.DoesNotExist:
-#             raise Http404
-#
-#     def get(self, request, pk, format=None):
-#         article = self.get_object(pk)
-#         serializer = ArticleSerializer(article)
-#         return Response(serializer.data)
-#
-#     def put(self, request, pk, format=None):
-#         snippet = self.get_object(pk)
-#         serializer = ArticleSerializer(snippet, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#     def delete(self, request, pk, format=None):
-#         article = self.get_object(pk)
-#         article.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+            return HttpResponse(status=204)
+        except Article.DoesNotExist:
+            message = "primary key does not exist"
+            return JsonResponse(status=404, data={'error': message})

@@ -1,0 +1,38 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for article in articles %}
+      <tr>
+        <td>{{ article.title }}</td>
+        <td>{{ article.content }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if articles.has_other_pages %}
+  <ul class="pagination">
+    {% if articles.has_previous %}
+      <li><a href="?page={{ articles.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in articles.paginator.page_range %}
+      {% if artciles.id == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if articles.has_next %}
+      <li><a href="?page={{ articles.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}

@@ -1,7 +1,7 @@
 import pytest
 from blog.models import Article
 
-pytestmark = pytest.mark.django_db
+PYTESTMARK = pytest.mark.django_db
 
 
 @pytest.mark.django_db
@@ -22,28 +22,19 @@ def test_get(client):
 def test_post(client):
     response = client.post('/api/v1/articles/', {'title': 'title', 'content': 'content98798'},
                            content_type='application/json')
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json() == {'title': 'title', 'content': 'content98798'}
 
 
 @pytest.mark.parametrize(
     'title, content', [
-        ('jj', '1'),
-        (0.3, ''),
-        ('5', 'Buzz'),
-        ('10', 'Buzz'),
-        ('15', 'FizzBuzz'),
-        ('16', '16')
+        ('jj' * 300, '1'),
+        (0.3, None),
     ]
 )
-# @pytest.mark.parametrize("a,b,expected", testdata, ids=["forward", "backward"])
-def test_input_for_db(title, content):
-    article = Article.objects.create(title=title, content=content)
-    assert article.title == title
-    assert article.content == content
-
-
-
-
-
-
+def test_post_not_valid_data(client, title, content):
+    response = client.post('/api/v1/articles/', {'title': title, 'content': content},
+                           content_type='application/json')
+    assert response.status_code == 400
+    assert response.json() == {"error": "not valid data"}
+    assert Article.objects.count() == 0
