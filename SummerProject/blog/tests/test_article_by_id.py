@@ -2,7 +2,7 @@ import pytest
 import requests
 from blog.models import Article
 
-PYTESTMARK = pytest.mark.django_db
+pytestmark = pytest.mark.django_db
 
 
 @pytest.fixture

@@ -37,7 +37,10 @@ class ArticleList(View):
             new_article = Article(title=data["title"], content=data["content"])
             new_article.full_clean()
             new_article.save()
-            return JsonResponse(status=201, data=data, safe=False)
+            response = JsonResponse(status=201, data=data, safe=False)
+            response['id'] = new_article.id
+            return response
+
         except:
             message = "not valid data"
             return JsonResponse(status=400, data={'error': message})

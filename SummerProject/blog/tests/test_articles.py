@@ -1,7 +1,7 @@
 import pytest
 from blog.models import Article
 
-PYTESTMARK = pytest.mark.django_db
+pytestmark = pytest.mark.django_db
 
 
 @pytest.mark.django_db
