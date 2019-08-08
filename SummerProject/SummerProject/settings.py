@@ -84,9 +84,7 @@ DATABASES = {
         'PASSWORD': POSTGRES_DB_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',
-        'TEST': {
-            'NAME': 'test_db',
-        },
+
     }
 }
 
