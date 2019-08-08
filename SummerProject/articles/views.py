@@ -1,79 +1,59 @@
-# from django.shortcuts import render
-# from django_handlers import Handler
-# from rest_framework import generics
-# from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+from django.views import View
 from .models import Article
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .serializers import ArticlesSerializer
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+from django.utils.decorators import method_decorator
+import json
 
 
-    # Create your views here.
-    # handler_general = Handler()
-    #
-    #
-    # @handler_general.get('articles')
-    # def view_articles(request):
-    #     # here we should show all the our articles titles/ look on computer
-    #     # articles = Article.objects.all()
-    #     # return render(request, 'general.html', {'articles': [article.data for article in articles]})
-    #     return Http
+class ArticleView(View):
+    def get(self, request):
+        friend_list = list(Article.objects.values())
+        return JsonResponse(friend_list, safe=False)
 
-#
-# class CreateView(generics.ListCreateAPIView):
-#     queryset = Article.objects.all()
-#     serializer_class = ArticlesSerializer
-#
-#     def perform_create(self, serializer):
-#         serializer.save()
-#
-#
-# class DetailsView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Article.objects.all()
-#     serializer_class = ArticlesSerializer
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(ArticleView, self).dispatch(request, *args, **kwargs)
 
-@api_view(['GET', 'POST'])
-@csrf_exempt
-def article_list(request, format=None):
-    """View for getting all articles and post new one"""
-    if request.method == 'GET':
-        articles = Article.objects.values('title', 'content').all()
-        serializer = ArticlesSerializer(articles, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ArticlesSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request):
+        data = request.body.decode('utf8')
+        data = json.loads(data)
+        articles = Article(title=data["title"], content=data["content"])
+        articles.save()
+        return JsonResponse({"created": data}, safe=False)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-@csrf_exempt
-def article_details(request, pk, format=None):
-    """View for get, put and delete article with certain pk"""
+class ArticleDetailView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(ArticleDetailView, self).dispatch(request, *args, **kwargs)
 
-    try:
-        article = Article.objects.values('title', 'content').get(pk=pk)
-    except Article.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    def get(self, request, pk):
+        article_list = {"article": list(Article.objects.filter(pk=pk).values())}
+        return JsonResponse(article_list, safe=False)
 
-    if request.method == 'GET':
-        serializer = ArticlesSerializer(article)
-        return Response(serializer.data)
+    def put(self, request, pk):
+        data = request.body.decode('utf8')
+        data = json.loads(data)
+        try:
+            new_article = Article.objects.get(pk=pk)
+            data_key = list(data.keys())
+            for key in data_key:
+                if key == "title":
+                    new_article.title = data[key]
+                if key == "content":
+                    new_article.content = data[key]
+            new_article.save()
+            return JsonResponse({"updated": data}, safe=False)
+        except Article.DoesNotExist:
+            return JsonResponse({"error": "Your friend having provided primary key does not exist"}, safe=False)
+        except:
+            return JsonResponse({"error": "not a valid data"}, safe=False)
 
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = ArticlesSerializer(article, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        article.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, pk):
+        try:
+            new_article = Article.objects.get(pk=pk)
+            new_article.delete()
+            return JsonResponse({"deleted": True}, safe=False)
+        except:
+            return JsonResponse({"error": "not a valid primary key"}, safe=False)
