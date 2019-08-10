@@ -1,17 +1,33 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views import View
 from .models import Article
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 import json
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.forms.models import model_to_dict
+
+ARTICLES_NUMBER_PER_PAGE = 3
 
 
 class ArticleView(View):
-    def get(self, request):
-        friend_list = list(Article.objects.values())
-        return JsonResponse(friend_list, safe=False)
 
-    @method_decorator(csrf_exempt)
+    def get(self, request):
+        articles_list = list(Article.objects.values('id', 'title', 'content').all())
+        paginator = Paginator(articles_list, ARTICLES_NUMBER_PER_PAGE)
+        page = request.GET.get('page', 1)
+
+        try:
+            article_list = paginator.page(page)
+        except PageNotAnInteger:
+            article_list = paginator.page(1)
+        except EmptyPage:
+            article_list = paginator.page(paginator.num_pages)
+
+        response = HttpResponse(article_list)
+        response['custom'] = 'custom get articles'
+        return response
+
+    @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         return super(ArticleView, self).dispatch(request, *args, **kwargs)
 
@@ -20,17 +36,23 @@ class ArticleView(View):
         data = json.loads(data)
         articles = Article(title=data["title"], content=data["content"])
         articles.save()
-        return JsonResponse({"created": data}, safe=False)
+        if len(data["title"]) > 300:
+            return HttpResponse(status=400)
+        else:
+            response = JsonResponse(data, safe=False, status=201)
+            return response
 
 
 class ArticleDetailView(View):
-    @method_decorator(csrf_exempt)
+    @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         return super(ArticleDetailView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, pk):
-        article_list = {"article": list(Article.objects.filter(pk=pk).values())}
-        return JsonResponse(article_list, safe=False)
+        article = model_to_dict(Article.objects.get(pk=pk), fields=['title', 'content'])
+        response = JsonResponse(article, safe=False)
+        response['custom_id'] = pk
+        return response
 
     def put(self, request, pk):
         data = request.body.decode('utf8')
@@ -44,16 +66,20 @@ class ArticleDetailView(View):
                 if key == "content":
                     new_article.content = data[key]
             new_article.save()
-            return JsonResponse({"updated": data}, safe=False)
+            response = JsonResponse({"updated": data}, safe=False, status=200)
+            response['custom_id'] = pk
+            return response
         except Article.DoesNotExist:
-            return JsonResponse({"error": "Your friend having provided primary key does not exist"}, safe=False)
+            response = JsonResponse({"error": "pk doesn't exist"}, safe=False, status=404)
+            return response
         except:
-            return JsonResponse({"error": "not a valid data"}, safe=False)
+            return JsonResponse({"error": "not valid data"}, safe=False)
 
     def delete(self, request, pk):
         try:
             new_article = Article.objects.get(pk=pk)
             new_article.delete()
-            return JsonResponse({"deleted": True}, safe=False)
+            response = JsonResponse({"deleted": True}, safe=False, status=204)
+            return response
         except:
-            return JsonResponse({"error": "not a valid primary key"}, safe=False)
+            return JsonResponse({"error": "not valid pk"}, safe=False)
