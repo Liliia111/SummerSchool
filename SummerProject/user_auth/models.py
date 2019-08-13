@@ -7,7 +7,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=40, blank=True)
     last_name = models.CharField(max_length=40, blank=True)
     email = models.EmailField(unique=True, blank=True)
-    password = models.CharField(max_length=1000, blank=True)
+    password = models.CharField(max_length=10000, blank=True)
 
     USERNAME_FIELD = 'email'
     objects = UserManager()
