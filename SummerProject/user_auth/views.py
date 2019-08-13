@@ -33,7 +33,10 @@ def login(request):
             auth_login(request, user)
             response = HttpResponse(status=200)
             # TODO: max_age
-            response.set_cookie('id', user.id)
+            request.session['logged_in'] = True
+            request.session['id'] = user.id
+            request.session['name'] = user.first_name
+            request.session['password'] = user.password
             return response
         return HttpResponseBadRequest()
     return HttpResponseBadRequest()
@@ -44,6 +47,12 @@ def logout(request):
     if request.method == "GET":
         auth_logout(request)
         response = HttpResponse(status=200)
-        response.delete_cookie('id')
+        try:
+            del request.session['logged in']
+            del request.session['id']
+            del request.session['name']
+            del request.session['password']
+        except KeyError:
+            pass
         return response
     return HttpResponseBadRequest
