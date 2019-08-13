@@ -4,6 +4,37 @@ from .validator import valid_data_for_login, valid_data_for_creating_user
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
+from django.views import View
+from django.utils.decorators import method_decorator
+
+
+class UserView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserView, self).dispatch(request, *args, **kwargs)
+
+    def put(self, request):
+        changes = json.loads(request.body.decode('utf-8'))
+
+        if 'id' in request.session:
+            user_id = request.session['id']
+        else:
+            return HttpResponseBadRequest()
+
+        user = User.objects.get(id=user_id)
+        print(user.first_name)
+        if not user:
+            return HttpResponseBadRequest()
+
+        first_name = changes['first_name']
+        last_name = changes['last_name']
+
+        user.update(
+            first_name=first_name,
+            last_name=last_name,
+        )
+        print(user.first_name)
+        return HttpResponse(status=200)
 
 
 @csrf_exempt
