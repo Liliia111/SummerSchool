@@ -7,8 +7,21 @@ from django.template.loader import render_to_string
 
 
 class Command(BaseCommand):
-
     help = 'Sends an email to the specified email addresses.'
+
+    def __read_message(self, message):
+        if os.path.isfile(message):
+            try:
+                message = open(message).read()
+                return message
+            except (IOError, OSError) as exc:
+                raise CommandError('Error reading message file "{}": {}'.format(message, exc))
+
+    def __email_validation(self, recipient):
+        try:
+            validate_email(recipient)
+        except:
+            raise CommandError('"{}" is not a valid email address'.format(recipient))
 
     def add_arguments(self, parser):
         parser.add_argument('subject')
@@ -20,18 +33,9 @@ class Command(BaseCommand):
         message = options['message']
         recipient = options['recipient']
 
-        if os.path.isfile(message):
-            try:
-                message = open(message).read()
-            except (IOError, OSError) as exc:
-                raise CommandError('Error reading message file "{}": {}'.format(message, exc))
+        self.__email_validation(recipient)
 
-        options['message'] = message
-
-        try:
-            validate_email(recipient)
-        except:
-            raise CommandError('"{}" is not a valid email address'.format(recipient))
+        options['message'] = self.__read_message(message)
 
         msg_html = render_to_string('email.html', {'message': options['message']})
 

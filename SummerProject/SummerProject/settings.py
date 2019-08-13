@@ -30,10 +30,6 @@ ALLOWED_HOSTS = []
 # Application definition
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
-SENDGRID_API_KEY = SENDGRID_API_KEY
-
-DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
-
 EMAIL_HOST = 'smtp.sendgrid.net'
 
 EMAIL_HOST_USER = 'apikey'
