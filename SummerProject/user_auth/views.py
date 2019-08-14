@@ -16,24 +16,13 @@ class UserView(View):
     def put(self, request):
         changes = json.loads(request.body.decode('utf-8'))
 
-        if 'id' in request.session:
-            user_id = request.session['id']
-        else:
-            return HttpResponseBadRequest()
-
-        user = User.objects.get(id=user_id)
-        print(user.first_name)
-        if not user:
-            return HttpResponseBadRequest()
-
         first_name = changes['first_name']
         last_name = changes['last_name']
 
-        user.update(
+        request.user.update(
             first_name=first_name,
             last_name=last_name,
         )
-        print(user.first_name)
         return HttpResponse(status=200)
 
 
