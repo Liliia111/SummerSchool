@@ -2,47 +2,40 @@ from django.core.management.base import BaseCommand
 from articles.models import Article
 from django.forms.models import model_to_dict
 import csv
-import bisect
+import logging
 
 
 class Command(BaseCommand):
-    help = "Shows multiple pages staring from specified"
+    help = "Shows multiple articles staring from specified"
+    logger = logging.getLogger(__name__)
+
+    @staticmethod
+    def get_content(queryset):
+        rows_list = list()
+        for article in queryset:
+            dict_article = model_to_dict(article)
+            article_content = [dict_article["id"], dict_article["title"], dict_article["content"]]
+            rows_list.append(article_content)
+
+        Command.logger.info("Amount of received articles {}".format(len(rows_list)))
+        return rows_list
 
     def add_arguments(self, parser):
-        parser.add_argument('articles_amount', type=int, help='Determines the number of returned articles')
-        parser.add_argument('pk', type=int, help='Determines starting pk value')
+        parser.add_argument('-am', '--articles_amount', type=int, help='Determines the number of returned articles')
+        parser.add_argument('-pk', type=int, help='Determines starting pk value')
 
     def handle(self, *args, **kwargs):
+
         am = kwargs['articles_amount']
         pk = kwargs['pk']
 
+        self.logger.info("-am parameter {}, -pk parameter {}".format(am, pk))
+        # context manager
         with open("articles/articles.csv", "w") as articles:
+            self.logger.info("articles.csv file was successfully created")
             writer = csv.writer(articles)
-            # writer.writerow(['id', 'title', 'content'])
-            articles_list = list(Article.objects.values('id').all())
-            articles_pk_list = []
+            articles_pk_list = Article.objects.all().order_by('id')[pk:pk+am]
 
-            for i in articles_list:
-                articles_pk_list.append(i['id'])
+            for article in self.get_content(articles_pk_list):
+                writer.writerow(article)
 
-            for i in range(am):
-                try:
-                    article = Article.objects.get(pk=pk)
-                    dict_article = model_to_dict(article)
-                    row = [dict_article["id"], dict_article["title"], dict_article["content"]]
-                    writer.writerow(row)
-                except article.DoesNotExist:
-                    index = bisect.bisect_right(articles_pk_list, pk)
-                    try:
-                        pk = articles_pk_list[index]
-                    except IndexError:
-                        break
-                    article = Article.objects.get(pk= pk)
-                    dict_article = model_to_dict(article)
-                    row = [dict_article["id"], dict_article["title"], dict_article["content"]]
-                    writer.writerow(row)
-
-                pk += 1
-        articles.close()
-
-        return "Success! Check articles.csv file for content!"
