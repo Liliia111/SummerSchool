@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseBadRequest
-from .models import User
+from .models import User, Role
 from .validator import valid_data_for_login, valid_data_for_creating_user
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -32,11 +32,13 @@ def registration(request):
         data = json.loads(request.body.decode('utf-8'))
         if not valid_data_for_creating_user(data):
             return HttpResponseBadRequest()
+        user_role = Role.objects.get(pk=1)
         user = User.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
-            password=data['password']
+            password=data['password'],
+            role=user_role
         )
         return HttpResponse("Success,{} your account created!".format(user.first_name), status=201)
     return HttpResponseBadRequest()
