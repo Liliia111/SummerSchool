@@ -64,7 +64,7 @@ class Article(models.Model):
     category = models.ForeignKey(Category)
 
 class Comment(models.Model):
-    content = models.CharField(max_length=1000)
+    content = models.TextField()
     date = models.DateTimeField()
     user = models.ForeignKey(User)
 
