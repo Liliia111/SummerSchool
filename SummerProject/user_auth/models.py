@@ -55,7 +55,7 @@ class Team(models.Model):
 
 class Article(models.Model):
     headline = models.CharField(max_length=150, blank=False)
-    photo = models.URLField(max_length=150)
+    photo = models.ImageField(max_length=150)
     video = models.URLField(max_length=150)
     author = models.CharField(max_length=55, blank=False)
     source = models.CharField(max_length=3, choices=[(tag, tag.value) for tag in SocialNetworkChoice])
