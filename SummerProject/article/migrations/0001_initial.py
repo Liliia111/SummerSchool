@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('category_team', '0001_initial'),
+        ('categories', '0001_initial'),
     ]
 
     operations = [
@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
                 ('source', models.CharField(choices=[(category_team.models.SocialNetworkChoice('Facebook'), 'Facebook'), (category_team.models.SocialNetworkChoice('Twitter'), 'Twitter'), (category_team.models.SocialNetworkChoice('Google'), 'Google')], max_length=8)),
                 ('content', models.TextField()),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='category_team.Category')),
-                ('team', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='category_team.Team')),
+                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='categories.Category')),
+                ('team', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='categories.Team')),
             ],
         ),
         migrations.CreateModel(

@@ -1,10 +1,10 @@
 from django.db import models
 from user.models import User
-from category_team.models import Team, Category, SocialNetworkChoice
+from categories.models import Team, Category, SocialNetworkChoice
 
 
 class Article(models.Model):
-    headline = models.CharField(max_length=150, blank=False)
+    headline = models.CharField(max_length=150)
     photo = models.URLField(max_length=150)
     video = models.URLField(max_length=150)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
