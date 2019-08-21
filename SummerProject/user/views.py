@@ -1,11 +1,12 @@
+# pylint: disable=C0111,E1101,R0201
 from django.http import HttpResponse, HttpResponseBadRequest
-from .models import User, Role
-from .validator import valid_data_for_login, valid_data_for_creating_user
-import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from django.views import View
 from django.utils.decorators import method_decorator
+from .models import User, Role
+from .validator import is_user_data_valid_for_create, is_data_valid_for_login
+import json
 
 
 class UserView(View):
@@ -30,7 +31,7 @@ class UserView(View):
 def registration(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        if not valid_data_for_creating_user(data):
+        if not is_user_data_valid_for_create(data):
             return HttpResponseBadRequest()
         user_role = Role.objects.get(pk=1)
         user = User.create(
@@ -48,7 +49,7 @@ def registration(request):
 def login(request):
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8'))
-        if not valid_data_for_login(data):
+        if not is_data_valid_for_login(data):
             return HttpResponseBadRequest()
         user = authenticate(email=data["email"], password=data["password"])
         if user:
