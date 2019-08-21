@@ -1,4 +1,9 @@
-from SummerProject.settings import *
+# pylint: disable=W0614,W0401
+"""Setup database for tests"""
+
+
+from config.settings import *
+
 
 DATABASES = {
     'default': {
