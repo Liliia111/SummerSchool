@@ -124,10 +124,9 @@ dmypy.json
 .pyre/
 
 #local settings
-local_settings.py
-
 .idea/
 node_modules/
 package-lock.json
 SummerProject/static/public/bundle.js
+SummerProject/summer_pr_db_test
 
