@@ -83,21 +83,6 @@ input[placeholder] {
     width: 100%;
 }
 
-.password{
-    display: flex;
-    flex-direction: row;
-}
-.password a{
-    width: 50%;
-    font-family: Roboto, sans-serif;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 11px;
-    letter-spacing: 1px;
-    text-align:right;
-}
-
 .user-data .has-error input{
     margin-bottom: 0;
 }

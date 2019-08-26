@@ -9,7 +9,7 @@ import axios from 'axios';
 const API_URL = 'http://localhost:8000';
 
 
-class Registration extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props);
 
@@ -92,4 +92,4 @@ class Registration extends React.Component {
     }
 }
 
-export default Registration;
+export default Login;
