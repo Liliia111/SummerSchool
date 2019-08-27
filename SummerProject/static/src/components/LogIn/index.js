@@ -5,7 +5,6 @@ import './style.css';
 import axios from 'axios';
 
 
-
 const API_URL = 'http://localhost:8000';
 
 
@@ -16,6 +15,7 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
+            error: false,
         }
     }
 
@@ -24,19 +24,18 @@ class Login extends React.Component {
     };
 
     submitHandler = event => {
-        event.preventDefault()
+        event.preventDefault();
         console.log(this.state);
         axios
             .post(API_URL + '/api/v1/user/login/', {
                 'email': this.state.email,
                 'password': this.state.password,
             })
-            .then(response => {
-                console.log(response)
-                console.log(response.data)
+            .then(() => {
+                this.props.history.push('/home')
             })
-            .catch(error => {
-                console.log(error)
+            .catch(() => {
+                this.setState({error: true})
             })
     };
 
@@ -82,6 +81,11 @@ class Login extends React.Component {
                             <button type="submit" onClick={this.submitHandler} className="btn-primary sing-up">LOG IN
                             </button>
                         </div>
+                        {
+                            this.state.error && <div className="help-block">
+                                Invalid login or password
+                            </div>
+                        }
                         <div className="log-in-mobile">
                             <a href="http://localhost:8000/registration/">Don't have an account?</a>
                         </div>

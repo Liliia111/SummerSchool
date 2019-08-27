@@ -74,10 +74,9 @@ class Registration extends React.Component {
             email: '',
             password: '',
             validation: this.validator.valid(),
-            redirectToReferrer: false
+            redirectToReferrer: false,
+            error : false
         };
-
-        this.submitted = false;
     }
 
     changeHandler = event => {
@@ -85,7 +84,7 @@ class Registration extends React.Component {
     };
 
     submitHandler = event => {
-        event.preventDefault()
+        event.preventDefault();
         console.log(this.state);
         const validation = this.validator.validate(this.state);
         this.setState({validation});
@@ -99,12 +98,11 @@ class Registration extends React.Component {
                     'email': this.state.email,
                     'password': this.state.password,
                 })
-                .then(response => {
-                    console.log(response)
-                    console.log(response.data)
+                .then(() => {
+                    this.props.history.push('/home')
                 })
-                .catch(error => {
-                    console.log(error)
+                .catch(() => {
+                     this.setState({error: true})
                 })
         }
     };
@@ -186,6 +184,11 @@ class Registration extends React.Component {
                             <button type="submit" onClick={this.submitHandler} className="btn-primary sing-up">SIGN UP
                             </button>
                         </div>
+                        {
+                            this.state.error && <div className="help-block">
+                                User with such email already exist, please enter correct data
+                            </div>
+                        }
                         <div className="log-in-mobile">
                             <a href="http://localhost:8000/login/">Already have an account?</a>
                         </div>
