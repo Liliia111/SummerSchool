@@ -16,17 +16,12 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            hasError: false
         }
     }
 
     changeHandler = event => {
         this.setState({[event.target.name]: event.target.value})
     };
-
-    componentDidCatch(error, info) {
-        this.setState({ hasError: true });
-    }
 
     submitHandler = event => {
         event.preventDefault()

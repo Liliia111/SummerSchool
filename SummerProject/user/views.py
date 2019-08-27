@@ -35,11 +35,13 @@ def registration(request):
             return HttpResponseBadRequest()
         if User.objects.filter(email=data['email']).exists():
             return HttpResponseBadRequest()
+        user_role = Role.objects.get(pk=1)
         user = User.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
-            password=data['password']
+            password=data['password'],
+            role=user_role
         )
         return HttpResponse("Success,{} your account created!".format(user.first_name), status=201)
     return HttpResponseBadRequest()
