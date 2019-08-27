@@ -1,0 +1,185 @@
+.Footer{
+    background: white;
+    bottom: 0;
+    margin-top: 50px;
+}
+
+.context-dark, .bg-gray-dark, .bg-primary {
+    color: black;
+}
+
+.footer-classic a, .footer-classic a:focus, .footer-classic a:active {
+    color: black;
+    margin-left: -1px;
+}
+.nav-list li {
+    padding-top: 7px;
+    color: black;
+    padding-bottom: 6px;
+    opacity: 0.60;
+}
+
+.nav-list li a:hover:before {
+    margin-left: 0;
+    opacity: 1;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    width: 200%;
+    margin-left: 10px;
+}
+
+
+input[type=submit]{
+    background-color: #D72130;
+    border: none;
+    color: white;
+    padding: 0px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.row{
+    bottom:0;
+}
+
+.social-container .col {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.nav-list li a:before {
+    content: "\f14f";
+    font-family: Open Sans, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: -28px;
+    margin-right: 7px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .22s ease;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+    padding: 20px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    color: #434C5D;
+    height: 42px;
+    margin-left: -20px;
+    font-weight: inherit;
+    font-size: 16px;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #D72130;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #D72130;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.social-inner-left h6{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 23px;
+    font: status-bar;
+    font-style: normal;
+    font-size: 18px;
+    background-color: #D72130;
+    text-align: left;
+    line-height: 24px;
+}
+
+.social-inner-right h6{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 23px;
+    font: status-bar;
+
+    font-style: normal;
+    font-size: 13px;
+    background-color: #D72130;
+    text-align: right;
+    line-height: 24px;
+}
+
+.example{
+    max-width:300px
+}
+
+.icons{
+    display: flex;
+}
+
+.subscribe{
+    padding: 10px;
+    display: flex;
+}
+
+.Sign-up{
+    opacity: 0.4;
+    margin-right: 35px;
+    margin-left: -10px;
+    margin-top: 5px;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+    margin-right: 10px;
+}
+
+.title{
+    color: black;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 22px
+}
+
+.facebook-icon{
+    opacity: 1;
+}
+
+.google-icon{
+    opacity: 1;
+}
+
+.copyright{
+    margin-bottom: -12px;
+    margin-top: -12px;
+}
+
+.sport-news-logo{
+    margin-left: 20px;
+}
