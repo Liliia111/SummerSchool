@@ -47,10 +47,10 @@ class Footer extends React.Component {
                                         <div className="icons">
                                             <div className="Sign-up">Sign up by</div>
                                             <div className="facebook-icon">
-                                                <img src="/static/src/components/Footer/imgs/fb.svg" alt="facebook"/>
+                                                <p><a href="#"><img src="/static/src/components/imgs/fb.svg" alt="facebook"/></a></p>
                                             </div>
                                             <div className="google-icon">
-                                                <img src="/static/src/components/Footer/imgs/gg.svg" alt="google"/>
+                                                <p><a href="#"><img src="/static/src/components/imgs/gg.svg" alt="google"/></a></p>
                                             </div>
                                         </div>
                                     </li>
