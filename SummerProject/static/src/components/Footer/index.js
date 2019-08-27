@@ -2,8 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
-class Footer extends React.Component {
-    render() {
+function Footer() {
         return (
             <div className="footer">
                 <footer className="section footer-classic context-dark bg-image">
@@ -83,7 +82,6 @@ class Footer extends React.Component {
                 </footer>
             </div>
         )
-    }
 }
 
 export default Footer;
