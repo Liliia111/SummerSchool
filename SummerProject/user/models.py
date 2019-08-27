@@ -23,7 +23,7 @@ class User(AbstractBaseUser):
         return self.email
 
     @staticmethod
-    def create(first_name, last_name, email, password, role):
+    def create(first_name, last_name, email, password):
         user = User(first_name=first_name, last_name=last_name, email=email)
         user.set_password(password)
         user.save()

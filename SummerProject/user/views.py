@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from django.views import View
 from django.utils.decorators import method_decorator
-from .models import User, Role
+from .models import User
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login
 import json
 
@@ -39,7 +39,7 @@ def registration(request):
             email=data['email'],
             password=data['password'],
         )
-        return HttpResponse("Success,{} your account created!".format(user.first_name), status=201)
+        return HttpResponse(status=201)
     return HttpResponseBadRequest()
 
 
