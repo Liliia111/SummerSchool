@@ -5,7 +5,7 @@ import './style.css';
 class Footer extends React.Component {
     render() {
         return (
-            <div className="Footer">
+            <div className="footer">
                 <footer className="section footer-classic context-dark bg-image">
                     <div className="container">
                         <div className="row row-30">
@@ -37,7 +37,7 @@ class Footer extends React.Component {
                                 </div>
                                 <ul className="nav-list">
                                     <li><a href="#">Sign up to recieve the latest in sport news</a></li>
-                                    <form className="example" action="/action_page.php">
+                                    <form className="subscribe-form">
                                         <div className="subscribe">
                                             <input type="text" placeholder="Your email address" name="search2"/>
                                             <input type="submit" value="Subscribe"/>
@@ -45,12 +45,12 @@ class Footer extends React.Component {
                                     </form>
                                     <li>
                                         <div className="icons">
-                                            <div className="Sign-up">Sign up by</div>
+                                            <div className="sign-up">Sign up by</div>
                                             <div className="facebook-icon">
-                                                <p><a href="#"><img src="/static/src/components/imgs/fb.svg" alt="facebook"/></a></p>
+                                                <a href="#"><img src="/static/imgs/fb.svg" alt="facebook"/></a>
                                             </div>
                                             <div className="google-icon">
-                                                <p><a href="#"><img src="/static/src/components/imgs/gg.svg" alt="google"/></a></p>
+                                                <a href="#"><img src="/static/imgs/gg.svg" alt="google"/></a>
                                             </div>
                                         </div>
                                     </li>

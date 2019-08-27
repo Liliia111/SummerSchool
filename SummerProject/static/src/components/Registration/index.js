@@ -15,7 +15,7 @@ class Registration extends React.Component {
                     <a href="#" className="btn btn-primary login">Log In</a>
                 </div>
                 <div className="left-part bg">
-                    <img src="/static/src/components/imgs/login.jpg" alt="BG"/>
+                    <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
 
                 <div className="right-part background">
