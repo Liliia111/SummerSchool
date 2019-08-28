@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse
-from middlewares.user_auth import AuthenticatedUserMiddleware
 from .models import Article
 from django.db import transaction
 
@@ -15,8 +14,6 @@ def comment_form(request, article_id):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            # перевірка на аутенфікацію юзера
-            # почитати про middlewares
             comment.user = request.user
             comment.save()
             article.comments.add(comment)
