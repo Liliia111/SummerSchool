@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
 import axios from 'axios';
-import FormValidator from './FormValidator';
-
+import FormValidator from '../../validator/FormValidator';
+import {rules} from './validation_rules'
 
 
 const API_URL = 'http://localhost:8000';
@@ -14,63 +14,11 @@ class Registration extends React.Component {
     constructor(props) {
         super(props);
 
-        this.validator = new FormValidator([
-          {
-            field: 'first_name',
-            method: 'isEmpty',
-            validWhen: false,
-            message: 'First name is required!',
-          },
-          {
-            field: 'first_name',
-            method: 'isLength',
-            args: [ { max:50 } ],
-            validWhen: true,
-            message: 'First name can contain less than 50 char!',
-          },
-          {
-            field: 'last_name',
-            method: 'isEmpty',
-            validWhen: false,
-            message: 'Last name is required!',
-          },
-          {
-            field: 'last_name',
-            method: 'isLength',
-            args: [ { max:50 } ],
-            validWhen: true,
-            message: 'Last name can contain less than 50 char!',
-          },
-          {
-            field: 'email',
-            method: 'isEmpty',
-            validWhen: false,
-            message: 'Email is required!',
-          },
-          {
-            field: 'email',
-            method: 'isEmail',
-            validWhen: true,
-            message: 'That is not a valid email!',
-          },
-          {
-            field: 'password',
-            method: 'isEmpty',
-            validWhen: false,
-            message: 'Password is required!',
-          },
-          {
-            field: 'password',
-            method: 'isLength',
-            args: [ { min:4, max:255 } ],
-            validWhen: true,
-            message: 'Password must contain more than 4 character and less than 255!',
-          },
-        ]);
+        this.validator = new FormValidator(rules);
 
         this.state = {
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             validation: this.validator.valid(),
@@ -93,8 +41,8 @@ class Registration extends React.Component {
         if (validation.isValid) {
             axios
                 .post(API_URL + '/api/v1/user/registration/', {
-                    'first_name': this.state.first_name,
-                    'last_name': this.state.last_name,
+                    'first_name': this.state.firstName,
+                    'last_name': this.state.lastName,
                     'email': this.state.email,
                     'password': this.state.password,
                 })
@@ -109,7 +57,7 @@ class Registration extends React.Component {
 
 
     render() {
-        const {first_name, last_name, email, password} = this.state;
+        const {firstName, lastName, email, password} = this.state;
         let validation = this.submitted ?
                       this.validator.validate(this.state) :
                       this.state.validation;
@@ -142,19 +90,19 @@ class Registration extends React.Component {
                     <form onSubmit={this.submitHandler} className="form">
                         <div className="user-data">
                             <div className="form-group">
-                                <div className={validation.first_name.isInvalid && 'has-error'}>
+                                <div className={validation.firstName.isInvalid && 'has-error'}>
                                     <label>First Name</label>
-                                    <input type="text" placeholder="John" name="first_name" value={first_name}
+                                    <input type="text" placeholder="John" name="firstName" value={firstName}
                                            onChange={this.changeHandler} className="form-control"/>
-                                    <span className="help-block">{validation.first_name.message}</span>
+                                    <span className="help-block">{validation.firstName.message}</span>
                                 </div>
                             </div>
                             <div className="form-group ">
-                                <div className={validation.last_name.isInvalid && 'has-error'}>
+                                <div className={validation.lastName.isInvalid && 'has-error'}>
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="Doe" name="last_name" value={last_name}
+                                    <input type="text" placeholder="Doe" name="lastName" value={lastName}
                                            onChange={this.changeHandler} className="form-control"/>
-                                    <span className="help-block">{validation.last_name.message}</span>
+                                    <span className="help-block">{validation.lastName.message}</span>
                                 </div>
                             </div>
                         </div>
