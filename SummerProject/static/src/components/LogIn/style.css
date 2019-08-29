@@ -2,7 +2,6 @@ label {
     width: 50%;
     font-family: Roboto, sans-serif;
     font-size: 10px;
-    font-style: normal;
     font-weight: 500;
     line-height: 11px;
     letter-spacing: 1px;
@@ -11,9 +10,7 @@ label {
 }
 
 input[placeholder] {
-    font-family: sans-serif;
     font-size: 12px;
-    font-style: normal;
     font-weight: 600;
     line-height: 16px;
     border-radius: 0;
@@ -22,22 +19,6 @@ input[placeholder] {
 
 .input-height {
     height: 42px;
-}
-
-.sign-up {
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 14px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: #FFFFFF;
-
-}
-
-.passw-email, .sign-up-w {
-    width: 100%;
 }
 
 .password{
@@ -49,17 +30,10 @@ a.password-link{
     width: 50%;
     font-family: Roboto, sans-serif;
     font-size: 10px;
-    font-style: normal;
     font-weight: 500;
     line-height: 11px;
     letter-spacing: 1px;
     text-align:right;
-}
-
-.help-block{
-    font-family: Roboto, sans-serif;
-    font-size: 12px;
-    color: #D72130;
 }
 
 @media only screen and (max-width: 768px) {

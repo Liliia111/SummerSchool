@@ -31,7 +31,6 @@ class Registration extends React.Component {
 
     submitHandler = event => {
         event.preventDefault();
-        console.log(this.state);
         const validation = this.validator.validate(this.state);
         this.setState({validation});
         this.submitted = true;
@@ -85,7 +84,7 @@ class Registration extends React.Component {
                         </a>
                     </div>
                     <p>Or use your email for registration:</p>
-                    <form onSubmit={this.submitHandler} className="form">
+                    <form className="form">
                         <div className="user-data">
                             <div className="form-group">
                                 <div className={validation.firstName.isInvalid && 'has-error'}>

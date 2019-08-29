@@ -23,7 +23,6 @@ class Login extends React.Component {
 
     submitHandler = event => {
         event.preventDefault();
-        console.log(this.state);
         axios
             .post('/api/v1/user/login/', {
                 'email': this.state.email,
