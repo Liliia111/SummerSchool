@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
+
 function Footer() {
         return (
             <div className="footer">
@@ -59,7 +60,7 @@ function Footer() {
                     </div>
                     <div className="row no-gutters social-container">
                         <div className="col-md-6">
-                            <a className="social-inner-left" href="#">
+                            <a className="social-inner-left" href="127.0.0.1:8000/home/">
                                 <h6>
                                     <span>
                                         <div className="sport-news-logo"> Sport News </div>

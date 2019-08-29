@@ -90,17 +90,6 @@ form.subscribe-form input[type=text] {
     margin: auto;
 }
 
-form.subscribe-form button {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: #D72130;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-}
 
 form.subscribe-form button:hover {
     background: #D72130;
