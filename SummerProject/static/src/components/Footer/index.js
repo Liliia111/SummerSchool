@@ -38,7 +38,7 @@ function Footer() {
                                     <li><a href="#">Sign up to recieve the latest in sport news</a></li>
                                     <form className="subscribe-form">
                                         <div className="subscribe">
-                                            <input type="text" placeholder="Your email address" name="search2"/>
+                                            <input type="text" placeholder="Your email address"/>
                                             <input type="submit" value="Subscribe"/>
                                         </div>
                                     </form>

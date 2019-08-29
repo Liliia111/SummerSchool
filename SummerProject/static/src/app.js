@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MainRoutes from './router';
-import Footer from './components/Footer'
 
 const App = () => (
     <Router>
