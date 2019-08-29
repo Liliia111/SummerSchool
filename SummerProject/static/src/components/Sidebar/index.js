@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
   render() {
     console.log(this.state.category);
     return (
-      <div className="container">
+      <div className="container-sidebar">
         <ul>
           {this.state.category.map(category => (
             <li>
