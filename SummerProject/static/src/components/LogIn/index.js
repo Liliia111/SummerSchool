@@ -1,11 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
-import axios from 'axios';
-
-
-const API_URL = 'http://localhost:8000';
+import axios from '../../axios';
 
 
 class Login extends React.Component {
@@ -27,7 +25,7 @@ class Login extends React.Component {
         event.preventDefault();
         console.log(this.state);
         axios
-            .post(API_URL + '/api/v1/user/login/', {
+            .post('/api/v1/user/login/', {
                 'email': this.state.email,
                 'password': this.state.password,
             })
@@ -45,11 +43,11 @@ class Login extends React.Component {
         return (
             <div className="login-page">
                 <div className="logo">
-                    <a href="http://localhost:8000/home/">Sport News</a>
+                    <Link to="/home" className="logo-link">Sport News</Link>
                 </div>
                 <div className="log-in">
-                    <a href="http://localhost:8000/registration/">Don't have an account?</a>
-                    <a href="http://localhost:8000/registration/" className="btn btn-primary login">Get Started</a>
+                    <Link to="/registration/" className="login-link">Don't have an account?</Link>
+                    <Link to="/registration/" className="btn btn-primary login login-link">Get Started</Link>
                 </div>
                 <div className="left-part bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
@@ -67,7 +65,7 @@ class Login extends React.Component {
                             </div>
                             <div className="password">
                                 <label>Password</label>
-                                <a href="#fgpsw">Forgot password?</a>
+                                 <Link to="/home" className="password-link">Forgot password?</Link>
                             </div>
                             <div>
                                 <div className="form-group">
@@ -87,7 +85,7 @@ class Login extends React.Component {
                             </div>
                         }
                         <div className="log-in-mobile">
-                            <a href="http://localhost:8000/registration/">Don't have an account?</a>
+                             <Link to="/registration/" className="login-link-mobile">Don't have an account?</Link>
                         </div>
                     </form>
                 </div>

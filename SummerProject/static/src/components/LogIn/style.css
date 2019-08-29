@@ -30,10 +30,8 @@ input[placeholder] {
     font-weight: bold;
     font-size: 12px;
     line-height: 14px;
-
     letter-spacing: 0.8px;
     text-transform: uppercase;
-
     color: #FFFFFF;
 
 }
@@ -42,12 +40,12 @@ input[placeholder] {
     width: 100%;
 }
 
-
 .password{
     display: flex;
     flex-direction: row;
 }
-.password a{
+
+a.password-link{
     width: 50%;
     font-family: Roboto, sans-serif;
     font-size: 10px;
@@ -64,7 +62,6 @@ input[placeholder] {
     color: #D72130;
 }
 
-
 @media only screen and (max-width: 768px) {
     .form {
         width: 90%;
@@ -74,6 +71,7 @@ input[placeholder] {
         margin-top: 20px;
         color: #FFFFFF;
     }
+
     .password a{
         margin-top: 20px;
         color: #FFFFFF;

@@ -1,13 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
-import axios from 'axios';
+import axios from '../../axios';
 import FormValidator from '../../validator/FormValidator';
 import {rules} from './validation_rules'
-
-
-const API_URL = 'http://localhost:8000';
 
 
 class Registration extends React.Component {
@@ -40,7 +38,7 @@ class Registration extends React.Component {
 
         if (validation.isValid) {
             axios
-                .post(API_URL + '/api/v1/user/registration/', {
+                .post('/api/v1/user/registration/', {
                     'first_name': this.state.firstName,
                     'last_name': this.state.lastName,
                     'email': this.state.email,
@@ -65,11 +63,11 @@ class Registration extends React.Component {
         return (
             <div className="login-page">
                 <div className="logo">
-                    <a href="http://localhost:8000/home/">Sport News</a>
+                    <Link to="/home" className="logo-link">Sport News</Link>
                 </div>
                 <div className="log-in">
-                    <a href="http://localhost:8000/login/">Already have an account?</a>
-                    <a href="http://localhost:8000/login/" className="btn btn-primary login">Log In</a>
+                    <Link to="/login/" className="login-link">Already have an account?</Link>
+                    <Link to="/login/" className="btn btn-primary login login-link">Login</Link>
                 </div>
                 <div className="left-part bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
@@ -138,7 +136,7 @@ class Registration extends React.Component {
                             </div>
                         }
                         <div className="log-in-mobile">
-                            <a href="http://localhost:8000/login/">Already have an account?</a>
+                            <Link to="/login/" className="login-link-mobile">Already have an account?</Link>
                         </div>
                     </form>
                 </div>

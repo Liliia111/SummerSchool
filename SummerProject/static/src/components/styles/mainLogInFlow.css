@@ -28,10 +28,9 @@
     width: 245px;
     height: 83px;
     text-align: center;
-
 }
 
-.logo a {
+a.logo-link {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -66,7 +65,7 @@
 
 }
 
-.log-in a {
+a.login-link {
     position: absolute;
     left: 15%;
     top: 26%;
@@ -80,7 +79,7 @@
     color: #596377;
 }
 
-.log-in-mobile a{
+a.login-link-mobile{
     font-family: sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -104,7 +103,6 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 25px;
-
     color: #434C5D;
 }
 
@@ -114,7 +112,6 @@
     right: 0;
     top: 15%;
     bottom: 8.57%;
-
     display: inline-block;
     width: 30%;
     height: 32px;
