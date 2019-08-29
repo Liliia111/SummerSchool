@@ -2,9 +2,15 @@ import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import Registration from './components/Registration'
 import Home from "./components/Home";
+<<<<<<< HEAD
+=======
+
+const Home =()=><div>Home</div>
 
 export default class MainRoutes extends React.Component {
-
+  /**
+    @return {} - Switch components
+   */
   render() {
     return (
       <main id="container">

@@ -21,7 +21,6 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    console.log(this.state.category);
     return (
       <div className="container-sidebar">
         <ul>
