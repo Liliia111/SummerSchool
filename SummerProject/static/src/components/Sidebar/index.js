@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import axios from '../../axios';
 import "./style.css";
 
 class Sidebar extends React.Component {
@@ -10,7 +10,7 @@ class Sidebar extends React.Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8000/api/v1/category/")
+    axios.get("/api/v1/categories/")
       .then(res => {
         const category = res.data;
         this.setState({ category });
