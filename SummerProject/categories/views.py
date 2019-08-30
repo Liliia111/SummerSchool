@@ -1,8 +1,11 @@
 import operator
 from django.http import JsonResponse, HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Category, Team
 
 
+@csrf_exempt
 def get_categories(request):
     if request.method == 'GET':
 
@@ -12,7 +15,8 @@ def get_categories(request):
 
         for parent_categ in parent_categs:
 
-            child_categs = Category.objects.select_related('parent_category_id').filter(parent_category_id=parent_categ.id)
+            child_categs = Category.objects.select_related('parent_category_id').filter(
+                parent_category_id=parent_categ.id)
             child_categs_list = []
 
             for child_categ in child_categs:
@@ -25,7 +29,8 @@ def get_categories(request):
                     child_subcategs_list.append(subcateg_dict)
 
                 child_subcategs_list = sorted(child_subcategs_list, key=operator.itemgetter('id'))
-                child_categ_dict = {'id': child_categ.id, 'name': child_categ.name, 'subcategories': child_subcategs_list}
+                child_categ_dict = {'id': child_categ.id, 'name': child_categ.name,
+                                    'subcategories': child_subcategs_list}
                 child_categs_list.append(child_categ_dict)
 
             child_categs_list = sorted(child_categs_list, key=operator.itemgetter('id'))
@@ -38,4 +43,4 @@ def get_categories(request):
 
     else:
 
-        return HttpResponseBadRequest
+        return HttpResponseBadRequest('Invalid request')
