@@ -1,0 +1,53 @@
+label {
+    width: 50%;
+    font-family: Roboto, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 11px;
+    letter-spacing: 1px;
+    color: #434C5D;
+    text-transform: uppercase;
+}
+
+input[placeholder] {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    border-radius: 0;
+    color: #0f0f0f;
+}
+
+.input-height {
+    height: 42px;
+}
+
+.password{
+    display: flex;
+    flex-direction: row;
+}
+
+a.password-link{
+    width: 50%;
+    font-family: Roboto, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 11px;
+    letter-spacing: 1px;
+    text-align:right;
+}
+
+@media only screen and (max-width: 768px) {
+    .form {
+        width: 90%;
+    }
+
+    label {
+        margin-top: 20px;
+        color: #FFFFFF;
+    }
+
+    .password a{
+        margin-top: 20px;
+        color: #FFFFFF;
+    }
+}

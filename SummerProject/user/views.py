@@ -33,6 +33,8 @@ def registration(request):
         data = json.loads(request.body.decode('utf-8'))
         if not is_user_data_valid_for_create(data):
             return HttpResponseBadRequest()
+        if User.objects.filter(email=data['email']).exists():
+            return HttpResponseBadRequest()
         user = User.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
