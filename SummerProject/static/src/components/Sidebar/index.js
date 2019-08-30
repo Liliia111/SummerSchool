@@ -5,15 +5,15 @@ import "./style.css";
 
 class Sidebar extends React.Component {
   state = {
-    category: [],
+    categoriesList: [],
     error: false
   };
 
   componentDidMount() {
     axios.get("/api/v1/categories/")
       .then(res => {
-        const category = res.data;
-        this.setState({ category });
+        const categoriesList = res.data;
+        this.setState({ categoriesList });
       })
       .catch(res => {
         this.setState({ error: true });
@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
     return (
       <div className="container-sidebar">
         <ul>
-          {this.state.category.map(category => (
+          {this.state.categoriesList.map(category => (
             <li>
               <a className="first-level" key={category.id}>
                 {category.name}
