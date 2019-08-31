@@ -54,7 +54,7 @@ def login(request):
         user = authenticate(email=data["email"], password=data["password"])
         if user:
             auth_login(request, user)
-            response = HttpResponse(status=200)
+            response = HttpResponse(status=200, content_type='application/json')
             request.session['id'] = user.id
             return response
         return HttpResponseBadRequest()
