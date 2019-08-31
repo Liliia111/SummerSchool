@@ -5,6 +5,7 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import Registration from './components/Registration'
 import LogIn from './components/LogIn'
 import Home from "./components/Home";
+import ForgotPassword from "./components/ForgotPassword";
 
 
 export default class MainRoutes extends React.Component {
@@ -18,6 +19,7 @@ export default class MainRoutes extends React.Component {
           <Route path='/home/' component={Home} />
           <Route path='/registration' component={Registration} />
           <Route path='/login' component={LogIn} />
+          <Route path='/forgotPassword' component={ForgotPassword} />
           <Redirect path='*' to='/home/' />
         </Switch>
       </main>
