@@ -1,0 +1,344 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Simple Transactional Email</title>
+      <style>
+    /*All the styling goes here*/
+    body {
+      background-color: #ECECEC;
+      margin: 0;
+      padding: 0;
+    }
+
+    table {
+      border-collapse: separate;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+      width: 100%;
+    }
+
+        /* -------------------------------------
+            BODY & CONTAINER
+        ------------------------------------- */
+
+
+    .container {
+      display: block;
+      margin: 0 auto !important;
+          /* makes it centered */
+      max-width: 581px;
+      width: 600px;
+      padding-top: 55px;
+      padding-bottom: 150px;
+    }
+
+    .content {
+      box-sizing: border-box;
+      display: block;
+      margin: 0 auto;
+      max-width: 600px;
+      max-height: 400px;
+      padding: 10px;
+    }
+        /* -------------------------------------
+            HEADER, FOOTER, MAIN
+        ------------------------------------- */
+    .main {
+      background: #ffffff;
+      width: 100%;
+    }
+
+    .wrapper {
+      height: 306px;
+      box-sizing: border-box;
+    }
+
+    .content-block {
+      padding-bottom: 29px;
+      padding-top: 29px;
+    }
+
+    .footer {
+      clear: both;
+      margin-top: 10px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .footer td,
+          .footer p,
+          .footer span,
+          .footer a {
+      width: 122px;
+      height: 28px;
+      left: 755px;
+      top: 698px;
+      font-family: Open Sans, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 28px;
+      color: #D72130;
+    }
+        /* -------------------------------------
+            TYPOGRAPHY
+        ------------------------------------- */
+    .title {
+      color: #000000;
+      list-style-position: inside;
+      height: 66px;
+      left: 39.1%;
+      right: 25.9%;
+      top: calc(50% - 66px/2 - 84.5px);
+      margin: 0;
+      margin-bottom: 64px;
+      font-family: Open Sans, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 33px;
+      text-align: center;
+    }
+
+    .instructions {
+      padding-top: 32px;
+      padding-left: 83px;
+      padding-right: 65px;
+      padding-bottom: 35px;
+      color: #596377;
+      margin: 0;
+      text-align: center;
+      height: 17px;
+      left: 42.15%;
+      right: 27.78%;
+      top: calc(50% - 17px/2 + 23px);
+      list-style-position: inside;
+      font-family: Open Sans, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .why {
+      color: #000000;
+      height: 22px;
+      left: 46.67%;
+      right: 32.78%;
+      top: calc(50% - 22px/2 + 148.5px);
+      font-family: Open Sans, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 22px;
+      text-align: center;
+      padding-top: 29px;
+      padding-bottom: 12px;
+    }
+
+    .security {
+      left: 40%;
+      right: 26.81%;
+      top: 72.54%;
+      bottom: 16.69%;
+      font-family: Open Sans, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      padding-left: 52px;
+      padding-right: 51px;
+      padding-bottom: 35px;
+      color: #596377;
+    }
+        /* -------------------------------------
+            BUTTON
+        ------------------------------------- */
+    .btn-reset {
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .btn-reset > tbody > tr > td {
+      padding-left: 97px;
+      padding-right: 94px;
+    }
+
+    .btn-reset table {
+      width: 100%;
+    }
+
+    .btn-reset table td {
+      background-color: #D72130;
+      text-align: center;
+    }
+
+    .btn-reset a {
+      color: #ffffff;
+      background-color: #D72130;
+      border: solid 1px #D72130;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: inline-block;
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin: 0;
+      padding: 12px 25px;
+      text-decoration: none;
+    }
+
+        /* -------------------------------------
+            RESPONSIVE AND MOBILE FRIENDLY STYLES
+        ------------------------------------- */
+    @media only screen and (max-device-width: 620px) {
+      .title {
+        line-height: 23px;
+        font-size: 24px !important;
+        margin-bottom: 10px !important;
+      }
+
+      .instructions {
+        font-size: 12px  !important;
+        padding-bottom: 55px;
+      }
+
+      .security {
+        font-size: 12px  !important;
+      }
+
+      .why {
+        font-size: 26px  !important;
+        padding-top: 5px;
+      }
+
+      .btn-reset > tbody > tr > td {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+      }
+
+      .btn-reset a {
+        line-height: normal !important;
+      }
+
+      table[class=body] a {
+        font-size: 16px !important;
+      }
+
+      .content-block {
+        font-size: 26px !important;
+      }
+
+      table[class=body] .wrapper,
+          table[class=body] .article {
+        padding: 10px !important;
+      }
+
+      table[class=body] .content {
+        padding: 0 !important;
+      }
+
+      table[class=body] .container {
+        padding: 0 !important;
+        width: 100% !important;
+      }
+
+      table[class=body] .main {
+        border-left-width: 0 !important;
+        border-radius: 0 !important;
+        border-right-width: 0 !important;
+      }
+
+      table[class=body] .btn-reset table {
+        width: 100% !important;
+      }
+
+      table[class=body] .btn-reset a {
+        width: 100% !important;
+      }
+
+      table[class=body] .img-responsive {
+        height: auto !important;
+        max-width: 100% !important;
+        width: auto !important;
+      }
+    }
+      </style>
+  </head>
+ <body>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td>&nbsp;</td>
+            <td class="container">
+
+                <div class="content">
+                    <p class="title">You have requested to reset your password
+                        <br/> {% now "jS F Y" %}</p>
+
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table role="presentation" class="main">
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                            <td class="wrapper">
+
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <p class="instructions"> To reset your password, click the following link and follow the instructions.</p>
+
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn-reset">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="left">
+                                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td> <a href="http://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}" target="_blank">reset password</a> </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <p class="why">Why do I have to reset my password?</p>
+                                            <p class="security">As a security best practice, Sport News does not store your password. As such, we cannot simply send you your old password. A unique link to reset your password has been generated for you.
+                                                <br />
+                                                <br /> Please ignore this message if you havn’t requested reseting password.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- END MAIN CONTENT AREA -->
+                    </table>
+                    <!-- END CENTERED WHITE CONTAINER -->
+
+                    <!-- START FOOTER -->
+                    <div class="footer">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+
+                            <tr>
+                                <td class="content-block">
+                                    Sport News
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- END FOOTER -->
+
+                </div>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</body>
+</html>
