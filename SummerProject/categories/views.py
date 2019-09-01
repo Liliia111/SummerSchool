@@ -42,5 +42,4 @@ def get_categories(request):
         return JsonResponse(categories_list, safe=False)
 
     else:
-
-        return HttpResponseBadRequest('Invalid request')
+        return HttpResponseBadRequest()
