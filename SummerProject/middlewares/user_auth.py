@@ -6,7 +6,10 @@ from django.http.response import HttpResponseBadRequest
 
 class AuthenticatedUserMiddleware:
     """Middleware to verify that the user is authenticated"""
-    URLS = ['/api/v1/user/self/', '/api/v1/articles/<int:article_id>/comment/']
+    URLS = [
+        '/api/v1/user/self/',
+        '/api/v1/articles/<int:article_id>/comment/'
+    ]
 
     def __init__(self, get_response):
         self.get_response = get_response
