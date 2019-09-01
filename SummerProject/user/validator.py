@@ -32,3 +32,27 @@ def is_data_valid_for_login(data):
     except ValidationError:
         return False
     return True
+
+
+def is_valid_email_address(data):
+    params = ["email"]
+    for k in data.keys():
+        if k not in params:
+            return False
+    try:
+        validate_email(data["email"])
+    except ValidationError:
+        return False
+    return True
+
+
+def is_valid_password_for_reset(data):
+    params = ["new_password", "new_password_confirm"]
+    for k in data.keys():
+        if k not in params:
+            print(k)
+            return False
+    if len(data["new_password"]) > PASSWORD_MAX_LEN or len(data["new_password_confirm"]) > PASSWORD_MAX_LEN or \
+            data["new_password"] != data["new_password_confirm"]:
+        return False
+    return True
