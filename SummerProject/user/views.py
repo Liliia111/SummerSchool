@@ -4,6 +4,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect
+from django.template.base import Token
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -131,10 +132,7 @@ def forgot_password_reset_confirm(request, uidb64=None, token=None):
                 new_password = data['new_password_confirm']
                 user.set_password(new_password)
                 user.save()
+                Token.objects.filter(user=user).delete()
                 return HttpResponse(status=201)
-            else:
-                return HttpResponseBadRequest()
-        else:
-            return HttpResponseBadRequest()
 
     return HttpResponseBadRequest()
