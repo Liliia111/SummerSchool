@@ -4,7 +4,6 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect
-from django.template.base import Token
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -16,6 +15,7 @@ from config.settings import DEFAULT_FROM_EMAIL
 from .models import User
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
+
 
 class UserView(View):
     @method_decorator(csrf_exempt)
@@ -105,7 +105,7 @@ def forgot_password_email_send(request):
                 email = render_to_string(email_template_name, content)
                 send_mail(subject, email, DEFAULT_FROM_EMAIL, [user.email], html_message=email, fail_silently=False)
 
-            return redirect('/check-email')
+            return redirect('/check-email')  # email check component
 
         return HttpResponseBadRequest()
 
@@ -114,17 +114,27 @@ def forgot_password_email_send(request):
 
 @csrf_exempt
 def forgot_password_reset_confirm(request, uidb64=None, token=None):
-    if request.method == "POST":
-        data = json.loads(request.body.decode('utf-8'))
+    if request.method == "GET":
         UserModel = get_user_model()
         assert uidb64 is not None and token is not None
         try:
             uid = urlsafe_base64_decode(uidb64)
             user = UserModel.objects.get(pk=uid)
+            request.session['uid'] = str(uid)
         except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
             user = None
-
         if user is not None and default_token_generator.check_token(user, token):
+            return redirect('/reset_password')  # password reset check component
+
+    return HttpResponseBadRequest()
+
+
+def forgot_password_handler(request):
+    if request.method == "POST":
+        UserModel = get_user_model()
+        user = UserModel.objects.get(pk=int(request.session.get('uid')))
+        data = json.loads(request.body.decode('utf-8'))
+        if user is not None:
             if is_valid_password_for_reset(data):
                 new_password = data['new_password_confirm']
                 user.set_password(new_password)
