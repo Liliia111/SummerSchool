@@ -16,9 +16,6 @@ def comment_form(request, article_id):
         form = CommentForm(data)
         if form.is_valid():
             comment = form.save(commit=False)
-            # comment.content = data["content"]
-            import pdb;
-            # pdb.set_trace()
             comment.user = request.user
             comment.save()
             article.comments.add(comment)
