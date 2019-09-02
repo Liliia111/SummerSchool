@@ -100,7 +100,7 @@ def forgot_password_email_send(request):
                 }
                 subject_template_name = 'password_reset_subject.txt'
 
-                email_template_name = 'email.html'
+                email_template_name = 'reset_password.html'
 
                 subject = render_to_string(subject_template_name, content)
 
@@ -132,7 +132,6 @@ def forgot_password_reset_confirm(request, uidb64=None, token=None):
                 new_password = data['new_password_confirm']
                 user.set_password(new_password)
                 user.save()
-                Token.objects.filter(user=user).delete()
                 return HttpResponse(status=201)
 
     return HttpResponseBadRequest()
