@@ -95,9 +95,9 @@ def forgot_password_email_send(request):
                     'token': default_token_generator.make_token(user),
                     'protocol': 'http',
                 }
-                subject_template_name = 'password_reset_subject.txt'
+                subject_template_name = 'emails/password_reset_subject.txt'
 
-                email_template_name = 'reset_password.html'
+                email_template_name = 'emails/reset_password.html'
 
                 subject = render_to_string(subject_template_name, content)
 
