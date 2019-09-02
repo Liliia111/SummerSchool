@@ -73,4 +73,9 @@ To check if everything is installed, use the following command:
 ```bash
 npm run dev-server
 ```
+## SendGrid configuration
+To use SendGrid you need to declare SENDGRID_API_KEY variable in local_settings.py and intialize it with api key:
+```bash
+SENDGRID_API_KEY = #
+```
 
