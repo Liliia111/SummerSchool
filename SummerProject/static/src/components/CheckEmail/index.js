@@ -20,7 +20,7 @@ class CheckEmail extends React.Component {
                 <div className="left-part bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
-                <div className="right-part background">
+                <div className="right-part background text-location">
                     <div className="mail">
                         <img className="icon-style"/>
                     </div>
