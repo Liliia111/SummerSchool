@@ -5,70 +5,46 @@ import random
 import string
 
 
+''' Login'''
 @pytest.fixture()
-def create_user(db):
+def create_user(db, client):
     def inner():
+        email = "{}@mail.com".format(''.join([random.choice(string.ascii_lowercase) for n in range(10)]))
         password = "44456"
-        user = User.objects.create(first_name="First",
-                                   last_name="Last",
-                                   email="{}@mail.com".
-                                   format(''.join([random.choice(string.ascii_lowercase) for n in range(10)])),
-                                   password=password)
+        client.post('/api/v1/user/registration/', data={'first_name': 'Max',
+                                                        'last_name': 'NewMax',
+                                                        'email': email,
+                                                        'password': password}, content_type='application/json')
+        client.post('/api/v1/user/login/', data={'email': email,
+                                                 'password': password}, content_type='application/json')
+        user = User.objects.get(email=email)
+
         return user, password
-    return inner  # provide the fixture value
-
-
-# @pytest.fixture()
-# def get_user(create_user):
-#     username, password = create_user()
-#     return username, password
-#
-#
-# user_name, user_password = get_user()
-
-class NewUser:
-    @pytest.fixture(autouse=True)
-    def get_user(self, create_user):
-        username, password = create_user()
-        return username, password
-
-    def __init__(self, get_user):
-        self.user_name, self.user_password = get_user()
-
-    def user_name(self):
-        return self.user_name
-
-    def user_password(self):
-        return self.user_password
+    return inner
 
 
 @pytest.fixture()
-def new_article(db):
-    new_user = NewUser()
+def new_article(db, create_user):
+    new_user, _ = create_user()
     print("new_user{}".format(new_user))
     return Article.objects.create(
         headline="New one",
         photo="https://oyebesmartest.com/public/uploads/preview/-11550470501p1ok6amcue.png",
         video="https://www.youtube.com/watch?v=axsaC62UQOc",
-        # error with User instance
-        author=new_user.user_name(),
+        author=new_user,
         source="New's",
         content="Some new content")
 
 
-@pytest.mark.djago_db
+@pytest.mark.django_db
 def test_comment_post(client, new_article):
-    new_user = NewUser()
     data = {
         'content': "This is new comment"
     }
-    print(new_user.user_name(), new_user.user_password())
-    client.login(username=new_user.user_name(), password=new_user.user_password())
-
     response = client.post('/api/v1/articles/{}/comment/'.format(new_article.id),
                            data=data,
                            content_type='application/json')
     comment = new_article.comments.get(id=1)
     assert response.status_code == 201
-    assert response['Content-Type'] == 'application/json'
-    assert response['comment_id'] == comment.id
+    assert response['Content-Type'] == 'text/html; charset=utf-8'
+    assert response['comment_id'] == str(comment.id)
