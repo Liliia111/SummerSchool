@@ -129,6 +129,7 @@ def forgot_password_reset_confirm(request, uidb64=None, token=None):
     return HttpResponseBadRequest()
 
 
+@csrf_exempt
 def forgot_password_handler(request):
     if request.method == "POST":
         UserModel = get_user_model()
