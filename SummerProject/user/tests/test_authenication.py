@@ -60,3 +60,24 @@ def test_failed_login(client, user):
     response = client.post('/api/v1/user/login/', data=data, content_type='application/json')
     assert response.status_code == 400
     assert 'sessionid' not in response.cookies
+
+
+@pytest.mark.django_db
+def test_logout(client):
+    response1 = client.get('/api/v1/user/logout/')
+    assert response1.status_code == 200
+
+
+@pytest.mark.django_db
+def test_change_data(client, user):
+    data = {
+        "first_name": "Andrew",
+        "last_name": "New"
+    }
+    data1 = {
+        "email": user.email,
+        "password": PASSWORD
+    }
+    client.post('/api/v1/user/login/', data=data1, content_type='application/json')
+    response = client.put('/api/v1/user/self/', data=data, content_type='application/json')
+    assert response.status_code == 200
