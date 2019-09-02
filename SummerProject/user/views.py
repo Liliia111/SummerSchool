@@ -62,8 +62,7 @@ def login(request):
         user = authenticate(email=data["email"], password=data["password"])
         if user:
             auth_login(request, user)
-            response = HttpResponse(status=200)
-            request.session['id'] = user.id
+            response = HttpResponse(status=200, content_type='application/json')
             return response
         return HttpResponseBadRequest()
     return HttpResponseBadRequest()
@@ -74,10 +73,8 @@ def logout(request):
     if request.method == "GET":
         auth_logout(request)
         response = HttpResponse(status=200)
-        if 'id' in request.session:
-            del request.session['id']
         return response
-    return HttpResponseBadRequest
+    return HttpResponseBadRequest()
 
 
 @csrf_exempt
