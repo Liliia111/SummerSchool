@@ -9,6 +9,7 @@ import CheckEmail from "./components/CheckEmail"
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 
+import ArticlesView from "./components/ArticlesView";
 export default class MainRoutes extends React.Component {
   /**
     @return {} - Switch components

@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'user',
-    'article',
+    'articles',
     'categories',
 ]
 
