@@ -39,7 +39,7 @@ class ForgotPassword extends React.Component {
                     'email': this.state.email,
                 })
                 .then(() => {
-                    this.props.history.push('/check-email')
+                    this.props.history.push('/check-email', this.state)
                 })
                 .catch(() => {
                      this.setState({error: true})
