@@ -36,6 +36,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
+    "remove-markdown": "^0.3.0",
     "style-loader": "^0.23.1",
     "validator": "^11.1.0",
     "webpack": "^4.38.0",

@@ -36,6 +36,7 @@ class Registration extends React.Component {
         this.submitted = true;
 
         if (validation.isValid) {
+            console.log('asdas')
             axios
                 .post('/api/v1/user/registration/', {
                     'first_name': this.state.firstName,
