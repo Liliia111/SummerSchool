@@ -8,9 +8,12 @@ from .forms import CommentForm
 
 """ View for comment backend"""
 @transaction.atomic
-def comment_form(request, article_id):
+def comments_view(request, article_id):
     article = get_object_or_404(Article, id=article_id)
-    if request.method == 'POST':
+    if request.method == "GET":
+        data = list(article.comments.all().values())
+        return JsonResponse(data, safe=False)
+    elif request.method == 'POST':
         data = request.body.decode('utf8')
         data = json.loads(data)
         form = CommentForm(data)
@@ -23,16 +26,5 @@ def comment_form(request, article_id):
             response['comment_id'] = comment.id
             response['article_id'] = article_id
             return response
-    else:
-        return HttpResponseBadRequest
-
-
-""" View for getting existing comments"""
-@transaction.atomic
-def viewing_comments(request, article_id):
-    article = get_object_or_404(Article, id=article_id)
-    if request.method == "GET":
-        data = list(article.comments.all().values())
-        return JsonResponse(data, safe=False)
     else:
         return HttpResponseBadRequest

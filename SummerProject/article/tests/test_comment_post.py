@@ -26,11 +26,10 @@ def create_user(db, client):
 @pytest.fixture()
 def new_article(db, create_user):
     new_user, _ = create_user()
-    print("new_user{}".format(new_user))
     return Article.objects.create(
         headline="New one",
-        photo="https://oyebesmartest.com/public/uploads/preview/-11550470501p1ok6amcue.png",
-        video="https://www.youtube.com/watch?v=axsaC62UQOc",
+        photo="http://fake_photo.png",
+        video="http://fake_video",
         author=new_user,
         source="New's",
         content="Some new content")
@@ -41,10 +40,10 @@ def test_comment_post(client, new_article):
     data = {
         'content': "This is new comment"
     }
-    response = client.post('/api/v1/articles/{}/comment/'.format(new_article.id),
+    response = client.post('/api/v1/articles/{}/comments/'.format(new_article.id),
                            data=data,
                            content_type='application/json')
-    comment = new_article.comments.get(id=1)
+    comment = new_article.comments.get(id=response['comment_id'])
     assert response.status_code == 201
     assert response['Content-Type'] == 'text/html; charset=utf-8'
-    assert response['comment_id'] == str(comment.id)
+    assert comment.content == 'This is new comment'
