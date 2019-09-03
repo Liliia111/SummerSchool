@@ -120,7 +120,7 @@ def forgot_password_reset_confirm(request, uidb64=None, token=None):
         try:
             uid = urlsafe_base64_decode(uidb64)
             user = UserModel.objects.get(pk=uid)
-            request.session['uid'] = str(uid)
+            request.session['uid'] = uid.decode("utf-8")
         except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
             user = None
         if user is not None and default_token_generator.check_token(user, token):
