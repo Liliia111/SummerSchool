@@ -1,0 +1,27 @@
+.right-part h3{
+    width: 100%;
+    font-weight: 600;
+    font-size: 13px;
+    color: #596377;
+    margin-bottom: 0;
+}
+
+.sign-in{
+    text-align: center;
+    margin-top: 2%;
+}
+a.sign-in-link{
+    text-decoration: none;
+    color: #000000;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+    .right-part h3{
+        color: #C6CCD7;
+    }
+    .sign-in{
+        display: none;
+    }
+}
