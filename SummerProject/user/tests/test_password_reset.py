@@ -41,7 +41,7 @@ def test_forgot_password_reset(client, user):
     ("", PASSWORD)
 ])
 @pytest.mark.django_db
-def test_forgot_invalid_data_password_reset(client, user, new_password, new_password_confirm):
+def test_invalid_data_password_reset(client, user, new_password, new_password_confirm):
     response = client.post(reverse('forgot_password'), {'email': user.email}, content_type='application/json')
     assert response.status_code == 302
     assert len(mail.outbox) == 1
