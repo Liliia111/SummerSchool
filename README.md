@@ -1,41 +1,48 @@
 # SummerSchool
-Environment setup:
+## Environment setup:
+```bash
+sudo apt-get install python3
+```
+If pip3 not installed run:
+```bash
+sudo apt-get install -y python3-pip
+```
+Then do the following:
+```bash
+pip3 install virtualen
+git clone https://github.com/Liliia111/SummerSchool.git
+cd SummerSchool
+virtualenv env
+env/bin/activate
+pip3 install -r requirements.txt
+```
 
- sudo apt-get install python3
-
- If pip3 not installed run:
- sudo apt-get install -y python3-pip
-
- pip3 install virtualen
-
- git clone https://github.com/Liliia111/SummerSchool.git
-
- cd SummerSchool
- 
- virtualenv env
- 
- env/bin/activate
- 
- pip3 install -r requirements.txt
-
-
-installing psycopg2: 
- pip3 install psycopg2 
-
-if u have some troubles try:
- sudo apt-get install libpq-dev
-
-in file 'local_settings.py' u have to initialize two variables 
+To install psycopg2:
+```bash 
+pip3 install psycopg2 
+```
+If u have some troubles try:
+```bash
+sudo apt-get install libpq-dev
+```
+Create **local_settings.py** file on the **manage.py** level. In the file **local_settings.py** u have to initialize all the necessary variables: 
+```bash
 POSTGRES_DB_USERNAME = 'name'
 POSTGRES_DB_PASSWORD = 'password'
-and change database user and password in 'settings.py' to this variables
+SENDGRID_API_KEY = 'your key'
+DEFAULT_FROM_EMAIL = 'email'
+```
+And change database user and password in **settings.py** to this variables.
 
- python3 manage.py makemigrations
- python3 manage.py migrate
- 
- To run project:
- python3 manage.py runserver
-
+Then to have all tables in your database, you must do following commands:
+```bash
+python3 manage.py makemigrations
+python3 manage.py migrate
+``` 
+To run project:
+```bash
+python3 manage.py runserver
+```
 ## UI setup
 Install Node.js:
 ```bash
@@ -58,7 +65,6 @@ cd SummerSchool
 npm install 
 ```
 
-
 To check if everything is installed, use the following command:
 ```bash
 npm run dev-server
@@ -67,15 +73,5 @@ npm run dev-server
 To add bundle.js:
 ```bash
 npm run build
-```
-
-To check if everything is installed, use the following command:
-```bash
-npm run dev-server
-```
-## SendGrid configuration
-To use SendGrid you need to declare SENDGRID_API_KEY variable in local_settings.py and intialize it with api key:
-```bash
-SENDGRID_API_KEY = #
 ```
 
