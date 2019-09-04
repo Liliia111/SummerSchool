@@ -54,7 +54,6 @@ def is_valid_password_for_reset(data):
     params = ["new_password", "new_password_confirm"]
     for k in data.keys():
         if k not in params:
-            print(k)
             return False
     if len(data["new_password"]) > PASSWORD_MAX_LEN or len(data["new_password"]) < PASSWORD_MIN_LEN or \
             len(data["new_password_confirm"]) > PASSWORD_MAX_LEN or \
