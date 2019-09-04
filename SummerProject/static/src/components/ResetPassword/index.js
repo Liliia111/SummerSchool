@@ -1,22 +1,23 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/mainLogInFlow.css';
-import '../LogIn/style.css';
+import '../styles/mainLogInFlow.css'
 import './style.css';
 import FormValidator from "../../validator/FormValidator";
 import {rules} from "./validation_rules";
 import axios from "../../axios";
 
 
-class ForgotPassword extends React.Component {
+class ResetPassword extends React.Component {
+
     constructor(props) {
         super(props);
 
         this.validator = new FormValidator(rules);
 
         this.state = {
-            email: '',
+            newPassword: '',
+            password: '',
             validation: this.validator.valid(),
             error: false,
         };
@@ -35,20 +36,21 @@ class ForgotPassword extends React.Component {
 
         if (validation.isValid) {
             axios
-                .post('/api/v1/user/forgot_password/', {
-                    'email': this.state.email,
+                .post('/api/v1/user/forgot_password_handler/', {
+                    'new_password': this.state.newPassword,
+                    'new_password_confirm': this.state.password,
                 })
                 .then(() => {
-                    this.props.history.push('/check-email', this.state)
+                    this.props.history.push('/login')
                 })
                 .catch(() => {
-                     this.setState({error: true})
+                    this.setState({error: true})
                 })
         }
     };
 
     render() {
-        const {email} = this.state;
+        const {newPassword, password} = this.state;
         let validation = this.submitted ?
             this.validator.validate(this.state) :
             this.state.validation;
@@ -60,40 +62,50 @@ class ForgotPassword extends React.Component {
                 </div>
                 <div className="log-in">
                     <Link to="/registration/" className="login-link">Don't have an account?</Link>
-                    <Link to="/registration/" className="btn btn-primary login login-link">Get Started</Link>
+                    <Link to="/registration/" className="btn btn-primary login login-link">Get started</Link>
                 </div>
                 <div className="left-part bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
 
                 <div className="right-part background">
-                    <h1>Forgot your password?</h1>
+                    <h1>Please enter your new password</h1>
+
                     <form className="form">
-                        <h3>Enter your email address below and we'll get you back on track</h3>
                         <div className="passw-email">
-                            <div className={validation.email.isInvalid && 'has-error'}>
-                                <label>Email address</label>
-                                <div className="form-group">
-                                    <input type="text" placeholder="johndoe@gmail.com" name="email" value={email}
-                                           onChange={this.changeHandler} className="form-control input-height"/>
-                                    <span className="help-block">{validation.email.message}</span>
+                            <div className={validation.password.isInvalid && 'has-error'}>
+                                <label>New password</label>
+                                <div>
+                                    <div className="form-group">
+                                        <input type="password" placeholder="new password" name="newPassword"
+                                               value={newPassword}
+                                               onChange={this.changeHandler} className="form-control input-height"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={validation.password.isInvalid && 'has-error'}>
+                                <label>Password</label>
+                                <div>
+                                    <div className="form-group">
+                                        <input type="password" placeholder="confrim password" name="password"
+                                               value={password}
+                                               onChange={this.changeHandler} className="form-control input-height"/>
+                                        <span className="help-block">{validation.password.message}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="sign-up-w">
-                            <button type="submit" onClick={this.submitHandler} className="btn-primary sing-up">REQUEST
-                                RESENT LINK
+                            <button type="submit" onClick={this.submitHandler} className="btn-primary sing-up">SIGN UP
                             </button>
                         </div>
                         {
                             this.state.error && <div className="help-block">
-                                User with such email doesn't exist, please enter correct data
+                                Passwords don't match. Please try again.
                             </div>
                         }
                         <div className="log-in-mobile">
                             <Link to="/registration/" className="login-link-mobile">Don't have an account?</Link>
-                            <br/>
-                            <Link to="/login/" className="login-link-mobile">Back to Sign in</Link>
                         </div>
                         <div className="sign-in">
                             <Link to="/login/" className='sign-in-link'>Back to Sign in</Link>
@@ -105,4 +117,4 @@ class ForgotPassword extends React.Component {
     }
 }
 
-export default ForgotPassword;
+export default ResetPassword;

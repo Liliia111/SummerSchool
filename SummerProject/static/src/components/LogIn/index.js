@@ -64,7 +64,7 @@ class Login extends React.Component {
                             </div>
                             <div className="password">
                                 <label>Password</label>
-                                 <Link to="/home" className="password-link">Forgot password?</Link>
+                                 <Link to="/forgotPassword" className="password-link">Forgot password?</Link>
                             </div>
                             <div>
                                 <div className="form-group">
