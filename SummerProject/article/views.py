@@ -3,6 +3,7 @@ from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from .models import Article
 from django.db import transaction
 import json
+from django.db.models import Count
 from .forms import CommentForm
 
 
@@ -28,3 +29,13 @@ def comments_view(request, article_id):
             return response
     else:
         return HttpResponseBadRequest
+
+
+""" View for most commented articles"""
+
+
+@transaction.atomic
+def most_commented(request):
+    if request.method == "GET":
+        data = list(Article.objects.values().annotate(art_comments=Count('comments')).order_by('-art_comments')[:3])
+        return JsonResponse(data, safe=False)
