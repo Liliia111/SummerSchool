@@ -18,8 +18,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     objects = UserManager()
-    is_staff = True
-    is_superuser = True
     def __str__(self):
         return self.email
 

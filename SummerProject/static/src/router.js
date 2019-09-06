@@ -24,6 +24,7 @@ export default class MainRoutes extends React.Component {
           <Route path='/check-email' component={CheckEmail} />
           <Route path='/forgotPassword' component={ForgotPassword} />
           <Route path='/resetPassword' component={ResetPassword}/>
+          <Route path='/articles' component={ArticlesView} />
           <Redirect path='*' to='/home/' />
         </Switch>
       </main>
