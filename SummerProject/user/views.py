@@ -2,7 +2,7 @@
 import json
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
@@ -21,6 +21,15 @@ class UserView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super(UserView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        logged_user = request.user
+        data = {
+            'first_name': logged_user.first_name,
+            'last_name': logged_user.last_name,
+            'email': logged_user.email,
+        }
+        return JsonResponse(data, safe=False)
 
     def put(self, request):
         changes = json.loads(request.body.decode('utf-8'))
