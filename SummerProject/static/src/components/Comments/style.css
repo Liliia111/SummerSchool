@@ -1,0 +1,39 @@
+.comment_block{
+  margin: auto;
+  width: 56%;
+  height: auto;
+  background-color: #F8F8F8;
+  display: flex;
+  justify-content: center;
+}
+
+.comment_input{
+  margin: 2.45%;
+  margin-bottom: 6%;
+  width: 95%;
+  height: auto;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D8;
+  box-sizing: border-box;
+}
+
+.input_form{
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  width : 85%;
+  height: 100%;
+  vertical-align: middle;
+
+}
+
+.comment_img{
+  border-radius: 50%;
+  width: 12%;
+  padding: 2%;
+}
+
+.comment_button{
+  margin-top: 1%;
+  float: right;
+}

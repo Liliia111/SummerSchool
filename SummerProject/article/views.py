@@ -4,10 +4,12 @@ from .models import Article
 from django.db import transaction
 import json
 from .forms import CommentForm
+from django.views.decorators.csrf import csrf_exempt
 
 
 """ View for comment backend"""
 @transaction.atomic
+@csrf_exempt
 def comments_view(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     if request.method == "GET":

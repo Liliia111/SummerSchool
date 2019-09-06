@@ -8,7 +8,7 @@ class AuthenticatedUserMiddleware:
     """Middleware to verify that the user is authenticated"""
     URLS = [
         '/api/v1/user/self/',
-        '/api/v1/articles/<int:article_id>/comment/'
+        '/api/v1/articles/<int:article_id>/comments/'
     ]
 
     def __init__(self, get_response):
