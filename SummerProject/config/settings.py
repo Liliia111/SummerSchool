@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'user',
     'article',
     'categories',
+    'hitcount'
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+HITCOUNT_KEEP_HIT_IN_DATABASE = { 'days': 0 }
