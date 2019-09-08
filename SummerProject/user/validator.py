@@ -56,8 +56,8 @@ def is_valid_password_for_reset(data):
         if k not in params:
             return False
     if len(data["new_password"]) > PASSWORD_MAX_LEN or len(data["new_password"]) < PASSWORD_MIN_LEN or \
-            len(data["new_password_confirm"]) > PASSWORD_MAX_LEN  or \
-            len(data["new_password_confirm"]) <  PASSWORD_MIN_LEN or \
+            len(data["new_password_confirm"]) > PASSWORD_MAX_LEN or \
+            len(data["new_password_confirm"]) < PASSWORD_MIN_LEN or \
             data["new_password"] != data["new_password_confirm"]:
         return False
     return True
