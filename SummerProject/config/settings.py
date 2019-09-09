@@ -25,6 +25,8 @@ SECRET_KEY = 'cly)o&qsq2mvvuutm#ru&!vvcbht+gy9#cfkf-m2!+0ewh3(su'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+HOST = "localhost:8000"
+
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
 EMAIL_HOST = 'smtp.sendgrid.net'
