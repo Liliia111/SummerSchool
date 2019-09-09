@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate, get_user_model
 from django.views import View
 from django.utils.decorators import method_decorator
-from config.settings import DEFAULT_FROM_EMAIL
+from config.settings import DEFAULT_FROM_EMAIL, HOST
 from .models import User
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
@@ -88,7 +88,7 @@ def forgot_password_email_send(request):
             for user in associated_users:
                 content = {
                     'email': user.email,
-                    'domain': request.META['HTTP_HOST'],
+                    'domain': HOST,
                     'site_name': 'Sport News',
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'user': user,
@@ -105,7 +105,7 @@ def forgot_password_email_send(request):
                 email = render_to_string(email_template_name, content)
                 send_mail(subject, email, DEFAULT_FROM_EMAIL, [user.email], html_message=email, fail_silently=False)
 
-            return redirect('/check-email')  # email check component
+            return HttpResponse(status=200)
 
         return HttpResponseBadRequest()
 
@@ -120,11 +120,11 @@ def forgot_password_reset_confirm(request, uidb64=None, token=None):
         try:
             uid = urlsafe_base64_decode(uidb64)
             user = UserModel.objects.get(pk=uid)
-            request.session['uid'] = str(uid)
+            request.session['uid'] = uid.decode("utf-8")
         except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
             user = None
         if user is not None and default_token_generator.check_token(user, token):
-            return redirect('/reset_password')  # password reset check component
+            return redirect('/resetPassword')
 
     return HttpResponseBadRequest()
 

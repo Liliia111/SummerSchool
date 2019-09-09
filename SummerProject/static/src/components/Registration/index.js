@@ -20,7 +20,6 @@ class Registration extends React.Component {
             email: '',
             password: '',
             validation: this.validator.valid(),
-            redirectToReferrer: false,
             error : false
         };
     }
@@ -44,7 +43,7 @@ class Registration extends React.Component {
                     'password': this.state.password,
                 })
                 .then(() => {
-                    this.props.history.push('/home')
+                    this.props.history.push('/login')
                 })
                 .catch(() => {
                      this.setState({error: true})
