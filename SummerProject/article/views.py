@@ -46,6 +46,6 @@ class ArticleCountHitDetailView(HitCountDetailView):
 
 class MostPopularView(View):
     def get(self, request):
-        articles = Article.objects.order_by("hit_count_generic__hits")[:MOST_POPULAR_COUNT]
+        articles = Article.objects.order_by("-hit_count_generic__hits")[:MOST_POPULAR_COUNT]
         popular_list = [model_to_dict(article) for article in articles]
         return JsonResponse(popular_list, safe=False)
