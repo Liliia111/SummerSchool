@@ -1,9 +1,21 @@
+<<<<<<< HEAD
 bg-red {
     background-color: red;
 }
 
 .navbar{
     padding: 0;
+=======
+.bg-red {
+    background-color: red;
+}
+
+.navbar {
+    padding: 0;
+    z-index: 10000;
+    position: fixed;
+    background-color: white;
+>>>>>>> 7a0ffffa7a4fb94be8354edbfd2d34bc2dfbc231
 }
 
 input {
@@ -35,7 +47,11 @@ input[placeholder] {
     font-size: 25px;
 }
 
+<<<<<<< HEAD
 .dropdown-left{
+=======
+.dropdown-left {
+>>>>>>> 7a0ffffa7a4fb94be8354edbfd2d34bc2dfbc231
     position: relative;
 }
 
@@ -44,6 +60,24 @@ input[placeholder] {
     margin-top: 6px;
 }
 
+<<<<<<< HEAD
 .navbar-nav{
     font-size: 20px;
 }
+=======
+.navbar-nav {
+    font-size: 20px;
+}
+
+.facebook-icon-header {
+    margin-top: 8px;
+}
+
+.google-icon-header {
+    margin-top: 8px;
+}
+
+.icons {
+    margin-left: 60px;
+}
+>>>>>>> 7a0ffffa7a4fb94be8354edbfd2d34bc2dfbc231
