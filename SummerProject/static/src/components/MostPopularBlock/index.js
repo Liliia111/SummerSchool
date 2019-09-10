@@ -50,10 +50,7 @@ class MostPopularBlock extends React.Component {
                 <div className="card">
                   <div className="card-horizontal">
                     <div className="img-square-wrapper">
-                      <img
-                        className
-                        src="sport1.png"
-                        alt={popularArticle.headline}
+                      <img className src="/static/imgs/sport1.png" alt={popularArticle.headline}
                       />
                     </div>
                     <div className="card-body">
@@ -75,11 +72,7 @@ class MostPopularBlock extends React.Component {
                 <div className="card">
                   <div className="card-horizontal">
                     <div className="img-square-wrapper">
-                      <img
-                        className
-                        src="sport1.png"
-                        alt={commentedArticle.headline}
-                      />
+                      <img className src="/static/imgs/sport1.png" alt={commentedArticle.headline}/>
                     </div>
                     <div className="card-body">
                       <h4 className="card-title" key={commentedArticle.id}>

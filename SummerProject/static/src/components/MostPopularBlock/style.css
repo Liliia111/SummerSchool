@@ -75,13 +75,13 @@ p {
 }
 .divider-popular {
 	margin-left: 6px;
-	width: 269px;
+	width: 259px;
 	display: inline-block;
 	border-bottom: 1px solid #B2B2B2;
 }
 .divider-comments {
 	margin-left: 6px;
-	width: 255px;
+	width: 245px;
 	display: inline-block;
 	border-bottom: 1px solid #B2B2B2;
 }
