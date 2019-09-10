@@ -33,14 +33,6 @@ function Header() {
                             <a className="nav-link" href="#">Share <span className="sr-only">(current)</span></a>
                         </div>
                     </li>
-<<<<<<< HEAD
-                    <li className="nav-item">
-                        <a href=""><img src="/static/imgs/fb.svg" alt="facebook"/></a>
-                    </li>
-                    <li className="nav-item">
-                        <a href=""><img src="/static/imgs/gg.svg" alt="google"/></a>
-                    </li>
-=======
                     <div className="icons">
                         <li className="nav-item">
                             <div className="facebook-icon-header">
@@ -53,7 +45,6 @@ function Header() {
                             </div>
                         </li>
                     </div>
->>>>>>> 7a0ffffa7a4fb94be8354edbfd2d34bc2dfbc231
                 </ul>
                  <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
@@ -82,8 +73,5 @@ function Header() {
     )
 }
 
-<<<<<<< HEAD
 export default Header;
-=======
-export default Header;
->>>>>>> 7a0ffffa7a4fb94be8354edbfd2d34bc2dfbc231
+
