@@ -43,6 +43,10 @@ To run project:
 ```bash
 python3 manage.py runserver
 ```
+To use hitcount package, in **hitcount/models.py** inside **HitCount** class change **object_pk** type from TextField to IntegerField:
+```bash
+object_pk = models.IntegerField('object ID')
+```
 ## UI setup
 Install Node.js:
 ```bash
