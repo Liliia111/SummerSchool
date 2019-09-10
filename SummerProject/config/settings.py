@@ -148,4 +148,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-HITCOUNT_KEEP_HIT_IN_DATABASE = { 'days': 0 }
+
+HITCOUNT_KEEP_HIT_IN_DATABASE = { 'days': 1 }
+
+HITCOUNT_HITS_PER_IP_LIMIT = 0
