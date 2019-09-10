@@ -6,10 +6,12 @@ from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from .models import Article
 from django.db import transaction
 import json
+from django.db.models import Count
 from .forms import CommentForm
 
-""" View for comment backend"""
 MOST_POPULAR_COUNT = 3
+
+""" View for comment backend"""
 
 
 @transaction.atomic
@@ -35,6 +37,9 @@ def comments_view(request, article_id):
         return HttpResponseBadRequest
 
 
+""" View for most popular articles"""
+
+
 class ArticleCountHitDetailView(HitCountDetailView):
     model = Article
     count_hit = True  # set to True if you want it to try and count the hit
@@ -49,3 +54,13 @@ class MostPopularView(View):
         articles = Article.objects.order_by("-hit_count_generic__hits")[:MOST_POPULAR_COUNT]
         popular_list = [model_to_dict(article) for article in articles]
         return JsonResponse(popular_list, safe=False)
+
+
+""" View for most commented articles"""
+
+
+@transaction.atomic
+def most_commented(request):
+    if request.method == "GET":
+        data = list(Article.objects.values().annotate(art_comments=Count('comments')).order_by('-art_comments')[:3])
+        return JsonResponse(data, safe=False)
