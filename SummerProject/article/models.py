@@ -1,8 +1,6 @@
-from __future__ import unicode_literals
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 from hitcount.models import HitCount, HitCountMixin
-from django.utils.encoding import python_2_unicode_compatible
 from user.models import User
 from categories.models import Team, Category, SocialNetworkChoice
 
@@ -13,7 +11,6 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-@python_2_unicode_compatible
 class Article(models.Model, HitCountMixin):
     headline = models.CharField(max_length=150)
     photo = models.URLField(max_length=150, null=True)
