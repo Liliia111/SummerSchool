@@ -36,3 +36,18 @@ class User(AbstractBaseUser):
             self.last_name = last_name
 
         self.save()
+
+
+# class FacebookUserProfile(models.Model):
+#     """
+#     For users who login via Facebook.
+#     """
+#     facebook_uid = models.CharField(max_length=20, unique=True, db_index=True)
+#
+#     user = models.ForeignKey(User, related_name='facebook_profiles', on_delete=models.CASCADE)
+#     profile_image_url = models.URLField(blank=True, null=True)
+#     profile_image_url_big = models.URLField(blank=True, null=True)
+#     profile_image_url_small = models.URLField(blank=True, null=True)
+#     location = models.TextField(blank=True, null=True)
+#     url = models.URLField(blank=True, null=True)
+#     about_me = models.CharField(max_length=160, blank=True, null=True)

@@ -38,10 +38,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Toggle sandbox mode (when running in DEBUG mode)
-SENDGRID_SANDBOX_MODE_IN_DEBUG=False
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 # echo to stdout or any other file-like object that is passed to the backend via the stream kwarg.
-SENDGRID_ECHO_TO_STDOUT=True
+SENDGRID_ECHO_TO_STDOUT = True
 
 ALLOWED_HOSTS = []
 
@@ -145,3 +145,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+
+FACEBOOK_APP_ID = '674638763014681'
+FACEBOOK_API_SECRET = '984f930d7f67fe22d309a42064b586d1'
+SITE_URL = 'localhost:8000/'

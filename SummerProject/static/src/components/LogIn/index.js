@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
@@ -29,6 +29,7 @@ class Login extends React.Component {
                 'password': this.state.password,
             })
             .then(() => {
+                debugger
                 this.props.history.push('/home')
             })
             .catch(() => {
@@ -64,7 +65,7 @@ class Login extends React.Component {
                             </div>
                             <div className="password">
                                 <label>Password</label>
-                                 <Link to="/forgotPassword" className="password-link">Forgot password?</Link>
+                                <Link to="/forgotPassword" className="password-link">Forgot password?</Link>
                             </div>
                             <div>
                                 <div className="form-group">
@@ -84,7 +85,7 @@ class Login extends React.Component {
                             </div>
                         }
                         <div className="log-in-mobile">
-                             <Link to="/registration/" className="login-link-mobile">Don't have an account?</Link>
+                            <Link to="/registration/" className="login-link-mobile">Don't have an account?</Link>
                         </div>
                     </form>
                 </div>

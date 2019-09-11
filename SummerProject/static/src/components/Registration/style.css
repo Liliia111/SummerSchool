@@ -4,6 +4,43 @@
     margin: 0 5px 10px;
 }
 
+.social-log{
+    width: 45px;
+    height: 35px;
+}
+
+.link-button{
+    display: flex;
+    flex-direction: row;
+}
+
+.googl{
+    margin-top: 1px;
+}
+
+.kep-login-facebook {
+    font-family: Helvetica, sans-serif;
+    font-weight: 700;
+    color: #fff;
+    width: 35px;
+    height: 10px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #FFFFFF !important;
+    border: 0 !important;
+    padding: 0;
+    background: url('/static/imgs/fb.svg') no-repeat center;
+}
+
+.kep-login-facebook:hover {
+    background: url('/static/imgs/fb-red.svg') no-repeat center;
+}
+
+.kep-login-facebook:focus{
+    outline: 0;
+
+}
+
 .fb img {
     content: url('/static/imgs/fb.svg');
 }
@@ -62,11 +99,11 @@ input[placeholder] {
     height: 42px;
 }
 
-.user-data .has-error input{
+.user-data .has-error input {
     margin-bottom: 0;
 }
 
-.has-error input{
+.has-error input {
     border: 1px solid #D72130;
 }
 
