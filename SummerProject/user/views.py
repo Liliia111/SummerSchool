@@ -15,15 +15,8 @@ from config.settings import DEFAULT_FROM_EMAIL, FACEBOOK_APP_ID, FACEBOOK_API_SE
 from .models import User
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
-from urllib.parse import quote
-from django.conf import settings
-from django.urls import reverse
-from django.template.context_processors import csrf
-from django.http import HttpResponseRedirect
-import urllib
-import facebook
-from cgi import parse_qs
 
+import django.middleware.csrf
 
 class UserView(View):
     @method_decorator(csrf_exempt)
@@ -57,7 +50,7 @@ def registration(request):
             password=data['password'],
         )
         response = HttpResponse(status=201)
-        #response.set_cookie['csrftoken'] = default_token_generator.make_token(user)
+        # response.set_cookie['csrftoken'] = default_token_generator.make_token(user)
         return response
     return HttpResponseBadRequest()
 
@@ -150,50 +143,3 @@ def forgot_password_handler(request):
                 return HttpResponse(status=201)
 
     return HttpResponseBadRequest()
-
-
-def auth(request, user=None):
-    cookie = facebook.get_user_from_cookie(request.COOKIES, FACEBOOK_APP_ID, FACEBOOK_API_SECRET)
-    if cookie:
-        uid = cookie['uid']
-        access_token = cookie['access_token']
-    else:
-
-        params = {}
-        params["client_id"] = FACEBOOK_APP_ID
-        params["client_secret"] = FACEBOOK_API_SECRET
-        params["redirect_uri"] = reverse("socialauth_facebook_login_done")[1:]
-        params["code"] = request.GET.get('code', '')
-
-        url = "https://graph.facebook.com/oauth/access_token?" + urllib.request.urlencode(params)
-        userdata = urllib.request.urlopen(url).read()
-        res_parse_qs = parse_qs(userdata)
-        if not res_parse_qs.has_key('access_token'):
-            return None
-
-        parse_data = res_parse_qs['access_token']
-        uid = parse_data['uid'][-1]
-        access_token = parse_data['access_token'][-1]
-
-    try:
-        fb_user = FacebookUserProfile.objects.get(facebook_uid=uid)
-        return fb_user.user
-
-    except FacebookUserProfile.DoesNotExist:
-
-        graph = facebook.GraphAPI(access_token)
-        fb_data = graph.get_object("me")
-
-        if not fb_data:
-            return None
-
-        if not user:
-            user = User.objects.create(email=fb_data["email"])
-            user.first_name = fb_data['first_name']
-            user.last_name = fb_data['last_name']
-            user.save()
-
-        fb_profile = FacebookUserProfile(facebook_uid=uid, user=user)
-        fb_profile.save()
-
-        return user

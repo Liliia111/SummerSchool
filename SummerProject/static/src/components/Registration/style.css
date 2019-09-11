@@ -4,31 +4,36 @@
     margin: 0 5px 10px;
 }
 
-.social-log{
+.social-log {
     width: 45px;
     height: 35px;
 }
 
-.link-button{
+.social-log span {
+    font-size: 0 !important;
+}
+
+.link-button {
     display: flex;
     flex-direction: row;
 }
 
-.googl{
+.googl {
     margin-top: 1px;
 }
 
 .kep-login-facebook {
     font-family: Helvetica, sans-serif;
     font-weight: 700;
-    color: #fff;
+    font-size: 0 !important;
     width: 35px;
     height: 10px;
     cursor: pointer;
     display: inline-block;
-    background-color: #FFFFFF !important;
+    background-color: #fff0 !important;
     border: 0 !important;
     padding: 0;
+    outline: none;
     background: url('/static/imgs/fb.svg') no-repeat center;
 }
 
@@ -36,17 +41,9 @@
     background: url('/static/imgs/fb-red.svg') no-repeat center;
 }
 
-.kep-login-facebook:focus{
+.kep-login-facebook:focus {
     outline: 0;
 
-}
-
-.fb img {
-    content: url('/static/imgs/fb.svg');
-}
-
-.fb img:hover {
-    content: url('/static/imgs/fb-red.svg');
 }
 
 .gg img {
@@ -125,13 +122,16 @@ input[placeholder] {
         width: 90%;
     }
 
+    .link-button {
+        margin-bottom: 20px;
+    }
+    .right-part p {
+        display: none;
+    }
+
     label {
         margin-top: 20px;
         color: #FFFFFF;
-    }
-
-    .fb img {
-        content: url('/static/imgs/fb-wh.svg');
     }
 
     .gg img {
@@ -142,5 +142,10 @@ input[placeholder] {
         display: flex;
         flex-direction: row;
         height: 20px;
+    }
+
+    .kep-login-facebook {
+        background-color: #fff0 !important;
+        background: url('/static/imgs/fb-wh.svg') no-repeat center;
     }
 }

@@ -27,7 +27,10 @@ class Registration extends React.Component {
 
     responseFacebook(response) {
         console.log(response);
-        console.log(response.data)
+        console.log(response.first_name);
+        console.log(response.last_name);
+        console.log(response.email);
+        console.log(response.id);
     }
 
     changeHandler = event => {
@@ -84,7 +87,7 @@ class Registration extends React.Component {
                                 <FacebookLogin
                                     appId="674638763014681"
                                     autoLoad={false}
-                                    fields="name,email"
+                                    fields="email, first_name, last_name"
                                     callback={this.responseFacebook}
                                 />
                         </div>
