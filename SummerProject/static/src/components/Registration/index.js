@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import FacebookLogin from 'react-facebook-login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
@@ -21,16 +21,9 @@ class Registration extends React.Component {
             email: '',
             password: '',
             validation: this.validator.valid(),
-            error: false
+            error: false,
+            redirect: false
         };
-    }
-
-    responseFacebook(response) {
-        console.log(response);
-        console.log(response.first_name);
-        console.log(response.last_name);
-        console.log(response.email);
-        console.log(response.id);
     }
 
     changeHandler = event => {
@@ -60,12 +53,24 @@ class Registration extends React.Component {
         }
     };
 
+    responseFacebook(response) {
+        axios
+            .post('/api/v1/user/facebookRegistration/', {
+                'first_name': response.first_name,
+                'last_name': response.last_name,
+                'userId': response.id,
+            });
+        window.location = '/home';
+    };
 
     render() {
         const {firstName, lastName, email, password} = this.state;
         let validation = this.submitted ?
             this.validator.validate(this.state) :
             this.state.validation;
+        if (this.state.redirect === true) {
+            this.props.history.push('/home')
+        }
 
         return (
             <div className="login-page">
@@ -84,12 +89,12 @@ class Registration extends React.Component {
                     <h1>Create Account</h1>
                     <div className="link-button">
                         <div className="social-log">
-                                <FacebookLogin
-                                    appId="674638763014681"
-                                    autoLoad={false}
-                                    fields="email, first_name, last_name"
-                                    callback={this.responseFacebook}
-                                />
+                            <FacebookLogin
+                                appId="674638763014681"
+                                autoLoad={false}
+                                fields="email, first_name, last_name"
+                                callback={this.responseFacebook}
+                            />
                         </div>
                         <div className="googl">
                             <a href="#" className="gg">

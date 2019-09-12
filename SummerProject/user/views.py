@@ -16,7 +16,6 @@ from .models import User
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
 
-import django.middleware.csrf
 
 class UserView(View):
     @method_decorator(csrf_exempt)
@@ -43,14 +42,29 @@ def registration(request):
             return HttpResponseBadRequest()
         if User.objects.filter(email=data['email']).exists():
             return HttpResponseBadRequest()
-        user = User.create(
+        User.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
             password=data['password'],
         )
         response = HttpResponse(status=201)
-        # response.set_cookie['csrftoken'] = default_token_generator.make_token(user)
+        return response
+    return HttpResponseBadRequest()
+
+
+@csrf_exempt
+def facebook_registration(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        if User.objects.filter(email=data['userId']).exists():
+            return HttpResponse(status=100)
+        User.create_user_via_facebook(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            userId=data['userId'],
+        )
+        response = HttpResponse(status=201)
         return response
     return HttpResponseBadRequest()
 
