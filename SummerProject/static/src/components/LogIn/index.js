@@ -29,7 +29,6 @@ class Login extends React.Component {
                 'password': this.state.password,
             })
             .then(() => {
-                debugger
                 this.props.history.push('/home')
             })
             .catch(() => {

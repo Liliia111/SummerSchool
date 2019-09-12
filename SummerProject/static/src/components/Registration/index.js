@@ -22,7 +22,6 @@ class Registration extends React.Component {
             password: '',
             validation: this.validator.valid(),
             error: false,
-            redirect: false
         };
     }
 
@@ -68,9 +67,6 @@ class Registration extends React.Component {
         let validation = this.submitted ?
             this.validator.validate(this.state) :
             this.state.validation;
-        if (this.state.redirect === true) {
-            this.props.history.push('/home')
-        }
 
         return (
             <div className="login-page">
