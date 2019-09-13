@@ -8,8 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 """ View for comment backend"""
-@transaction.atomic
 @csrf_exempt
+@transaction.atomic
 def comments_view(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     if request.method == "GET":
