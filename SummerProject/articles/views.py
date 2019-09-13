@@ -1,5 +1,5 @@
 from django.utils import timezone
-from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest,
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from django.views import View
 from articles.models import Article
 from django.forms.models import model_to_dict

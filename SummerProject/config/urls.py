@@ -20,7 +20,6 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/articles/', include('article.urls')),
     path('api/v1/categories/', include('categories.urls')),
     path('api/v1/user/', include('user.urls')),
     path('api/v1/articles/', include('articles.urls')),

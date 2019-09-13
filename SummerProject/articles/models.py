@@ -26,5 +26,3 @@ class Article(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     comments = models.ManyToManyField(Comment)
 
-    def __str__(self):
-        return self.headline

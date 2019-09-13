@@ -8,5 +8,5 @@ class Category(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=150)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
