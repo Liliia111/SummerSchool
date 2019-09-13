@@ -13,6 +13,7 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from config.settings import DEFAULT_FROM_EMAIL
 from .models import User
+from django.shortcuts import get_object_or_404
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
 
@@ -152,3 +153,14 @@ def forgot_password_handler(request):
                 return HttpResponse(status=201)
 
     return HttpResponseBadRequest()
+
+
+def get_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == 'GET':
+        data = {
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+        }
+        return JsonResponse(data, safe=False)
