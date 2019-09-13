@@ -18,15 +18,10 @@ class Articles extends Component{
 
 
     getArticle = () => {
-         console.log(this.props)
          axios
              .get(`/api/v1/articles/${this.props.match.params.id}/`)
              .then(res => {
-                console.log(res);
                 this.setState({ article : res.data });
-            })
-            .catch(err => {
-                console.log(err);
             });
     }
 
@@ -49,8 +44,7 @@ class Articles extends Component{
                          <h4>Article by Alex Kniupa / Assosiated Prass</h4>
                          <h2>{article.headline}</h2>
                      </div>
-                <div className="shadow-box">
-                </div>
+                <div className="shadow-box"></div>
                 <div className="side-text">
                     <h1>NEWS</h1>
                 </div>
