@@ -4,6 +4,7 @@
   "description": "Environment setup:",
   "main": "index.js",
   "scripts": {
+    "start": "webpack -d --watch",
     "build": "webpack",
     "dev-server": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
