@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'user',
-    'article',
+    'articles',
     'categories',
 ]
 
@@ -102,8 +102,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'summer_pr_db',
-        'USER': POSTGRES_DB_USERNAME,
-        'PASSWORD': POSTGRES_DB_PASSWORD,
+        'USER': 'milaviex',
+        'PASSWORD': '210800',
         'HOST': 'localhost',
         'PORT': '',
     }
