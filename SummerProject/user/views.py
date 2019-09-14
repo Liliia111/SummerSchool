@@ -1,7 +1,6 @@
 # pylint: disable=C0111,E1101,R0201
 import json
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -13,6 +12,7 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from config.settings import DEFAULT_FROM_EMAIL, HOST
 from .models import User
+from .tasks import send_reset_email_task
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
 
@@ -119,7 +119,8 @@ def forgot_password_email_send(request):
 
                 subject = ''.join(subject.splitlines())
                 email = render_to_string(email_template_name, content)
-                send_mail(subject, email, DEFAULT_FROM_EMAIL, [user.email], html_message=email, fail_silently=False)
+                send_reset_email_task.delay(subject, email, user.email)
+
 
             return HttpResponse(status=200)
 
