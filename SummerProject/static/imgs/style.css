@@ -1,0 +1,88 @@
+.article-view {
+    background: #F2F2F2;
+}
+
+
+.img-article img{
+    /* Photo for main article */
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    left: 16%;
+    top: 21%;
+
+}
+
+.text-block{
+    display: flex;
+    width: 380px;
+    height: 260px;
+    left: 58%;
+    top: 36%;
+    align-items: left;
+    background: #F6F6F6;
+}
+
+.text-block p{
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #C63638;
+}
+.text-block h2{
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 30px;
+    /* or 136% */
+    color: #2B2F43;
+}
+.article-text p{
+    position: absolute;
+    display: flex;
+    width: 813px;
+    height: 248px;
+    left: 255px;
+    top: 91%;
+    color: red;
+
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+
+
+}
+
+.side-text h1{
+    position: absolute;
+    float: left;
+    width: 343px;
+    height: 192px;
+    left: 66%;
+    top: 75%;
+    z-index: -1;
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 141px;
+    line-height: 192px;
+    /* identical to box height, or 136% */
+
+    letter-spacing: 1.25893px;
+
+    color: rgba(204, 211, 224, 0.301628);
+
+    transform: rotate(90deg);
+}
+
+@media only screen and(max-width: 768px){
+    .text-block{
+        display: none;
+    }
+}

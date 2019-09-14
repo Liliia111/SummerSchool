@@ -61,19 +61,19 @@ class Sidebar extends React.Component {
               </li>
               <li>
                 <a>
-                  <image src="/static/imgs/facebook.svg" />
+                  <img src="/static/imgs/facebook.svg" />
                 </a>
                 <a>
-                  <image src="/static/imgs/Twitter.svg" />
+                  <img src="/static/imgs/Twitter.svg" />
                 </a>
               </li>
 
               <li>
                 <a>
-                  <image src="/static/imgs/Google+.svg" />
+                  <img src="/static/imgs/Google+.svg" />
                 </a>
                 <a>
-                  <image src="/static/imgs/Youtube.svg" />
+                  <img src="/static/imgs/Youtube.svg" />
                 </a>
               </li>
             </ul>

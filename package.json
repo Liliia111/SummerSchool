@@ -4,6 +4,7 @@
   "description": "Environment setup:",
   "main": "index.js",
   "scripts": {
+    "start": "webpack -d --watch",
     "build": "webpack",
     "dev-server": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -37,6 +38,7 @@
     "react-dom": "^16.8.6",
     "react-facebook-login": "^4.1.1",
     "react-router-dom": "^5.0.1",
+    "remove-markdown": "^0.3.0",
     "style-loader": "^0.23.1",
     "validator": "^11.1.0",
     "webpack": "^4.38.0",
