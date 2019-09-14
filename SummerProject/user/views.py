@@ -35,6 +35,7 @@ class UserView(View):
         return HttpResponse(status=200)
 
 
+@csrf_exempt
 def registration(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
@@ -69,6 +70,7 @@ def facebook_registration(request):
     return HttpResponseBadRequest()
 
 
+@csrf_exempt
 def login(request):
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8'))
