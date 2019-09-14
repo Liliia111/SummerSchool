@@ -54,7 +54,7 @@ class Registration extends React.Component {
 
     responseFacebook(response) {
         axios
-            .post('/api/v1/user/facebookRegistration/', {
+            .post('/api/v1/user/facebook_registration/', {
                 'first_name': response.first_name,
                 'last_name': response.last_name,
                 'userId': response.id,
