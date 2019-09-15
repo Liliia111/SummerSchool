@@ -1,7 +1,8 @@
 from django.db import models
+from djchoices import ChoiceItem, DjangoChoices
 from user.models import User
 from categories.models import Team, Category
-from djchoices import DjangoChoices, ChoiceItem
+
 
 class Choices(DjangoChoices):
     google = ChoiceItem("GG")

@@ -102,8 +102,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'summer_pr_db',
-        'USER': 'milaviex',
-        'PASSWORD': '210800',
+        'USER': POSTGRES_DB_USERNAME,
+        'PASSWORD': POSTGRES_DB_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',
     }

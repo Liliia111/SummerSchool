@@ -9,6 +9,14 @@ bg-red {
 .navbar {
     background-color: white;
     z-index: 1000;
+    align-items: flex-start;
+    max-height:83px;
+    padding: 0;
+}
+
+#navbarSupportedContent {
+    align-items: flex-start;
+    max-height:83px;
 }
 
 input {
@@ -23,16 +31,30 @@ input {
     top: 0;
     left: 0;
     height: 83px;
-    width: 200px;
+    width: 253px;
     font-size: 25px;
 }
 
+a.navbar-brand {
+    max-height: 83px;
+    padding:0;
+}
+
 input[placeholder] {
-    font-size: 35px;
-    font-weight: lighter;
-    color: #C6CCD7;
+
     border: none;
     margin-top: 10px;
+    position: absolute;
+    width: 70px;
+    height: 19px;
+    left: 326px;
+    top: 33px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .share-icon {
@@ -68,5 +90,10 @@ input[placeholder] {
 
 .icons {
     margin-left: 60px;
+}
+
+.search-icon{
+    margin-top:25px;
+
 }
 

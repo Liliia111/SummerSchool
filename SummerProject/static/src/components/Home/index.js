@@ -8,8 +8,8 @@ class Home extends React.Component {
     render() {
         return <>
             <Header/>
-            <Sidebar/>
-            <Footer/>
+           <Sidebar/>
+           <Footer/>
         </>
     }
 }

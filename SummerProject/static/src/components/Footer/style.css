@@ -27,10 +27,11 @@
     opacity: 1;
 }
 
-ul {
+ul.nav-list  {
     list-style: none;
+    list-style-type: none;
     padding: 0;
-    width: 400px;
+    min-width: 400px;
     margin-left: 10px;
 }
 
@@ -149,7 +150,7 @@ form.subscribe-form::after {
     color: black;
 }
 
-img {
+.sign-up img {
     vertical-align: middle;
     border-style: none;
     margin-right: 10px;
