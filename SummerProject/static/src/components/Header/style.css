@@ -14,7 +14,7 @@ bg-red {
     padding: 0;
 }
 
-#navbarSupportedContent {
+#navbarSupportedContent{
     align-items: flex-start;
     max-height:83px;
 }
@@ -41,20 +41,11 @@ a.navbar-brand {
 }
 
 input[placeholder] {
-
+    font-size: 35px;
+    font-weight: lighter;
+    color: #C6CCD7;
     border: none;
     margin-top: 10px;
-    position: absolute;
-    width: 70px;
-    height: 19px;
-    left: 326px;
-    top: 33px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
 }
 
 .share-icon {
@@ -92,8 +83,7 @@ input[placeholder] {
     margin-left: 60px;
 }
 
-.search-icon{
+.search-icon {
     margin-top:25px;
-
 }
 
