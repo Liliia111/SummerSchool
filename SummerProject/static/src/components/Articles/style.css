@@ -9,7 +9,6 @@
     height: 544px;
     left: 250px;
     top: 161px;
-    z-index: -1;
 }
 
 .text-article {
@@ -87,7 +86,6 @@
     left: 1040px;
     top: 598px;
     transform: rotate(90deg);
-    z-index: -2;
 }
 
 .side-text h1{

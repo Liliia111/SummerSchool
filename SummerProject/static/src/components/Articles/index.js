@@ -41,7 +41,7 @@ class Articles extends Component{
                     </div>
                      <div className="text-block">
                          <p>Published /21.09.2019</p>
-                         <h4>Article by Alex Kniupa / Assosiated Prass</h4>
+                         <h4>Article by {article.author} / Assosiated Prass</h4>
                          <h2>{article.headline}</h2>
                      </div>
                 <div className="shadow-box"></div>
