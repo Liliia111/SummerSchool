@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'user',
     'articles',
     'categories',
+    'hitcount'
 ]
 
 MIDDLEWARE = [
@@ -102,8 +103,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'summer_pr_db',
-        'USER': 'milaviex',
-        'PASSWORD': '210800',
+        'USER': POSTGRES_DB_USERNAME,
+        'PASSWORD': POSTGRES_DB_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -154,3 +155,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+HITCOUNT_KEEP_HIT_IN_DATABASE = { 'days': 1 }
+
+HITCOUNT_HITS_PER_IP_LIMIT = 0

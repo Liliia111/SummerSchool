@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header";
 import Sidebar from '../Sidebar'
+import MostPopularBlock from '../MostPopularBlock'
 import Footer from '../Footer'
 
 
@@ -9,6 +10,7 @@ class Home extends React.Component {
         return <>
             <Header/>
             <Sidebar/>
+            <MostPopularBlock/>
             <Footer/>
         </>
     }
