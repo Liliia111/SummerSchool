@@ -1,13 +1,15 @@
-from django.utils import timezone
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
+from django.forms import model_to_dict
 from django.views import View
-from articles.models import Article
-from django.forms.models import model_to_dict
+from hitcount.views import HitCountDetailView
 from django.shortcuts import get_object_or_404
 from django.db import transaction
 import json
 from django.db.models import Count
 from .forms import CommentForm
+from articles.models import Article
+
+MOST_POPULAR_COUNT = 3
 
 
 class ArticleDetailView(View):
@@ -19,7 +21,10 @@ class ArticleDetailView(View):
         article = get_object_or_404(Article, pk=pk)
         return JsonResponse(model_to_dict(article))
 
+
 """ View for comment backend"""
+
+
 @transaction.atomic
 def comments_view(request, article_id):
     article = get_object_or_404(Article, id=article_id)
@@ -41,6 +46,25 @@ def comments_view(request, article_id):
             return response
     else:
         return HttpResponseBadRequest
+
+
+""" View for most popular articles"""
+
+
+class ArticleCountHitDetailView(HitCountDetailView):
+    model = Article
+    count_hit = True  # set to True if you want it to try and count the hit
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class MostPopularView(View):
+    def get(self, request):
+        articles = Article.objects.order_by("-hit_count_generic__hits")[:MOST_POPULAR_COUNT]
+        popular_list = [model_to_dict(article) for article in articles]
+        return JsonResponse(popular_list, safe=False)
 
 
 """ View for most commented articles"""

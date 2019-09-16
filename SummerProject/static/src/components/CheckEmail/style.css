@@ -1,8 +1,8 @@
-.text-location h1{
+.text-location h1 {
     text-align: center;
 }
 
-.text-location p{
+.text-location p {
     margin: 0 15%;
     font-size: 14px;
     line-height: 19px;
@@ -10,24 +10,38 @@
     color: #596377;
 }
 
-.mail{
+.checkEmail h4 {
+    color: #596377;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.mail {
     display: flex;
     justify-content: center;
     margin-bottom: 3%;
 }
 
-.mail img{
+.mail img {
     width: 80px;
     height: auto;
     content: url('/static/imgs/email.svg');
 }
 
 @media only screen and (max-width: 768px) {
-    .right-part p{
+    .right-part p {
         margin: 0;
         color: #C6CCD7;
     }
-    .mail img{
+
+    .mail img {
         content: url("/static/imgs/email-wh.svg");
+    }
+    .checkEmail h4 {
+        color: #C6CCD7;
     }
 }

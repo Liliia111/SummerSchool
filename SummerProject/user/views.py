@@ -43,13 +43,30 @@ def registration(request):
             return HttpResponseBadRequest()
         if User.objects.filter(email=data['email']).exists():
             return HttpResponseBadRequest()
-        user = User.create(
+        User.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
             password=data['password'],
         )
-        return HttpResponse(status=201)
+        response = HttpResponse(status=201)
+        return response
+    return HttpResponseBadRequest()
+
+
+@csrf_exempt
+def facebook_registration(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        if User.objects.filter(email=data['userId']).exists():
+            return HttpResponse(status=100)
+        User.create_user_via_facebook(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            userId=data['userId'],
+        )
+        response = HttpResponse(status=201)
+        return response
     return HttpResponseBadRequest()
 
 
@@ -68,7 +85,6 @@ def login(request):
     return HttpResponseBadRequest()
 
 
-@csrf_exempt
 def logout(request):
     if request.method == "GET":
         auth_logout(request)
