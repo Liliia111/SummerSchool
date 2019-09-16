@@ -14,11 +14,10 @@ class Comments extends React.Component {
           this.state = {
             comment: '',
             commentsList: [],
-            user: {},
+            loggedUser: {},
             visible: true,
             error: false,
-            logged: true,
-            user_id: '1'
+            logged: true
         };
 
         this.loginButton = (<button type="submit" onClick={this.submitLogging} className="comment_button">Log in</button>)
@@ -26,7 +25,7 @@ class Comments extends React.Component {
     }
 
     componentDidMount() {
-      axios.get("/api/v1/user/self/")
+      axios.get(`/api/v1/user/self/`)
         .then(res => {
           const loggedUser = res.data;
           this.setState({ loggedUser });
@@ -36,25 +35,14 @@ class Comments extends React.Component {
         });
 
 
-        axios.get("/api/v1/articles/1/comments/")
+        axios.get(`/api/v1/articles/1/comments/`)
           .then(res => {
             const commentsList = res.data;
             this.setState({ commentsList });
-            console.log(commentsList[0].content);
           })
           .catch(res => {
             this.setState({ logged: false });
           });
-
-           console.log(this.state.user_id)
-            axios.get(`api/v1/user/${this.state.user_id}/get_user/`)
-            .then(res => {
-                const user = res.data;
-                this.setState({ user })
-            })
-            .catch(res => {
-               console.log('Some error to get user')
-            });
     }
 
     changeHandler = event => {
@@ -69,11 +57,14 @@ class Comments extends React.Component {
         event.preventDefault();
 
             axios
-                .post(`/api/v1/article/1/comments`, {
+                .post("/api/v1/articles/1/comments/", {
                     'comment' : this.state.comment
                 })
                 .then(() => {
-                    this.props.history.push('/')
+                    const currentComments = [...this.state.commentsList]
+                    currentComments.push({id: 'asdf', content: this.state.comment, first_name: this.state.loggedUser.first_name, first_name: this.state.loggedUser.last})
+                    this.setState({comment: '', commentsList: currentComments, } )
+                    console.log(this.state.commentsList);
                 })
                 .catch(() => {
                      this.setState({error: true})
@@ -101,16 +92,15 @@ class Comments extends React.Component {
 
     getComments(){
         const items = []
-
-        for(var i = 0; i < this.state.commentsList.length; i++){
+        for(var i = 0; i < this.state.commentsList  .length; i++){
         items.push(<div>
         <div className="user-info">
                   <div className="img-width">
                     <img className="user-img" src="/static/imgs/avatar.png" alt="ava" />
                   </div>
                   <div className="user-name-date">
-                    <div className="user-info-name">{this.state.user.first_name} {this.state.user.last_name}</div>
-                    <div className="comment-date">Mar 15</div>
+                    <div className="user-info-name">{this.state.commentsList[i].first_name} {this.state.commentsList[i].last_name}</div>
+                    <div className="comment-date">Mar 17</div>
                   </div>
                 </div>
                 <div className="comment-content">
@@ -137,8 +127,6 @@ class Comments extends React.Component {
         const logged = this.state.logged
         const comment = this.state.comment
         const comments = this.state.commentsList
-        const user_name = this.state.user.first_name
-        const user_last_name = this.state.user.last_name
 
         return(
             <div className="comment_block">
@@ -155,15 +143,15 @@ class Comments extends React.Component {
                 </div>
               </div>
               <div >
-                <form className="comment_input">
+                <div className="comment_input">
                     <img className="comment_img" src="/static/imgs/avatar.png" alt="ava" />
-                    <input className="input_form" type="text" onChange={this.changeHandler} onKeyPress={this.handleKeyPress} name="comment" placeholder="Write new comment" value={comment}/>
+                    <input className="input_form" type="text" onChange={this.changeHandler} onKeyPress={this.handleKeyPress} name="comment" placeholder="Write new comment" value={this.state.comment}/>
                     {logged ? (
                       this.postButton
                     ) : (
                       this.loginButton
                     )}
-                </form>
+                </div>
               </div>
               {comments.length && <div className="comments">
                 <div>{this.getComments()}</div>
