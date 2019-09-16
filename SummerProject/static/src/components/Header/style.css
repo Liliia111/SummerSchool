@@ -9,6 +9,14 @@ bg-red {
 .navbar {
     background-color: white;
     z-index: 1000;
+    align-items: flex-start;
+    max-height:83px;
+    padding: 0;
+}
+
+#navbarSupportedContent{
+    align-items: flex-start;
+    max-height:83px;
 }
 
 input {
@@ -23,8 +31,13 @@ input {
     top: 0;
     left: 0;
     height: 83px;
-    width: 200px;
+    width: 253px;
     font-size: 25px;
+}
+
+a.navbar-brand {
+    max-height: 83px;
+    padding:0;
 }
 
 input[placeholder] {
@@ -68,5 +81,9 @@ input[placeholder] {
 
 .icons {
     margin-left: 60px;
+}
+
+.search-icon {
+    margin-top:25px;
 }
 

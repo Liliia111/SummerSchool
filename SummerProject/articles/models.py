@@ -1,4 +1,5 @@
 from django.db import models
+from djchoices import ChoiceItem, DjangoChoices
 from django.contrib.contenttypes.fields import GenericRelation
 from hitcount.models import HitCount, HitCountMixin
 from djchoices import DjangoChoices, ChoiceItem
