@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
+import FacebookLogin from 'react-facebook-login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
@@ -20,7 +21,7 @@ class Registration extends React.Component {
             email: '',
             password: '',
             validation: this.validator.valid(),
-            error : false
+            error: false,
         };
     }
 
@@ -46,17 +47,26 @@ class Registration extends React.Component {
                     this.props.history.push('/login')
                 })
                 .catch(() => {
-                     this.setState({error: true})
+                    this.setState({error: true})
                 })
         }
     };
 
+    responseFacebook(response) {
+        axios
+            .post('/api/v1/user/facebook_registration/', {
+                'first_name': response.first_name,
+                'last_name': response.last_name,
+                'userId': response.id,
+            });
+        window.location = '/home';
+    };
 
     render() {
         const {firstName, lastName, email, password} = this.state;
         let validation = this.submitted ?
-                      this.validator.validate(this.state) :
-                      this.state.validation;
+            this.validator.validate(this.state) :
+            this.state.validation;
 
         return (
             <div className="login-page">
@@ -73,14 +83,20 @@ class Registration extends React.Component {
 
                 <div className="right-part background">
                     <h1>Create Account</h1>
-                    <div>
-                        <a href="#" className="fb">
-                            <img className="icon-style"/>
-                        </a>
-
-                        <a href="#" className="gg">
-                            <img className="icon-style"/>
-                        </a>
+                    <div className="link-button">
+                        <div className="social-log">
+                            <FacebookLogin
+                                appId="674638763014681"
+                                autoLoad={false}
+                                fields="email, first_name, last_name"
+                                callback={this.responseFacebook}
+                            />
+                        </div>
+                        <div className="googl">
+                            <a href="#" className="gg">
+                                <img className="icon-style"/>
+                            </a>
+                        </div>
                     </div>
                     <p>Or use your email for registration:</p>
                     <form className="form">

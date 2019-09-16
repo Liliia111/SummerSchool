@@ -29,6 +29,13 @@ class User(AbstractBaseUser):
         user.save()
         return user
 
+    @staticmethod
+    def create_user_via_facebook(first_name, last_name, userId):
+        user = User(first_name=first_name, last_name=last_name, email=userId)
+        user.set_unusable_password()
+        user.save()
+        return user
+
     def update(self, first_name=None, last_name=None):
         if first_name:
             self.first_name = first_name

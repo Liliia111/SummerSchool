@@ -204,11 +204,6 @@ a.login-link-mobile{
         color: #FFFFFF;
     }
 
-    .right-part p {
-        margin-top: 20px;
-        color: #FFFFFF;
-    }
-
     .log-in .btn, .log-in a {
         display: none;
     }
