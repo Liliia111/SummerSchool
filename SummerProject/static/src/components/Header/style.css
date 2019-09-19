@@ -40,13 +40,13 @@ a.navbar-brand {
     padding:0;
 }
 
-input[placeholder] {
-    font-size: 35px;
-    font-weight: lighter;
-    color: #C6CCD7;
-    border: none;
-    margin-top: 10px;
-}
+/*input[placeholder] {*/
+/*    font-size: 35px;*/
+/*    font-weight: lighter;*/
+/*    color: #C6CCD7;*/
+/*    border: none;*/
+/*    margin-top: 10px;*/
+/*}*/
 
 .share-icon {
     opacity: 0.5;
