@@ -32,6 +32,8 @@ def test_forgot_password_reset(client, user):
 
 
 @pytest.mark.parametrize("new_password, new_password_confirm", [
+    (PASSWORD * 3000, PASSWORD * 3000),
+    (PASSWORD * 3000, PASSWORD),
     (PASSWORD + '1', PASSWORD),
     ("", ""),
     ("", PASSWORD)
