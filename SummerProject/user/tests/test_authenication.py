@@ -28,7 +28,7 @@ def test_registration_new_user_via_facebook(client):
         "last_name": "Stasiuk",
         "userId": "1234567889753",
     }
-    response = client.post('/api/v1/user/facebookRegistration/', data=data, content_type='application/json')
+    response = client.post('/api/v1/user/facebook_registration/', data=data, content_type='application/json')
     assert response.status_code == 201
 
 
@@ -39,7 +39,7 @@ def test_registration_user_with_existing_id(client, user):
         "last_name": "Stasiuk",
         "userId": "test@test.com",
     }
-    response = client.post('/api/v1/user/facebookRegistration/', data=data, content_type='application/json')
+    response = client.post('/api/v1/user/facebook_registration/', data=data, content_type='application/json')
     assert response.status_code == 100
 
 
