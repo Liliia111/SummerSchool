@@ -71,16 +71,18 @@ def registration(request):
 def facebook_registration(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        if User.objects.get(email=data['userId']):
+        user = User.objects.get(email=data['userId'])
+        if user:
+            auth_login(request, user)
             return HttpResponse(status=100)
-
-        User.create_user_via_facebook(
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            userId=data['userId'],
-        )
-        response = HttpResponse(status=201)
-        return response
+        else:
+            User.create_user_via_facebook(
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                userId=data['userId'],
+            )
+            response = HttpResponse(status=201)
+            return response
 
     return HttpResponseBadRequest()
 
