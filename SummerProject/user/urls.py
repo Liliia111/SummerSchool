@@ -3,7 +3,7 @@
 from django.conf.urls import url
 from django.urls import path
 from .views import registration, login, logout, UserView, forgot_password_email_send, forgot_password_reset_confirm, \
-    forgot_password_handler, facebook_registration
+    forgot_password_handler, facebook_registration, change_password
 
 urlpatterns = [
     path('registration/', registration),
@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', forgot_password_reset_confirm, name='password_reset_confirm'),
     path('forgot_password_handler/', forgot_password_handler),
     path('facebook_registration/', facebook_registration),
-    path('forgot_password_handler/', forgot_password_handler, name='forgot_password_handler')
+    path('forgot_password_handler/', forgot_password_handler, name='forgot_password_handler'),
+    path('change_password/', change_password)
 ]
