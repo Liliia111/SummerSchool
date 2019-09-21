@@ -1,10 +1,9 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
-from .models import Article
+from .models import Article, Comment
 from user.models import User
 from django.db import transaction
 import json
-from .forms import CommentForm
 from django.views.decorators.csrf import csrf_exempt
 
 """ Function for adding user data to each dict """
@@ -37,18 +36,14 @@ def comments_view(request, article_id):
     elif request.method == 'POST':
         data = request.body.decode('utf8')
         data = json.loads(data)
-        form = CommentForm(data)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = request.user
-            comment.save()
-            print("Comment was saved")
-            article.comments.add(comment)
-            print("Comment was added to article")
-            response = HttpResponse(status=201)
-            response['comment_id'] = comment.id
-            response['article_id'] = article_id
-            return response
+        # here must be validation check
+        comment = Comment(content=data["comment"], user=request.user)
+        comment.save()
+        article.comments.add(comment)
+        response = HttpResponse(status=201)
+        response['comment_id'] = comment.id
+        response['article_id'] = article_id
+        return response
     else:
         print("Form is incorrect")
         return HttpResponseBadRequest

@@ -38,7 +38,7 @@ def new_article(db, create_user):
 @pytest.mark.django_db
 def test_comment_post(client, new_article):
     data = {
-        'content': "This is new comment"
+        'comment': "This is new comment"
     }
     response = client.post('/api/v1/articles/{}/comments/'.format(new_article.id),
                            data=data,

@@ -20,8 +20,10 @@ class Comments extends React.Component {
             logged: true
         };
 
-        this.loginButton = (<button type="submit" onClick={this.submitLogging} className="comment_button">Log in</button>)
-        this.postButton = (<button type="submit" onClick={this.submitHandler} className="comment_button">Post comment</button>)
+        this.loginButton = (<button type="submit" onClick={this.submitLogging} className="comment_button">Log in</button>);
+        this.postButton = (<button type="submit" onClick={this.submitHandler} className="comment_button">Post comment</button>);
+
+        this.sortCommentsList = this.sortCommentsList.bind(this)
     }
 
     componentDidMount() {
@@ -57,12 +59,12 @@ class Comments extends React.Component {
         event.preventDefault();
 
             axios
-                .post("/api/v1/articles/1/comments/", {
+                .post("/api/v1/articles/1/comments", {
                     'comment' : this.state.comment
                 })
                 .then(() => {
                     const currentComments = [...this.state.commentsList]
-                    currentComments.push({id: 'asdf', content: this.state.comment, first_name: this.state.loggedUser.first_name, first_name: this.state.loggedUser.last})
+                    currentComments.push({id: 'asdf', content: this.state.comment, first_name: this.state.loggedUser.first_name, last_name: this.state.loggedUser.last_name})
                     this.setState({comment: '', commentsList: currentComments, } )
                     console.log(this.state.commentsList);
                 })
@@ -84,10 +86,27 @@ class Comments extends React.Component {
       )
     }
 
-    sortCommentsList(){
-        const myArray = this.state.commentsList
+    sortCommentsList(event){
+        const{commentsList} = this.state
 
-        myArray.sort((a, b) => a.item.date - b.item.date)
+        let newCommentList = commentsList.sort((a, b) => {a.date < b.date})
+
+        this.setState({
+            commentsList: newCommentList
+        })
+        console.log(newCommentList);
+    }
+
+    monthDay(){
+        var str = arguments[0]
+        var month_num =  parseInt(str.slice(5, 7), 10) - 1
+        var date_num = str.slice(8, 10)
+        const months_names = ['Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+        var res = `${months_names[month_num]} ${date_num}`
+        return (
+            res
+        )
     }
 
     getComments(){
@@ -100,7 +119,7 @@ class Comments extends React.Component {
                   </div>
                   <div className="user-name-date">
                     <div className="user-info-name">{this.state.commentsList[i].first_name} {this.state.commentsList[i].last_name}</div>
-                    <div className="comment-date">Mar 17</div>
+                    <div className="comment-date">{this.monthDay(this.state.commentsList[i].date)}</div>
                   </div>
                 </div>
                 <div className="comment-content">
@@ -138,7 +157,7 @@ class Comments extends React.Component {
                   <span className="sorted">sotred by: Most recent</span>
                   <div className="dropdown-content">
                     <p>Olders first</p>
-                    <p>Newest first</p>
+                    <p onClick={this.sortCommentsList}>Newest first</p>
                   </div>
                 </div>
               </div>
