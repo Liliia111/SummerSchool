@@ -11,9 +11,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate, get_user_model
 from django.views import View
 from django.utils.decorators import method_decorator
-from config.settings import DEFAULT_FROM_EMAIL
+from config.settings import DEFAULT_FROM_EMAIL, HOST
 from .models import User
 from django.shortcuts import get_object_or_404
+from .tasks import send_reset_email_task
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
 
@@ -53,13 +54,30 @@ def registration(request):
             return HttpResponseBadRequest()
         if User.objects.filter(email=data['email']).exists():
             return HttpResponseBadRequest()
-        user = User.create(
+        User.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
             password=data['password'],
         )
-        return HttpResponse(status=201)
+        response = HttpResponse(status=201)
+        return response
+    return HttpResponseBadRequest()
+
+
+@csrf_exempt
+def facebook_registration(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        if User.objects.filter(email=data['userId']).exists():
+            return HttpResponse(status=100)
+        User.create_user_via_facebook(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            userId=data['userId'],
+        )
+        response = HttpResponse(status=201)
+        return response
     return HttpResponseBadRequest()
 
 
@@ -78,7 +96,6 @@ def login(request):
     return HttpResponseBadRequest()
 
 
-@csrf_exempt
 def logout(request):
     if request.method == "GET":
         auth_logout(request)
@@ -98,7 +115,7 @@ def forgot_password_email_send(request):
             for user in associated_users:
                 content = {
                     'email': user.email,
-                    'domain': request.META['HTTP_HOST'],
+                    'domain': HOST,
                     'site_name': 'Sport News',
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'user': user,
@@ -113,7 +130,8 @@ def forgot_password_email_send(request):
 
                 subject = ''.join(subject.splitlines())
                 email = render_to_string(email_template_name, content)
-                send_mail(subject, email, DEFAULT_FROM_EMAIL, [user.email], html_message=email, fail_silently=False)
+                send_reset_email_task.delay(subject, email, user.email)
+
 
             return HttpResponse(status=200)
 

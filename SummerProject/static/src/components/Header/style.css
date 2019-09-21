@@ -1,0 +1,89 @@
+bg-red {
+    background-color: red;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.navbar {
+    background-color: white;
+    z-index: 1000;
+    align-items: flex-start;
+    max-height:83px;
+    padding: 0;
+}
+
+#navbarSupportedContent{
+    align-items: flex-start;
+    max-height:83px;
+}
+
+input {
+    border: 0px;
+}
+
+.logotype {
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    background: #D72130;
+    top: 0;
+    left: 0;
+    height: 83px;
+    width: 253px;
+    font-size: 25px;
+}
+
+a.navbar-brand {
+    max-height: 83px;
+    padding:0;
+}
+
+/*input[placeholder] {*/
+/*    font-size: 35px;*/
+/*    font-weight: lighter;*/
+/*    color: #C6CCD7;*/
+/*    border: none;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+.share-icon {
+    opacity: 0.5;
+    font-size: 25px;
+}
+
+
+.dropdown-left {
+    position: relative;
+}
+
+.margin {
+    margin-left: 60px;
+    margin-top: 6px;
+}
+
+.navbar-nav{
+    font-size: 20px;
+}
+
+.navbar-nav {
+    font-size: 20px;
+}
+
+.facebook-icon-header {
+    margin-top: 8px;
+}
+
+.google-icon-header {
+    margin-top: 8px;
+}
+
+.icons {
+    margin-left: 60px;
+}
+
+.search-icon {
+    margin-top:25px;
+}
+

@@ -54,26 +54,26 @@ class Sidebar extends React.Component {
               )}
             </li>
           ))}
-          <div class="social-media-section">
+          <div className="social-media-section">
             <ul>
               <li>
-                <a class="follow">Follow</a>
+                <a className="follow">Follow</a>
               </li>
               <li>
                 <a>
-                  <image src="/static/imgs/facebook.svg" />
+                  <img src="/static/imgs/facebook.svg" />
                 </a>
                 <a>
-                  <image src="/static/imgs/Twitter.svg" />
+                  <img src="/static/imgs/Twitter.svg" />
                 </a>
               </li>
 
               <li>
                 <a>
-                  <image src="/static/imgs/Google+.svg" />
+                  <img src="/static/imgs/Google+.svg" />
                 </a>
                 <a>
-                  <image src="/static/imgs/Youtube.svg" />
+                  <img src="/static/imgs/Youtube.svg" />
                 </a>
               </li>
             </ul>

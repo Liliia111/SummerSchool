@@ -20,12 +20,12 @@ class CheckEmail extends React.Component {
                 <div className="left-part bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
-                <div className="right-part background text-location">
+                <div className="right-part background text-location checkEmail">
                     <div className="mail">
                         <img className="icon-style"/>
                     </div>
                     <h1>Check your email {this.props.location.state.email}</h1>
-                    <p>If there's Sport News account linked to this email address, we'll send over instructions to reset your password.</p>
+                    <h4>If there's Sport News account linked to this email address, we'll send over instructions to reset your password.</h4>
                     <div className="log-in-mobile">
                         <Link to="/registration/" className="login-link-mobile">Don't have an account?</Link>
                     </div>

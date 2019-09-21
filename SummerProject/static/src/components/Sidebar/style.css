@@ -63,7 +63,7 @@ html, body {
   height: 100%;
 }
 
-li {
+.container-sidebar li {
   padding: 0px;
   height: 40px;
 }
@@ -72,7 +72,7 @@ li {
   padding: 0px 0px 0px 64px;
 }
 
-ul {
+.container-sidebar ul {
   list-style-type: none;
   top: 0;
   height: 100vh;
@@ -178,5 +178,5 @@ ul {
 .social-media-section > ul > li {
   padding-top: 20%;
   padding: 0px 0px 0px 64px;
-  width: 23%;
+  width: 50%;
 }
