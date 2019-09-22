@@ -3,13 +3,17 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
+import Header from "../Header";
+import Sidebar from '../Sidebar'
 
 
-class Registration extends React.Component {
+class PersonalInfo extends React.Component {
 
     render() {
 
-        return (
+        return <>
+            <Header/>
+            <Sidebar/>
             <div>
                 <div className="tab_place">
                     <ul className="nav justify-content-center row" role="tablist">
@@ -17,7 +21,8 @@ class Registration extends React.Component {
                             <a className="nav-link bg-white text-dark" data-toggle="tab" href="#personal">Personal</a>
                         </li>
                         <li className="nav-item border col-sm-3">
-                            <a className="nav-link bg-white text-dark" data-toggle="tab" href="http://localhost:8000/changePassword">Change
+                            <a className="nav-link bg-white text-dark" data-toggle="tab"
+                               href="http://localhost:8000/changePassword">Change
                                 password</a>
                         </li>
                         <li className="nav-item border col-sm-3">
@@ -30,9 +35,9 @@ class Registration extends React.Component {
                     </ul>
                 </div>
             </div>
-        )
+        </>
     }
 }
 
 
-export default Registration;
+export default PersonalInfo;

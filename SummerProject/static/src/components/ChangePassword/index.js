@@ -1,20 +1,21 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
-import axios from '../../axios';
 import FormValidator from "../../validator/FormValidator";
-import {rules} from "../ResetPassword/validation_rules";
-import {Link} from "react-router-dom";
+import {rules} from "./validation_rules";
+import axios from "../../axios";
 
 
-class ChangePassword extends React.Component {
+class changePassword extends React.Component {
+
     constructor(props) {
         super(props);
 
         this.validator = new FormValidator(rules);
 
         this.state = {
-            newPassword: '',
+            password: '',
             oldPassword: '',
             validation: this.validator.valid(),
             error: false,
@@ -32,46 +33,67 @@ class ChangePassword extends React.Component {
         this.setState({validation});
         this.submitted = true;
 
+        if (validation.isValid) {
+            axios
+                .put('/api/v1/user/change_password/', {
+                    'old_password': this.state.oldPassword,
+                    'new_password': this.state.password,
+                })
+                .then(() => {
+                    this.props.history.push('/home')
+                })
+                .catch(() => {
+                    this.setState({error: true})
+                })
+        }
     };
 
     render() {
-        const {newPassword, oldPassword} = this.state;
+        const {password, oldPassword} = this.state;
         let validation = this.submitted ?
             this.validator.validate(this.state) :
             this.state.validation;
-        return (
-            <div>
-                <div id="change_password" className="container tab-pane "><br/>
-                    <div className="lol">
-                        <form>
-                            <div className={validation.password.isInvalid && 'has-error'}>
-                                <label className="text_password">Old password</label>
-                                <input type="password" name="oldPassword" placeholder={"old password"} value={oldPassword}
-                                       onChange={this.changeHandler}/>
-                            </div>
-                            <div className={validation.password.isInvalid && 'has-error'}>
-                                <label className="text_password">New password</label>
-                                <input type="password" name="newPassword" placeholder={"new password"} value={newPassword}
-                                       onChange={this.changeHandler}/>
-                                <span className="help-block">{validation.password.message}</span>
-                            </div>
 
-                            <div className="sign-up-new">
-                                <button type="submit" onClick={this.submitHandler}
-                                        className="btn-primary sing-up">CHANGE PASSWORD
-                                </button>
-                            </div>
-                            {
-                                this.state.error && <div className="help-block">
-                                    Passwords don't match. Please try again.
+        return (
+            <div className="change-password">
+                <form className="form">
+                    <div className="passw-email">
+                        <div className={validation.password.isInvalid && 'has-error'}>
+                            <label>Old password</label>
+                            <div>
+                                <div className="form-group">
+                                    <input type="password" placeholder="old password" name="oldPassword"
+                                           value={oldPassword}
+                                           onChange={this.changeHandler} className="form-control input-height"/>
                                 </div>
-                            }
-                        </form>
+                            </div>
+                        </div>
+                        <div className={validation.password.isInvalid && 'has-error'}>
+                            <label>New password</label>
+                            <div>
+                                <div className="form-group">
+                                    <input type="password" placeholder="new password" name="password"
+                                           value={password}
+                                           onChange={this.changeHandler} className="form-control input-height"/>
+                                    <span className="help-block">{validation.password.message}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div className="sign-up-w">
+                        <button type="submit" onClick={this.submitHandler} className="btn-primary sing-up">CHANGE
+                            PASSWORD
+                        </button>
+                    </div>
+                    {
+                        this.state.error && <div className="help-block">
+                            Please try later, now this function is disabled!
+                        </div>
+                    }
+                </form>
             </div>
         )
     }
 }
 
-export default ChangePassword;
+export default changePassword;
