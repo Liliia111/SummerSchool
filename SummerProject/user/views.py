@@ -12,7 +12,6 @@ from django.contrib.auth.hashers import check_password
 from django.views import View
 from config.settings import DEFAULT_FROM_EMAIL, HOST
 from .models import User
-from django.shortcuts import get_object_or_404
 from .tasks import send_reset_email_task
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset, is_valid_data_for_update
@@ -156,7 +155,6 @@ def forgot_password_email_send(request):
                 subject = ''.join(subject.splitlines())
                 email = render_to_string(email_template_name, content)
                 send_reset_email_task.delay(subject, email, user.email)
-
 
             return HttpResponse(status=200)
 
