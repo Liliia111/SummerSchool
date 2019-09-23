@@ -15,7 +15,7 @@ from .models import User
 from django.shortcuts import get_object_or_404
 from .tasks import send_reset_email_task
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
-    is_valid_password_for_reset
+    is_valid_password_for_reset, is_valid_data_for_update
 
 
 class UserView(View):
@@ -26,12 +26,20 @@ class UserView(View):
         last_name = changes['last_name']
         email = changes['email']
 
-        request.user.update(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-        )
-        return HttpResponse(status=200)
+        if is_valid_data_for_update(changes):
+
+            if User.objects.filter(email=changes['email']).exists():
+                return HttpResponseBadRequest()
+
+            request.user.update(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+            )
+            return HttpResponse(status=200)
+
+        else:
+            return HttpResponseBadRequest()
 
     def get(self, request):
         logged_user = request.user

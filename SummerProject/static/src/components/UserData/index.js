@@ -82,15 +82,12 @@ class userData extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className={validation.email.isInvalid && 'has-error'}>
-                            <label>Email</label>
-                            <div>
-                                <div className="form-group">
-                                    <input type="text" placeholder="johndoe@gmail.com" name="email" value={email}
-                                           onChange={this.changeHandler}
-                                           className="form-control input-height"/>
-                                    <span className="help-block">{validation.email.message}</span>
-                                </div>
+                        <label>Email</label>
+                        <div>
+                            <div className="form-group">
+                                <input type="text" placeholder="johndoe@gmail.com" name="email" value={email}
+                                       onChange={this.changeHandler}
+                                       className="form-control input-height"/>
                             </div>
                         </div>
                     </div>
@@ -101,7 +98,7 @@ class userData extends React.Component {
                     </div>
                     {
                         this.state.error && <div className="help-block">
-                            Please try later, now this function is disabled!
+                           Invalid data!
                         </div>
                     }
                 </form>
