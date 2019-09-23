@@ -61,3 +61,14 @@ def is_valid_password_for_reset(data):
             data["new_password"] != data["new_password_confirm"]:
         return False
     return True
+
+
+def is_valid_data_for_update(data):
+    if len(data["first_name"]) > FIRST_NAME_MAX_LEN or len(data["last_name"]) > LAST_NAME_MAX_LEN:
+        return False
+    if data["email"] != '':
+        try:
+            validate_email(data["email"])
+        except ValidationError:
+            return False
+    return True

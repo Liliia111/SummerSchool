@@ -7,7 +7,7 @@ import {rules} from "./validation_rules";
 import axios from "../../axios";
 
 
-class changePassword extends React.Component {
+class userData extends React.Component {
 
     constructor(props) {
         super(props);
@@ -15,8 +15,11 @@ class changePassword extends React.Component {
         this.validator = new FormValidator(rules);
 
         this.state = {
-            password: '',
             oldPassword: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            email: '',
             validation: this.validator.valid(),
             error: false,
         };
@@ -35,9 +38,10 @@ class changePassword extends React.Component {
 
         if (validation.isValid) {
             axios
-                .put('/api/v1/user/change_password/', {
-                    'old_password': this.state.oldPassword,
-                    'new_password': this.state.password,
+                .put('/api/v1/user/self/', {
+                    'first_name': this.state.firstName,
+                    'last_name': this.state.lastName,
+                    'email': this.state.email
                 })
                 .then(() => {
                     this.props.history.push('/home')
@@ -49,7 +53,7 @@ class changePassword extends React.Component {
     };
 
     render() {
-        const {password, oldPassword} = this.state;
+        const {firstName, lastName, email} = this.state;
         let validation = this.submitted ?
             this.validator.validate(this.state) :
             this.state.validation;
@@ -58,36 +62,43 @@ class changePassword extends React.Component {
             <div className="change-password">
                 <form className="form">
                     <div className="passw-email">
-                        <div className={validation.password.isInvalid && 'has-error'}>
-                            <label>Old password</label>
+                        <div className={validation.firstName.isInvalid && 'has-error'}>
+                            <label>First name</label>
                             <div>
                                 <div className="form-group">
-                                    <input type="password" placeholder="old password" name="oldPassword"
-                                           value={oldPassword}
+                                    <input type="text" placeholder="John" name="firstName" value={firstName}
                                            onChange={this.changeHandler} className="form-control input-height"/>
+                                    <span className="help-block">{validation.firstName.message}</span>
                                 </div>
                             </div>
                         </div>
-                        <div className={validation.password.isInvalid && 'has-error'}>
-                            <label>New password</label>
+                        <div className={validation.lastName.isInvalid && 'has-error'}>
+                            <label>Last name</label>
                             <div>
                                 <div className="form-group">
-                                    <input type="password" placeholder="new password" name="password"
-                                           value={password}
+                                    <input type="text" placeholder="Doe" name="lastName" value={lastName}
                                            onChange={this.changeHandler} className="form-control input-height"/>
-                                    <span className="help-block">{validation.password.message}</span>
+                                    <span className="help-block">{validation.lastName.message}</span>
                                 </div>
+                            </div>
+                        </div>
+                        <label>Email</label>
+                        <div>
+                            <div className="form-group">
+                                <input type="text" placeholder="johndoe@gmail.com" name="email" value={email}
+                                       onChange={this.changeHandler}
+                                       className="form-control input-height"/>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <button type="submit" onClick={this.submitHandler} className="btn-primary change-password-submit">CHANGE
-                            PASSWORD
+                        <button type="submit" onClick={this.submitHandler}
+                                className="btn-primary change-password-submit">UPDATE PROFILE
                         </button>
                     </div>
                     {
                         this.state.error && <div className="help-block">
-                            Please try later, now this function is disabled!
+                           Invalid data!
                         </div>
                     }
                 </form>
@@ -96,4 +107,4 @@ class changePassword extends React.Component {
     }
 }
 
-export default changePassword;
+export default userData;
