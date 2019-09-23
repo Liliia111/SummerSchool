@@ -33,6 +33,7 @@ html, body {
   display: block;
   height: 100%;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .second-level {
@@ -47,6 +48,7 @@ html, body {
   width: 100%;
   display: block;
   height: 100%;
+  cursor: pointer;
 }
 
 .third-level {
@@ -61,6 +63,8 @@ html, body {
   width: 100%;
   display: block;
   height: 100%;
+  outline:none;
+  cursor: pointer;
 }
 
 .container-sidebar li {
@@ -120,8 +124,10 @@ html, body {
 .container-sidebar > ul > li > ul > li > ul > li:focus-within .third-level {
   outline: none;
   color: #D72130 !important;
+  text-decoration: none;
 }
-
+a{
+outline:none;}
 .container-sidebar > ul > li > ul > li:hover,
 .container-sidebar > ul > li > ul > li:focus-within {
   outline: none;
