@@ -11,6 +11,7 @@ import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 import ChangePassword from '../ChangePassword'
+import userData from "../UserData";
 
 
 class PersonalInfo extends React.Component {
@@ -25,8 +26,13 @@ class PersonalInfo extends React.Component {
                     <div className="tab_place">
                         <ul className="nav justify-content-center row" role="tablist">
                             <li className="nav-item border col-sm-3">
-                                <a className="nav-link bg-white text-dark" data-toggle="tab"
-                                   href="#personal">Personal</a>
+                                <NavLink
+                                    className='button change-pasword-nav'
+                                    exact activeClassName='active'
+                                    to='/userData'
+                                >
+                                    Personal
+                                </NavLink>
                             </li>
                             <li className="nav-item border col-sm-3">
                                 <NavLink
@@ -46,6 +52,10 @@ class PersonalInfo extends React.Component {
                                     hub</a>
                             </li>
                         </ul>
+                        <Route
+                            exact path='/userData'
+                            component={userData}
+                        />
                         <Route
                             exact path='/changePassword'
                             component={ChangePassword}

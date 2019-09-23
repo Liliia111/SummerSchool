@@ -36,11 +36,13 @@ class User(AbstractBaseUser):
         user.save()
         return user
 
-    def update(self, first_name=None, last_name=None, password=None):
+    def update(self, first_name=None, last_name=None, email=None, password=None):
         if first_name:
             self.first_name = first_name
         if last_name:
             self.last_name = last_name
+        if email:
+            self.email = email
         if password:
             self.set_password(password)
 

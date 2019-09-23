@@ -23,10 +23,12 @@ class UserView(View):
 
         first_name = changes['first_name']
         last_name = changes['last_name']
+        email = changes['email']
 
         request.user.update(
             first_name=first_name,
             last_name=last_name,
+            email=email,
         )
         return HttpResponse(status=200)
 
