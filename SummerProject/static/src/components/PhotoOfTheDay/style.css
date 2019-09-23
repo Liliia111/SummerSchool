@@ -1,0 +1,129 @@
+
+.triangle-right {
+     width: 0;
+     height: 0;
+     border-top: 61px solid transparent;
+     border-left: 169px solid #D72130;
+     border-bottom: 61px solid transparent;
+     position: absolute;
+     z-index: 3;
+}
+
+.gradient {
+     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, #000000 100%);
+     position: absolute;
+     width: 100%;
+     height: 40%;
+     bottom: 1px;
+     position: absolute;
+}
+
+.photo-of-the-day .item {
+     position: absolute;
+     z-index: 2;
+     top: 20px;
+     left: 23px;
+}
+
+.photo-of-the-day .item img {
+    min-width:814px;
+}
+.photo-of-the-day {
+
+    margin-bottom: 670px;
+    margin-left: 350px;
+
+}
+.triangle-right > p {
+     z-index: 1;
+     position: absolute;
+     top: -30px;
+     left: -157px;
+     width: 62px;
+     font-family: Open Sans, sans-serif;
+     font-style: normal;
+     font-weight: bold;
+     font-size: 16px;
+     line-height: 22px;
+     text-transform: uppercase;
+     color: #FFFFFF;
+}
+
+.bottom-right {
+     position: absolute;
+     bottom: 8px;
+     right: 16px;
+}
+
+.container-fluid {
+     position: relative;
+}
+
+.carousel-caption {
+     position: absolute;
+     bottom: 1px;
+     left: 2%;
+     right: auto;
+     text-align: left;
+     z-index: 10;
+     padding-top: 20px;
+     padding-bottom: 0px;
+     color: #fff;
+     width: 535px;
+}
+
+.carousel-caption h3 {
+     font-family: Open Sans, sans-serif;
+     font-style: normal;
+     font-weight: bold;
+     font-size: 22px;
+     line-height: 30px;
+     color: #FFFFFF;
+}
+
+.carousel-caption p {
+     font-family: Open Sans, sans-serif;
+     font-style: normal;
+     font-weight: normal;
+     font-size: 14px;
+     line-height: 19px;
+     padding-bottom: 5px;
+     color: #FFFFFF;
+}
+
+.divider-photo {
+     width: 317px;
+     margin-top: 3%;
+     display: inline-block;
+     border-top: 1px solid #B2B2B2;
+}
+
+.photo-container {
+     width: 177.56px;
+     height: 42px;
+     background: #FFFFFF;
+     border: 1px solid #B2B2B2;
+     box-sizing: border-box;
+     border-radius: 21px;
+     display: flex;
+     align-items: center;
+     justify-content: center
+}
+
+.photo-of-the-day-block {
+     margin-left: 10px;
+     display: flex;
+     width: 814px;
+     padding-bottom: 19px;
+}
+
+.photo-container > p {
+     margin: 0;
+     font-family: Open Sans, sans-serif;
+     font-style: normal;
+     font-weight: bold;
+     font-size: 14px;
+     line-height: 19px;
+     color: #000000;
+}
+
