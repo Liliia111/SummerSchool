@@ -1,5 +1,4 @@
 import React from 'react';
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
@@ -12,9 +11,23 @@ import {
 } from 'react-router-dom';
 import ChangePassword from '../ChangePassword'
 import userData from "../UserData";
+import axios from "../../axios";
 
 
 class PersonalInfo extends React.Component {
+
+    componentDidMount() {
+        axios.get(`/api/v1/user/self/`)
+            .then(res => {
+                const loggedUser = res.data;
+                this.setState({loggedUser});
+            })
+            .catch(res => {
+                this.props.history.push('/login')
+            });
+    }
+
+
 
     render() {
 
