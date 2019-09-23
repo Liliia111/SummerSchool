@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import '../styles/mainLogInFlow.css'
 import './style.css';
 import axios from '../../axios';
 
@@ -61,7 +59,7 @@ class Comments extends React.Component {
 
     submitLogging = event => {
       this.props.history.push('/login')
-    }
+    };
 
     submitHandler = event => {
         event.preventDefault();
@@ -78,7 +76,6 @@ class Comments extends React.Component {
                     const currentComments = [...this.state.commentsList];
                     currentComments.push({id: 'asdf', content: this.state.comment, date: monthDate, first_name: this.state.loggedUser.first_name, last_name: this.state.loggedUser.last_name})
                     this.setState({comment: '', commentsList: currentComments, commentsLength: currentComments.length} )
-                    console.log(monthDate);
                 })
                 .catch(() => {
                      this.setState({error: true})
@@ -92,7 +89,6 @@ class Comments extends React.Component {
     };
 
     printSomeDiv(){
-      console.log("Here we return some shit")
       return(
         <div> Posibly here can be some cont</div>
       )
@@ -146,7 +142,6 @@ class Comments extends React.Component {
             reversed: false,
             commentsLength: commentsList.length
         })
-        console.log(newCommentList);
         } else {
             this.setState({
                 commentsLength: commentsList.length
@@ -201,9 +196,9 @@ class Comments extends React.Component {
 
 
     render(){
-        const logged = this.state.logged
-        const comment = this.state.comment
-        const comments = this.state.commentsList
+        const logged = this.state.logged;
+        const comment = this.state.comment;
+        const comments = this.state.commentsList;
 
         return(
             <div className="comment_block">
