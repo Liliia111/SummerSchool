@@ -1,5 +1,5 @@
 import pytest
-from article.models import Article, Comment
+from articles.models import Article, Comment
 from user.models import User
 import random
 import string

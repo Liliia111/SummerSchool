@@ -7,7 +7,6 @@ from django.db import transaction
 import json
 from django.db.models import Count
 from articles.models import Article
-from django.views.decorators.csrf import csrf_exempt
 from .models import Article, Comment
 from user.models import User
 
@@ -43,7 +42,6 @@ def user_data_adding(comments_data, user_ids):
 """ View for comment backend"""
 
 
-@csrf_exempt
 @transaction.atomic
 def comments_view(request, article_id):
     article = get_object_or_404(Article, id=article_id)
@@ -58,6 +56,7 @@ def comments_view(request, article_id):
         comment = Comment(content=data["comment"], user=request.user)
         comment.save()
         article.comments.add(comment)
+        print("Comments was saved and added")
         response = HttpResponse(status=201)
         response['comment_id'] = comment.id
         response['article_id'] = article_id

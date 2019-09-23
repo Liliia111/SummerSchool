@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'user',
     'articles',
     'categories',
-    'hitcount'
+    'hitcount',
+    'cms',
 ]
 
 MIDDLEWARE = [

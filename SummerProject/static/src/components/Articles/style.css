@@ -104,7 +104,7 @@
     position: absolute;
     width: 814px;
     left: 250px;
-    top: 1080px;
+    top: 1680px;
 }
 .line-circle hr{
     background: #D8D8D8;
@@ -135,7 +135,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 1134px;
+    top: 1734px;
     left: 250px;
     flex-basis: auto;
     height: 100px;
@@ -235,7 +235,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 1134px;
+    top: 1734px;
     left: 670px;
     flex-basis: auto;
     height: 100px;
@@ -523,4 +523,9 @@
     .more-article-6 p{
         margin-right: 26px;
     }
+}
+
+.more-height{
+    height: auto;
+    margin-top: 100px;
 }
