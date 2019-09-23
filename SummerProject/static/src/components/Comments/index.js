@@ -222,7 +222,7 @@ class Comments extends React.Component {
               <div >
                 <div className="comment_input">
                     <img className="comment_img" src="/static/imgs/avatar.png" alt="ava" />
-                    <input className="input_form" type="text" onChange={this.changeHandler} onKeyPress={this.handleKeyPress} name="comment" placeholder="Write new comment" value={this.state.comment}/>
+                    <input className="input-form" type="text" onChange={this.changeHandler} onKeyPress={this.handleKeyPress} name="comment" placeholder="Write new comment" value={this.state.comment}/>
                     {logged ? (
                       this.postButton
                     ) : (
