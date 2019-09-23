@@ -1,7 +1,10 @@
 .change-password{
     position: absolute;
-	left: 36.46%;
+	left: 26.46%;
 	right: 36.53%;
-	top: 48.54%;
-	bottom: 51.28%;
+	top: 200%;
+	width: 50%;
+}
+.change-password-submit{
+	width: 100%;
 }

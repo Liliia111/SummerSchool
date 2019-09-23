@@ -5,6 +5,21 @@
 	width: 50%;
 
 }
+
+.tab_place a{
+	text-align: center;
+}
+
 a.nav-link:hover {
+	color:#F00F00 !important;
+}
+
+a.change-pasword-nav{
+	text-decoration: none;
+	color: #343a40;
+	margin-left: 10%;
+}
+
+.change-pasword-nav:hover {
 	color:#F00F00 !important;
 }

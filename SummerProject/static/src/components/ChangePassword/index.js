@@ -80,8 +80,8 @@ class changePassword extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="sign-up-w">
-                        <button type="submit" onClick={this.submitHandler} className="btn-primary sing-up">CHANGE
+                    <div>
+                        <button type="submit" onClick={this.submitHandler} className="btn-primary change-password-submit">CHANGE
                             PASSWORD
                         </button>
                     </div>
