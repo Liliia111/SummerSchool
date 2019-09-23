@@ -15,7 +15,19 @@
   justify-content: space-between;
 }
 
+.sorteeeeed{
+    justify-content: flex-end;
+      flex-direction: row;
+}
 
+.sorted-by{
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  color: #D72130;
+  width: auto;
+}
 
 .dropdown-content {
   display: none;
@@ -65,12 +77,13 @@
 }
 
 .sorted{
-  font-family: "Open Sans";
-font-style: normal;
-font-weight: bold;
-font-size: 12px;
-line-height: 17px;
-color: #D72130;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    width: auto;
+    color: #D72130;
+    cursor: pointer;
 }
 
 .comment_input{
@@ -83,11 +96,10 @@ color: #D72130;
   box-sizing: border-box;
 }
 
-.input_form{
+.input-form{
   border: none;
-  outline: none;
-  -webkit-appearance: none;
-  width : 80%;
+      outline: none;
+  width : 87%;
   height: 100%;
   vertical-align: middle;
 

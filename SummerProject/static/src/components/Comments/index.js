@@ -12,35 +12,43 @@ class Comments extends React.Component {
         super(props);
 
           this.state = {
+            articleId: 1,
             comment: '',
             commentsList: [],
             loggedUser: {},
             visible: true,
             error: false,
-            logged: true
+            logged: true,
+            reversed: true,
+            commentsLength: 2,
         };
 
         this.loginButton = (<button type="submit" onClick={this.submitLogging} className="comment_button">Log in</button>);
         this.postButton = (<button type="submit" onClick={this.submitHandler} className="comment_button">Post comment</button>);
 
-        this.sortCommentsList = this.sortCommentsList.bind(this)
+        this.sortCommentsListNewest = this.sortCommentsListNewest.bind(this)
+        this.sortCommentsListOldest = this.sortCommentsListOldest.bind(this)
+        this.sortMostRecent = this.sortMostRecent.bind(this)
     }
 
     componentDidMount() {
+      const{articleId} = this.state
+
       axios.get(`/api/v1/user/self/`)
         .then(res => {
           const loggedUser = res.data;
           this.setState({ loggedUser });
+          console.log(articleId);
         })
         .catch(res => {
           this.setState({ logged: false });
         });
 
 
-        axios.get(`/api/v1/articles/1/comments/`)
+        axios.get(`/api/v1/articles/${articleId}/comments/`)
           .then(res => {
             const commentsList = res.data;
-            this.setState({ commentsList });
+            this.setState({ commentsList: commentsList.reverse()});
           })
           .catch(res => {
             this.setState({ logged: false });
@@ -59,14 +67,18 @@ class Comments extends React.Component {
         event.preventDefault();
 
             axios
-                .post("/api/v1/articles/1/comments", {
+                .post(`/api/v1/articles/${this.state.articleId}/comments/`, {
                     'comment' : this.state.comment
                 })
                 .then(() => {
-                    const currentComments = [...this.state.commentsList]
-                    currentComments.push({id: 'asdf', content: this.state.comment, first_name: this.state.loggedUser.first_name, last_name: this.state.loggedUser.last_name})
-                    this.setState({comment: '', commentsList: currentComments, } )
-                    console.log(this.state.commentsList);
+                    const months_names = ['Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    const day = new Date().getDate();
+                    const month = new Date().getMonth();
+                    var monthDate = `${months_names[month]} ${day}`;
+                    const currentComments = [...this.state.commentsList];
+                    currentComments.push({id: 'asdf', content: this.state.comment, date: monthDate, first_name: this.state.loggedUser.first_name, last_name: this.state.loggedUser.last_name})
+                    this.setState({comment: '', commentsList: currentComments, commentsLength: currentComments.length} )
+                    console.log(monthDate);
                 })
                 .catch(() => {
                      this.setState({error: true})
@@ -86,16 +98,62 @@ class Comments extends React.Component {
       )
     }
 
-    sortCommentsList(event){
+    sortMostRecent(event){
         const{commentsList} = this.state
+        const{reversed} = this.state
+        if(reversed){
+            this.setState({
+                commentsLength: 2
+            })
+        } else {
+            let newCommentList = commentsList.reverse()
 
-        let newCommentList = commentsList.sort((a, b) => {a.date < b.date})
+            this.setState({
+                commentsList: newCommentList,
+                reversed: true,
+                commentsLength: 2
+            })
+        }
+    }
+
+    sortCommentsListNewest(event){
+        const{commentsList} = this.state
+        const{reversed} = this.state
+        if (!reversed){
+        let newCommentList = commentsList.reverse()
 
         this.setState({
-            commentsList: newCommentList
+            commentsList: newCommentList,
+            reversed: true,
+            commentsLength: commentsList.length
         })
         console.log(newCommentList);
+        } else {
+            this.setState({
+                commentsLength: commentsList.length
+            })
+        }
     }
+
+    sortCommentsListOldest(event){
+        const{commentsList} = this.state
+        const{reversed} = this.state
+        if (reversed){
+        let newCommentList = commentsList.reverse()
+
+        this.setState({
+            commentsList: newCommentList,
+            reversed: false,
+            commentsLength: commentsList.length
+        })
+        console.log(newCommentList);
+        } else {
+            this.setState({
+                commentsLength: commentsList.length
+            })
+        }
+    }
+
 
     monthDay(){
         var str = arguments[0]
@@ -111,7 +169,7 @@ class Comments extends React.Component {
 
     getComments(){
         const items = []
-        for(var i = 0; i < this.state.commentsList  .length; i++){
+        for(var i = 0; i < this.state.commentsLength; i++){
         items.push(<div>
         <div className="user-info">
                   <div className="img-width">
@@ -154,10 +212,10 @@ class Comments extends React.Component {
                   Comments({comments.length})
                 </div>
                 <div className="dropdown">
-                  <span className="sorted">sotred by: Most recent</span>
+                  <p onClick={this.sortMostRecent} className="sorted">sotred by: Most recent</p>
                   <div className="dropdown-content">
-                    <p>Olders first</p>
-                    <p onClick={this.sortCommentsList}>Newest first</p>
+                    <p onClick={this.sortCommentsListOldest}>Olders first</p>
+                    <p onClick={this.sortCommentsListNewest}>Newest first</p>
                   </div>
                 </div>
               </div>

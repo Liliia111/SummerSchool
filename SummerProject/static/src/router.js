@@ -10,6 +10,8 @@ import CheckEmail from "./components/CheckEmail"
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Comments from "./components/Comments";
+import PersonalInfo from "./components/PersonalInfo"
+import ChangePassword from "./components/ChangePassword";
 
 export default class MainRoutes extends React.Component {
   /**
@@ -27,6 +29,8 @@ export default class MainRoutes extends React.Component {
           <Route path='/forgotPassword' component={ForgotPassword} />
           <Route path='/resetPassword' component={ResetPassword}/>
           <Route path='/comments' component={Comments}/>
+          <Route path='/personalInfo' component={PersonalInfo}/>
+          <Route path='/changePassword' component={ChangePassword} />
           <Redirect path='*' to='/home/' />
         </Switch>
       </main>

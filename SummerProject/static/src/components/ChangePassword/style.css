@@ -1,0 +1,83 @@
+.header_class {
+    position: absolute;
+    width: 20%;
+    height: 83px;
+    left: 0;
+    top: 0;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    text-align: center;
+
+    color: #FFFBFB;
+
+    background: #D72130;
+}
+
+.tab_place {
+    position: absolute;
+    left: 25%;
+    top: 22%;
+    width: 50%;
+
+}
+
+a.nav-link:hover {
+    color: #F00F00 !important;
+}
+
+.lol {
+    position: absolute;
+    left: 36.46%;
+    right: 36.53%;
+    top: 40.54%;
+    bottom: 51.28%;
+}
+
+
+.lool {
+    position: absolute;
+    left: 36.46%;
+    right: 36.53%;
+    top: 48.54%;
+    bottom: 51.28%;
+}
+
+.text_password {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 11px;
+
+	letter-spacing: 0.9px;
+	text-transform: uppercase;
+
+	color: #434C5D;
+}
+input[type=password] {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #D0CFCE;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    line-height: 19px;
+    height: 42px;
+}
+
+input[type=text] {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #D0CFCE;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    line-height: 19px;
+    height: 42px;
+}
+
+
+.sign-up-new button{
+    width: 100%;
+}

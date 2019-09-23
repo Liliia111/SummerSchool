@@ -55,7 +55,6 @@ def comments_view(request, article_id):
     elif request.method == 'POST':
         data = request.body.decode('utf8')
         data = json.loads(data)
-        # here must be validation check
         comment = Comment(content=data["comment"], user=request.user)
         comment.save()
         article.comments.add(comment)
@@ -64,7 +63,6 @@ def comments_view(request, article_id):
         response['article_id'] = article_id
         return response
     else:
-        print("Form is incorrect")
         return HttpResponseBadRequest
 
 

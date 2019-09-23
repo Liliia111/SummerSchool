@@ -1,16 +1,15 @@
 # pylint: disable=C0111,E1101,R0201
 import json
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate, get_user_model
+from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate as auth, get_user_model
+from django.contrib.auth.hashers import check_password
 from django.views import View
-from django.utils.decorators import method_decorator
 from config.settings import DEFAULT_FROM_EMAIL, HOST
 from .models import User
 from django.shortcuts import get_object_or_404
@@ -20,19 +19,6 @@ from .validator import is_user_data_valid_for_create, is_data_valid_for_login, i
 
 
 class UserView(View):
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super(UserView, self).dispatch(request, *args, **kwargs)
-
-    def get(self, request):
-        logged_user = request.user
-        data = {
-            'first_name': logged_user.first_name,
-            'last_name': logged_user.last_name,
-            'email': logged_user.email,
-        }
-        return JsonResponse(data, safe=False)
-
     def put(self, request):
         changes = json.loads(request.body.decode('utf-8'))
 
@@ -45,8 +31,34 @@ class UserView(View):
         )
         return HttpResponse(status=200)
 
+    def get(self, request):
+        logged_user = request.user
+        data = {
+            'first_name': logged_user.first_name,
+            'last_name': logged_user.last_name,
+            'email': logged_user.email,
+        }
+        return JsonResponse(data, safe=False)
 
-@csrf_exempt
+
+def change_password(request):
+    if request.method == 'PUT':
+        changes = json.loads(request.body.decode('utf-8'))
+
+        old_password = changes['old_password']
+        new_password = changes['new_password']
+
+        if check_password(old_password, request.user.password):
+            request.user.update(
+                password=new_password
+            )
+            return HttpResponse(status=200)
+
+        return HttpResponseBadRequest()
+
+    return HttpResponseBadRequest()
+
+
 def registration(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
@@ -62,15 +74,16 @@ def registration(request):
         )
         response = HttpResponse(status=201)
         return response
+
     return HttpResponseBadRequest()
 
 
-@csrf_exempt
 def facebook_registration(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        if User.objects.filter(email=data['userId']).exists():
+        if User.objects.get(email=data['userId']):
             return HttpResponse(status=100)
+
         User.create_user_via_facebook(
             first_name=data['first_name'],
             last_name=data['last_name'],
@@ -78,16 +91,16 @@ def facebook_registration(request):
         )
         response = HttpResponse(status=201)
         return response
+
     return HttpResponseBadRequest()
 
 
-@csrf_exempt
 def login(request):
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8'))
         if not is_data_valid_for_login(data):
             return HttpResponseBadRequest()
-        user = authenticate(email=data["email"], password=data["password"])
+        user = auth(email=data["email"], password=data["password"])
         if user:
             auth_login(request, user)
             response = HttpResponse(status=200, content_type='application/json')
@@ -173,12 +186,3 @@ def forgot_password_handler(request):
     return HttpResponseBadRequest()
 
 
-def get_user(request, user_id):
-    user = get_object_or_404(User, id=user_id)
-    if request.method == 'GET':
-        data = {
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            'email': user.email,
-        }
-        return JsonResponse(data, safe=False)
