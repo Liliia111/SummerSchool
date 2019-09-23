@@ -5,6 +5,7 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import Registration from './components/Registration'
 import LogIn from './components/LogIn'
 import Home from "./components/Home";
+import ArticleComments from "./components/ArticleComments";
 import Articles from "./components/Articles";
 import CheckEmail from "./components/CheckEmail"
 import ForgotPassword from "./components/ForgotPassword";
@@ -22,6 +23,7 @@ export default class MainRoutes extends React.Component {
       <main id="container">
         <Switch>
           <Route path='/home/' component={Home} />
+          <Route path='/articleComments' component={ArticleComments} />
           <Route path='/registration' component={Registration} />
           <Route path='/login' component={LogIn} />
           <Route path='/articles/:id' component={Articles} />

@@ -58,6 +58,7 @@ def comments_view(request, article_id):
         comment = Comment(content=data["comment"], user=request.user)
         comment.save()
         article.comments.add(comment)
+        print("Comments was saved and added")
         response = HttpResponse(status=201)
         response['comment_id'] = comment.id
         response['article_id'] = article_id

@@ -60,7 +60,7 @@ class Comments extends React.Component {
     };
 
     submitLogging = event => {
-      this.props.history.push('/registration')
+      this.props.history.push('/login')
     }
 
     submitHandler = event => {
