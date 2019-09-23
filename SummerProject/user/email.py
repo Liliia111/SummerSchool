@@ -3,4 +3,7 @@ from config.settings import DEFAULT_FROM_EMAIL, HOST
 
 
 def send_reset_email(subject, email, recipient):
-    send_mail(subject, email, DEFAULT_FROM_EMAIL, [recipient], html_message=email, fail_silently=False)
+    try:
+        send_mail(subject, email, DEFAULT_FROM_EMAIL, [recipient], html_message=email, fail_silently=False)
+    except Exception as e:
+        print(str(e))
