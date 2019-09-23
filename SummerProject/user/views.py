@@ -1,7 +1,7 @@
 # pylint: disable=C0111,E1101,R0201
 import json
 from django.contrib.auth.tokens import default_token_generator
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
@@ -12,6 +12,7 @@ from django.contrib.auth.hashers import check_password
 from django.views import View
 from config.settings import DEFAULT_FROM_EMAIL, HOST
 from .models import User
+from django.shortcuts import get_object_or_404
 from .tasks import send_reset_email_task
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
     is_valid_password_for_reset
@@ -31,6 +32,15 @@ class UserView(View):
             email=email,
         )
         return HttpResponse(status=200)
+
+    def get(self, request):
+        logged_user = request.user
+        data = {
+            'first_name': logged_user.first_name,
+            'last_name': logged_user.last_name,
+            'email': logged_user.email,
+        }
+        return JsonResponse(data, safe=False)
 
 
 def change_password(request):
@@ -139,6 +149,7 @@ def forgot_password_email_send(request):
                 email = render_to_string(email_template_name, content)
                 send_reset_email_task.delay(subject, email, user.email)
 
+
             return HttpResponse(status=200)
 
         return HttpResponseBadRequest()
@@ -177,3 +188,5 @@ def forgot_password_handler(request):
                 return HttpResponse(status=201)
 
     return HttpResponseBadRequest()
+
+
