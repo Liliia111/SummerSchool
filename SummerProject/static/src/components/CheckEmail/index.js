@@ -17,10 +17,10 @@ class CheckEmail extends React.Component {
                     <Link to="/registration/" className="login-link">Don't have an account?</Link>
                     <Link to="/registration/" className="btn btn-primary login login-link">Get Started</Link>
                 </div>
-                <div className="left-part bg">
+                <div className="backgr-photo bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
-                <div className="right-part background text-location checkEmail">
+                <div className="main background text-location checkEmail">
                     <div className="mail">
                         <img className="icon-style"/>
                     </div>
