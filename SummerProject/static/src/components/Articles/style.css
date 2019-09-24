@@ -150,7 +150,27 @@
     text-align: center;
 }
 
+.grid-box{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 1734px;
+    left: 250px;
+    flex-basis: auto;
+    height: 100px;
+    width: 390px;
+}
 
+.grid-box-2{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 1734px;
+    left: 670px;
+    flex-basis: auto;
+    height: 100px;
+    width: 390px;
+}
 .more-article-2{
     border: 1px solid #B2B2B2;
     height: 98px;

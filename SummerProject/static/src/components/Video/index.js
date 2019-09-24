@@ -10,12 +10,15 @@ class Video extends Component{
         super(props);
 
         this.state = {
-           article: []
+           article: [],
+           articleList: []
         }
         this.getArticle = this.getArticle.bind(this)
+        this.getArticleList = this.getArticleList.bind(this)
     }
     componentDidMount() {
         this.getArticle();
+        this.getArticleList();
     }
 
 
@@ -27,15 +30,24 @@ class Video extends Component{
             });
          console.log(this.state.article);
     }
-
+    getArticleList = () => {
+          axios
+             .get(`/api/v1/more_articles/`)
+             .then(result => {
+                this.setState({ articleList : result.data });
+                console.log(this.state.articleList);
+             });
+    }
 
    render(){
    const {article} = this.state
+   const {articleList} = this.state
+   const data = articleList
    if(!article){
        return null;
    }
    return(
-            <div className="article-view">
+            <div className="video-view">
                 <div className="vid-main">
                     <iframe width="814" height="544" src={article.video}>
                     </iframe>
@@ -43,10 +55,14 @@ class Video extends Component{
                 <div className="side-text">
                     <h1>NEWS</h1>
                 </div>
-                <div className="left-txt">
+                <div className="lft-txt">
                     <h1>VIDEO</h1>
                 </div>
-
+                <div className="link-vid">
+                    <a href="http://localhost:8000/videos/2/">
+                    <img src="/static/imgs/1.svg" alt="EG"/>
+                    </a>
+                </div>
             </div>
    );
    }

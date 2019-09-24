@@ -1,0 +1,43 @@
+.video-view{
+    background: #FFFFFF;
+    max-width: 1440px;
+    height: 2234px;
+}
+
+.vid-main{
+    position: absolute;
+    left: 250px;
+    top: 161px;
+    z-index: 1;
+}
+
+.lft-txt{
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 10px;
+    top: 271px;
+    transform: rotate(90deg);
+}
+
+.lft-txt h1{
+    font-family: Roboto Condensed, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 141px;
+    line-height: 192px;
+    letter-spacing: 1.25893px;
+    color: rgba(204, 211, 224, 0.301628);
+}
+
+.link-vid{
+    position: absolute;
+    left: 250px;
+    top: 745px;
+}
+
+.link-vid img{
+    border: 0;
+    width: 300px;
+    height: 200px;
+}
