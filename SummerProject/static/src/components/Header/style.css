@@ -205,3 +205,179 @@ a#navbarDropdown.nav-link.dropdown-toggle {
  border-right: 1px solid #EDEDED;
  height: 83px;
 }
+
+.user-pic {
+  margin-top: 20px;
+ display: block;
+ width: 34px;
+ height: 34px;
+ left: 1132px;
+ top: 27px;
+ background-image: url(/static/imgs/Ellipse.jpg);
+
+}
+a.nav-link.name-surname {
+  margin-top: 12px;
+ height: 13px;
+
+
+
+font-family: Open Sans, sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 24px;
+/* or 200% */
+
+
+color: #000000 !important;
+}
+
+.down-arrow {
+ display: block;
+ margin-top: 30px;
+ margin-right: 40px;
+ width: 11px;
+ height: 5px;
+
+background-image: url(/static/imgs/Polygon.png);
+}
+
+
+.tooltiptext {
+
+
+  visibility: hidden;
+  width: 178px;
+ height:250px;
+ background: #FFFFFF;
+box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.09);
+font-family: Open Sans, sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 24px;
+/* or 200% */
+
+
+color: #000000;
+  text-align: center;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+ top: 80%;
+ left: 79%;
+ text-align: left;
+
+}
+
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+left: 80%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent  #FFFFFF transparent;
+}
+.down-arrow:focus-within .tooltiptext,
+.down-arrow:focus-within .tooltiptext
+{
+  visibility: visible;
+}
+.subtoolemail {
+ margin-left: 10px;
+ font-family: Open Sans, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 19px;
+/* identical to box height, or 158% */
+
+
+color: #7F7B7B;
+}
+
+.view-profile-btn {
+ width: 109px;
+ padding:5px;
+ margin-top: 10px;
+ margin-left: 10px;
+ border: 1px solid #D72130;
+ background-color: #D72130;
+ font-family: Open Sans, sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 19px;
+/* identical to box height, or 158% */
+
+ text-align: center;
+color: #FFFFFF;
+}
+.nameintools{
+ font-family: Open Sans, sans-serif;
+ font-style: normal;
+ font-weight: 600;
+ font-size: 12px;
+ line-height: 24px;
+ /* or 200% */
+
+
+ color: #000000;
+
+  top: 80%;
+  left: 70%;
+  text-align: left;
+  padding-left:10px;
+}
+
+.log-o {
+
+    font-family: Open Sans, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #000000 !important;
+    text-decoration: none;
+    padding: 10px 20px 0px 10px;
+    width: 100%;
+    display: block;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+    margin-top: 1px;
+
+}
+.log-o1 {
+
+    font-family: Open Sans, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #000000 !important;
+    text-decoration: none;
+    padding: 10px 20px 0px 10px;
+    width: 100%;
+    display: block;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+    margin-top: 15px;
+
+}
+
+.log-o:hover,
+.log-o:hover:focus-within {
+  outline: none;
+  color: #D72130 !important;
+}
+
+.log-o1:hover,
+.log-o:hover:focus-within {
+  outline: none;
+  color: #D72130 !important;
+}

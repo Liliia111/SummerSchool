@@ -1,8 +1,27 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css';
+import React from "react";
+import PropTypes from "prop-types";
+import axios from '../../axios';
+import "./style.css";
 
-function Header() {
+class Header extends React.Component{
+  state = {
+    loggedUser: {},
+    logged: true
+  };
+
+  componentDidMount() {
+        axios.get(`/api/v1/user/self/`)
+        .then(res => {
+          const loggedUser = res.data;
+          this.setState({ loggedUser });
+          console.log(articleId);
+        })
+        .catch(res => {
+          this.setState({ logged: false });
+        });
+  }
+
+    render() {
     return (
        <nav className="navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="#">
@@ -42,16 +61,40 @@ function Header() {
             </div>
             <div className="vl" style={{marginLeft: '70px'}} />
           </ul>
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
+
+          {this.state.logged == true && ( <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+          <span className="user-pic" />
+        </li>
+        <li className="nav-item">
+          <a className="nav-link name-surname" href="#" tabIndex={-1} aria-disabled="false">Ivan Baloh</a>
+        </li>
+        <li className="nav-item">
+
+          <span className="down-arrow" href="#" tabIndex={-1} aria-disabled="false">
+            <span className="tooltiptext"><span className="nameintools">Ivan Baloh</span><br />
+              <span className="subtoolemail">ivanbaloh@gmail.com</span>
+              <div className="view-profile-btn">VIEW PROFILE</div>
+            <span className="log-o1">Personal</span>
+            <span className="log-o">Change password</span>
+            <span className="log-o">Log out</span>
+            </span>
+
+
+          </span>
+        </li>
+         </ul>
+        )}
+
+        {this.state.logged == false && (<ul className="navbar-nav mr-auto"><li className="nav-item">
               <a className="nav-link sign-up-header" href="http://localhost:8000/registration/" tabIndex={-1} aria-disabled="false">Sign up</a>
             </li>
             <li className="nav-item">
               <div className="sign-in-sec2">
                 <a className="nav-link log-in-header" href="http://localhost:8000/login" tabIndex={-1} aria-disabled="false">Log in</a>
             </div>
-            </li>
-          </ul>
+            </li> </ul>)}
+
           <ul className="navbar-nav mr-auto">
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle leng" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +110,8 @@ function Header() {
           </ul>
         </div>
       </nav>
-    )
+    );
+}
 }
 
 export default Header;
