@@ -44,7 +44,7 @@ class PhotoOfTheDay extends React.Component {
                         <div className="gradient"/>
                         <div className="carousel-caption">
                             <h3>{this.state.popular.headline}</h3>
-                            <p>{this.state.popular.content}</p>
+                            <p>Los Angeles Lakes guard Derek Fisher, right, is pressured by the Denver Nuggets Nene during th efirst quarter of NBA exhibition action on Oct 16</p>
                         </div>
                     </div>
                 </div>
