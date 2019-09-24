@@ -15,19 +15,19 @@
     margin-left: -1px;
 }
 
-.nav-list li {
+.nav-list.fetf li {
     padding-top: 7px;
     color: black;
     padding-bottom: 6px;
     opacity: 0.60;
 }
 
-.nav-list li a:hover:before {
+.nav-list.fetf li a:hover:before {
     margin-left: 0;
     opacity: 1;
 }
 
-ul.nav-list  {
+ul.nav-list.fetf  {
     list-style: none;
     list-style-type: none;
     padding: 0;
@@ -54,7 +54,7 @@ input[type=submit] {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.nav-list li a:before {
+.nav-list.fetf li a:before {
     content: "\f14f";
     font-family: Open Sans, serif;
     font-style: normal;
