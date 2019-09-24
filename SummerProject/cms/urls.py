@@ -1,8 +1,7 @@
-from django.conf.urls import url
 from django.urls import path
-from .views import CommentView, CmsArticleView
+from .views import CommentView, ArticleView
 
 urlpatterns = [
-    path('article/', CmsArticleView.as_view()),
+    path('article/', ArticleView.as_view()),
     path('comment/', CommentView.as_view()),
 ]
