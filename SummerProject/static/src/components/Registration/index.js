@@ -44,7 +44,7 @@ class Registration extends React.Component {
                     'password': this.state.password,
                 })
                 .then(() => {
-                    this.props.history.push('/login')
+                    main
                 })
                 .catch(() => {
                     this.setState({error: true})
@@ -77,7 +77,7 @@ class Registration extends React.Component {
                     <Link to="/login/" className="login-link">Already have an account?</Link>
                     <Link to="/login/" className="btn btn-primary login login-link">Login</Link>
                 </div>
-                <div className="left-part bg">
+                <div className="backgr-photo bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
 
