@@ -10,11 +10,21 @@ class ArticleView(View):
         # here must be validation method
         data = request.body.decode('utf8')
         data = json.loads(data)
-        article = Article(headline=data["headline"], photo=data["photo"], video=data["video"], author=request.user,
+        article = Article.create(headline=data["headline"], photo=data["photo"], video=data["video"], author=request.user,
                           source=data["source"], content=data["content"], team=data["team"],
                           category=data["category"])
-        article.save()
         response = HttpResponse(status=201)
+        response['article_id'] = article.id
+        return response
+
+    def put(self, request):
+        # here must be validation method
+        data = request.body.decode('utf8')
+        data = json.loads(data)
+        article = Article.update(headline=data["headline"], photo=data["photo"], video=data["video"], author=request.user,
+                          source=data["source"], content=data["content"], team=data["team"],
+                          category=data["category"])
+        response = HttpResponse(status=202)
         response['article_id'] = article.id
         return response
 
