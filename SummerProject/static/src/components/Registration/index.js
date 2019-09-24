@@ -44,11 +44,9 @@ class Registration extends React.Component {
                     'password': this.state.password,
                 })
                 .then(() => {
-                    main
+                    this.props.history.push('/login')
                 })
-                .catch(() => {
-                    this.setState({error: true})
-                })
+
         }
     };
 
@@ -81,7 +79,7 @@ class Registration extends React.Component {
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
 
-                <div className="right-part background">
+                <div className="main background">
                     <h1>Create Account</h1>
                     <div className="link-button">
                         <div className="social-log">
