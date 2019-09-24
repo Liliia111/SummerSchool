@@ -32,3 +32,34 @@ class Article(models.Model, HitCountMixin):
     hit_count_generic = GenericRelation(
         HitCount, object_id_field='object_pk',
         related_query_name='hit_count_generic_relation')
+
+    def __str__(self):
+        return self.headline
+
+    @staticmethod
+    def create(headline, author,  content, photo=None, video=None,  source=None, team=None, category=None):
+        article = Article(headline=headline, photo=photo, video=video, author=author,
+                          source=source, content=content, team=team,
+                          category=category)
+        article.save()
+        return article
+
+    def update(self, headline=None, author=None,  content=None, photo=None, video=None,  source=None, team=None, category=None):
+        if headline:
+            self.headline = headline
+        if author:
+            self.author = author
+        if content:
+            self.content = content
+        if photo:
+            self.photo = photo
+        if video:
+            self.video = video
+        if source:
+            self.source = source
+        if team:
+            self.team = team
+        if category:
+            self.category = category
+
+        self.save()

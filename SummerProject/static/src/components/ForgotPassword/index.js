@@ -62,11 +62,11 @@ class ForgotPassword extends React.Component {
                     <Link to="/registration/" className="login-link">Don't have an account?</Link>
                     <Link to="/registration/" className="btn btn-primary login login-link">Get Started</Link>
                 </div>
-                <div className="left-part bg">
+                <div className="backgr-photo bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
 
-                <div className="right-part background">
+                <div className="main background">
                     <h1>Forgot your password?</h1>
                     <form className="form">
                         <h3>Enter your email address below and we'll get you back on track</h3>
