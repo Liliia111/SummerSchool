@@ -6,6 +6,7 @@ import Registration from './components/Registration'
 import LogIn from './components/LogIn'
 import Home from "./components/Home";
 import Articles from "./components/Articles";
+import Video from "./components/Video";
 import CheckEmail from "./components/CheckEmail"
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
@@ -22,6 +23,7 @@ export default class MainRoutes extends React.Component {
           <Route path='/registration' component={Registration} />
           <Route path='/login' component={LogIn} />
           <Route path='/articles/:id' component={Articles} />
+          <Route path='/videos/:id' component={Video} />
           <Route path='/check-email' component={CheckEmail} />
           <Route path='/forgotPassword' component={ForgotPassword} />
           <Route path='/resetPassword' component={ResetPassword}/>

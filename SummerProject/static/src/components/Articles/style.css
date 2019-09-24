@@ -1,6 +1,7 @@
 .article-view{
     background: #FFFFFF;
     max-width: 1440px;
+    height: 2400px;
 }
 
 .imgBx img{
@@ -9,6 +10,7 @@
     height: 544px;
     left: 250px;
     top: 161px;
+    z-index: 1;
 }
 
 .text-article {
@@ -98,11 +100,30 @@
     color: rgba(204, 211, 224, 0.301628);
 }
 
+.left-txt{
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 95px;
+    top: 179px;
+    transform: rotate(90deg);
+}
+
+.left-txt h1{
+    font-family: Roboto Condensed, monospace;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 141px;
+    line-height: 192px;
+    letter-spacing: 1.25893px;
+    color: rgba(204, 211, 224, 0.301628);
+}
+
 .line-circle {
     position: absolute;
     width: 814px;
     left: 250px;
-    top: 1080px;
+    top: 1680px;
 }
 .line-circle hr{
     background: #D8D8D8;
@@ -129,55 +150,15 @@
     text-align: center;
 }
 
-.grid-box{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 1134px;
-    left: 250px;
-    flex-basis: auto;
-    height: 100px;
-    width: 390px;
-}
-
-
-
-.more-article-3{
-    border: 1px solid #EDEDED;
-}
-
-.more-article-3 img{
-    float: left;
-    height: 99px;
-    width: 151px;
-}
-
-.more-article-3 h1{
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 16px;
-    line-height: 22px;
-    color: #2B2F43;
-}
-
-.more-article-3 p{
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    margin-right: 69px;
-    line-height: 19px;
-    color: #7F7B7B;
-}
 
 .more-article-2{
-    border: 1px solid #EDEDED;
+    border: 1px solid #B2B2B2;
+    height: 98px;
 }
 
 .more-article-2 img{
     float: left;
+    height: 97px;
 }
 
 .more-article-2 h1{
@@ -201,12 +182,13 @@
 }
 
 .more-article-1{
-    border: 1px solid #EDEDED;
+    border: 1px solid #B2B2B2;
+    height: 98px;
 }
 
 .more-article-1 img{
     float: left;
-    width: 151px;
+    height: 97px;
 }
 
 .more-article-1 h1{
@@ -220,104 +202,6 @@
 }
 
 .more-article-1 p{
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 19px;
-    margin-right: 69px;
-    color: #7F7B7B;
-}
-
-.grid-box-2{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 1134px;
-    left: 670px;
-    flex-basis: auto;
-    height: 100px;
-    width: 390px;
-}
-
-.more-article-6{
-    border: 1px solid #EDEDED;
-}
-
-.more-article-6 img{
-    float: left;
-    height: 99px;
-    width: 151px;
-}
-
-.more-article-6 h1{
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 16px;
-    line-height: 22px;
-    color: #2B2F43;
-}
-
-.more-article-6 p{
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    margin-right: 69px;
-    line-height: 19px;
-    color: #7F7B7B;
-}
-
-.more-article-5{
-    border: 1px solid #EDEDED;
-}
-
-.more-article-5 img{
-    float: left;
-}
-
-.more-article-5 h1{
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 22px;
-    margin-top: 16px;
-    color: #2B2F43;
-}
-
-.more-article-5 p{
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    margin-right: 69px;
-    line-height: 19px;
-    color: #7F7B7B;
-}
-
-.more-article-4{
-    border: 1px solid #EDEDED;
-}
-
-.more-article-4 img{
-    float: left;
-    width: 151px;
-}
-
-.more-article-4 h1{
-    font-family: Open Sans;
-    margin-top: 16px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 22px;
-    color: #2B2F43;
-}
-
-.more-article-4 p{
     font-family: Open Sans;
     font-style: normal;
     font-weight: normal;
@@ -475,11 +359,6 @@
     }
 }
 
-@media only screen and (max-width: 768px){
-    .more-article-3 p{
-        margin-right: 26px;
-    }
-}
 
 @media only screen and (max-width: 768px){
     .more-article-2 p{
@@ -507,18 +386,7 @@
 }
 
 @media only screen and (max-width: 768px){
-    .more-article-4 p{
-        margin-right: 26px;
-    }
-}
-
-@media only screen and (max-width: 768px){
-    .more-article-5 p{
-        margin-right: 26px;
-    }
-}
-@media only screen and (max-width: 768px){
-    .more-article-6 p{
-        margin-right: 26px;
+    .left-txt{
+        display: none;
     }
 }

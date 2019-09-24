@@ -20,6 +20,7 @@ class Article(models.Model):
     photo = models.URLField(max_length=150)
     video = models.URLField(max_length=150)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    published_date = models.DateTimeField()
     source = models.CharField(max_length=2, choices=Choices.choices)
     content = models.TextField(blank=False)
     team = models.ForeignKey(Team, null=True, on_delete=models.CASCADE)
