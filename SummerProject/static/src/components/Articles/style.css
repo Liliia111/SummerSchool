@@ -231,6 +231,12 @@
     color: #7F7B7B;
 }
 
+.comment_block{
+    position: absolute;
+    left: 250px;
+    top: 980px;
+}
+
 @media only screen and (max-width: 768px) {
     .article-view{
         max-width: 375px;

@@ -201,7 +201,7 @@ class Articles extends Component {
 
     getComments() {
         const items = []
-        for (var i = 0; i < this.state.commentsLength; i++) {
+        for (var i = 0; i < 2; i++) {
             items.push(<div>
                     <div className="user-info">
                         <div className="img-width">
@@ -209,12 +209,12 @@ class Articles extends Component {
                         </div>
                         <div className="user-name-date">
                             <div
-                                className="user-info-name">{this.state.commentsList[i].first_name} {this.state.commentsList[i].last_name}</div>
-                            <div className="comment-date">{this.monthDay(this.state.commentsList[i].date)}</div>
+                                className="user-info-name">LoonTIK</div>
+                            <div className="comment-date">13 octiabria</div>
                         </div>
                     </div>
                     <div className="comment-content">
-                        {this.state.commentsList[i].content}
+                        We need some sleep :c
                     </div>
                 </div>
             )
@@ -311,7 +311,7 @@ class Articles extends Component {
                             )}
                         </div>
                     </div>
-                    {comments.length && <div className="comments">
+                    {1 && <div className="comments">
                         <div>{this.getComments()}</div>
                     </div>}
                 </div>
