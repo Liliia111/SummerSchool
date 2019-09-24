@@ -72,7 +72,7 @@ class Comments extends React.Component {
                     const months_names = ['Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                     const day = new Date().getDate();
                     const month = new Date().getMonth();
-                    var monthDate = `${months_names[month]} ${day}`;
+                    const monthDate = `${months_names[month]} ${day}`;
                     const currentComments = [...this.state.commentsList];
                     currentComments.push({id: 'asdf', content: this.state.comment, date: monthDate, first_name: this.state.loggedUser.first_name, last_name: this.state.loggedUser.last_name})
                     this.setState({comment: '', commentsList: currentComments, commentsLength: currentComments.length} )

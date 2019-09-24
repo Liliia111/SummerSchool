@@ -22,17 +22,6 @@ def test_registration_new_user(client):
 
 
 @pytest.mark.django_db
-def test_registration_new_user_via_facebook(client):
-    data = {
-        "first_name": "Andrii",
-        "last_name": "Stasiuk",
-        "userId": "1234567889753",
-    }
-    response = client.post('/api/v1/user/facebook_registration/', data=data, content_type='application/json')
-    assert response.status_code == 201
-
-
-@pytest.mark.django_db
 def test_registration_user_with_existing_id(client, user):
     data = {
         "first_name": "Andrii",
@@ -94,7 +83,8 @@ def test_logout(client):
 def test_change_data(client, user):
     data = {
         "first_name": "Andrew",
-        "last_name": "New"
+        "last_name": "New",
+        "email": ""
     }
     data1 = {
         "email": user.email,
