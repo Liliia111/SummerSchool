@@ -15,14 +15,6 @@ class ArticleView(View):
         response['article_id'] = article.id
         return response
 
-    def put(self, request):
-        data = request.body.decode('utf8')
-        data = json.loads(data)
-        article = Article.update(headline=data["headline"], photo=data["photo"], video=data["video"], author=request.user,
-                          source=data["source"], content=data["content"])
-        response = HttpResponse(status=202)
-        response['article_id'] = article.id
-        return response
 
     def delete(self, request):
         data = json.loads(request.body.decode('utf-8'))
