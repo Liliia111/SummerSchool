@@ -33,6 +33,7 @@ html, body {
   display: block;
   height: 100%;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .second-level {
@@ -47,6 +48,7 @@ html, body {
   width: 100%;
   display: block;
   height: 100%;
+  cursor: pointer;
 }
 
 .third-level {
@@ -61,9 +63,11 @@ html, body {
   width: 100%;
   display: block;
   height: 100%;
+  outline:none;
+  cursor: pointer;
 }
 
-li {
+.container-sidebar li {
   padding: 0px;
   height: 40px;
 }
@@ -72,7 +76,7 @@ li {
   padding: 0px 0px 0px 64px;
 }
 
-ul {
+.container-sidebar ul {
   list-style-type: none;
   top: 0;
   height: 100vh;
@@ -120,8 +124,10 @@ ul {
 .container-sidebar > ul > li > ul > li > ul > li:focus-within .third-level {
   outline: none;
   color: #D72130 !important;
+  text-decoration: none;
 }
-
+a{
+outline:none;}
 .container-sidebar > ul > li > ul > li:hover,
 .container-sidebar > ul > li > ul > li:focus-within {
   outline: none;

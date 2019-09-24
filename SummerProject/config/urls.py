@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/v1/user/', include('user.urls')),
     path('api/v1/articles/', include('articles.urls')),
     path('api/v1/', include('articles.urls')),
+    path('api/v1/cms/', include('cms.urls')),
     re_path(r'.*', views.index),
 ]

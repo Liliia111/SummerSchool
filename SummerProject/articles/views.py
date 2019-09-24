@@ -1,16 +1,22 @@
-from django.utils import timezone
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
+from django.forms import model_to_dict
 from django.views import View
 from articles.models import Article
 from user.models import User
 from categories.models import Category
 from django.forms.models import model_to_dict
+from hitcount.views import HitCountDetailView
 from django.shortcuts import get_object_or_404
 from django.db import transaction
 import json
 from django.db.models import Count
-from .forms import CommentForm
 from datetime import datetime
+from articles.models import Article
+from .models import Article, Comment
+from user.models import User
+
+
+MOST_POPULAR_COUNT = 3
 
 
 class ArticleDetailView(View):
@@ -31,27 +37,67 @@ class ArticleDetailView(View):
         return JsonResponse(res)
 
 
+
+""" View for comment backend"""
+
+
+def user_data_adding(comments_data, user_ids):
+    for i in range(len(user_ids)):
+        user = get_object_or_404(User, id=user_ids[i]['user_id'])
+        user_data = {
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+        }
+        comments_data[i].update(user_data)
+
+    return comments_data
+
+
+""" View for comment backend"""
+
+
 @transaction.atomic
 def comments_view(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     if request.method == "GET":
-        data = list(article.comments.all().values())
+        comments_data = list(article.comments.all().values('id', 'content', 'date'))
+        user_ids = list(article.comments.values('user_id'))
+        data = user_data_adding(comments_data, user_ids)
         return JsonResponse(data, safe=False)
     elif request.method == 'POST':
         data = request.body.decode('utf8')
         data = json.loads(data)
-        form = CommentForm(data)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = request.user
-            comment.save()
-            article.comments.add(comment)
-            response = HttpResponse(status=201)
-            response['comment_id'] = comment.id
-            response['article_id'] = article_id
-            return response
+        comment = Comment(content=data["comment"], user=request.user)
+        comment.save()
+        article.comments.add(comment)
+        response = HttpResponse(status=201)
+        response['comment_id'] = comment.id
+        response['article_id'] = article_id
+        return response
     else:
         return HttpResponseBadRequest
+
+
+""" View for most popular articles"""
+
+
+class ArticleCountHitDetailView(HitCountDetailView):
+    model = Article
+    count_hit = True  # set to True if you want it to try and count the hit
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class MostPopularView(View):
+    def get(self, request):
+        articles = Article.objects.order_by("-hit_count_generic__hits")[:MOST_POPULAR_COUNT]
+        popular_list = [model_to_dict(article) for article in articles]
+        return JsonResponse(popular_list, safe=False)
+
+
+""" View for most commented articles"""
 
 
 @transaction.atomic

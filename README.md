@@ -43,6 +43,22 @@ To run project:
 ```bash
 python3 manage.py runserver
 ```
+To use hitcount package, in **hitcount/models.py** inside **HitCount** class change **object_pk** type from TextField to IntegerField:
+```bash
+object_pk = models.IntegerField('object ID')
+```
+### Celery configuration
+To use Celery, install packages from requirements.txt (or run ```pip3 install celery``` and ```pip3 install celery redis```). Then install Redis as a Celery “broker” through ranning these commands:
+```bash
+$ wget http://download.redis.io/releases/redis-5.0.5.tar.gz
+$ tar xzf redis-5.0.5.tar.gz
+$ cd redis-5.0.5
+$ make
+```
+Run Redis with:
+```bash
+$ src/redis-server
+```
 ## UI setup
 Install Node.js:
 ```bash

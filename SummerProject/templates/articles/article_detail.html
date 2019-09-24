@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aaa</title>
+</head>
+<body>
+<p>{{object.content}}</p>
+<div>
+    <h2>Hitcount Info</h2>
+    <dl>
+      <dt>Total Hits:</dt>
+      <dd>{{ hitcount.total_hits }}</dd>
+      <dt>The unique PK is:</dt>
+      <dd>{{ hitcount.pk }}</dd>
+      <dt>Hit counted?</dt>
+      <dd id="hit-counted">
+        <i id="hit-counted-value">{{ hitcount.hit_counted }}</i>
+      </dd>
+      <dt>Hit response:</dt>
+      <dd id="hit-response">{{ hitcount.hit_message }}</dd>
+    </dl>
+  </div>
+</body>
+</html>

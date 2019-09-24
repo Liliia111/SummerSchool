@@ -41,7 +41,7 @@ class Sidebar extends React.Component {
                         <ul>
                           {categories.subcategories.map(subcategories => (
                             <li>
-                              <a className="third-level" key={subcategories.id}>
+                              <a href={"http://localhost:8000/articles/" + subcategories.id + "/"} className="third-level" key={subcategories.id}>
                                 {subcategories.name}
                               </a>
                             </li>
@@ -54,10 +54,10 @@ class Sidebar extends React.Component {
               )}
             </li>
           ))}
-          <div class="social-media-section">
+          <div className="social-media-section">
             <ul>
               <li>
-                <a class="follow">Follow</a>
+                <a className="follow">Follow</a>
               </li>
               <li>
                 <a>

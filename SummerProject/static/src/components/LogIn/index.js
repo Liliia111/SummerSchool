@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mainLogInFlow.css'
 import './style.css';
@@ -48,11 +48,11 @@ class Login extends React.Component {
                     <Link to="/registration/" className="login-link">Don't have an account?</Link>
                     <Link to="/registration/" className="btn btn-primary login login-link">Get Started</Link>
                 </div>
-                <div className="left-part bg">
+                <div className="backgr-photo bg">
                     <img src="/static/imgs/login.jpg" alt="BG"/>
                 </div>
 
-                <div className="right-part background">
+                <div className="main background">
                     <h1>Log in to Sport News</h1>
                     <form onSubmit={this.submitHandler} className="form">
                         <div className="passw-email">
@@ -64,7 +64,7 @@ class Login extends React.Component {
                             </div>
                             <div className="password">
                                 <label>Password</label>
-                                 <Link to="/forgotPassword" className="password-link">Forgot password?</Link>
+                                <Link to="/forgotPassword" className="password-link">Forgot password?</Link>
                             </div>
                             <div>
                                 <div className="form-group">
@@ -84,7 +84,7 @@ class Login extends React.Component {
                             </div>
                         }
                         <div className="log-in-mobile">
-                             <Link to="/registration/" className="login-link-mobile">Don't have an account?</Link>
+                            <Link to="/registration/" className="login-link-mobile">Don't have an account?</Link>
                         </div>
                     </form>
                 </div>

@@ -40,10 +40,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Toggle sandbox mode (when running in DEBUG mode)
-SENDGRID_SANDBOX_MODE_IN_DEBUG=False
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 # echo to stdout or any other file-like object that is passed to the backend via the stream kwarg.
-SENDGRID_ECHO_TO_STDOUT=True
+SENDGRID_ECHO_TO_STDOUT = True
 
 ALLOWED_HOSTS = []
 
@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'user',
     'articles',
     'categories',
+    'hitcount',
+    'cms',
 ]
 
 MIDDLEWARE = [
@@ -102,8 +104,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'summer_pr_db',
-        'USER': 'milaviex',
-        'PASSWORD': '210800',
+        'USER': POSTGRES_DB_USERNAME,
+        'PASSWORD': POSTGRES_DB_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -147,3 +149,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+
+SITE_URL = 'localhost:8000/'
+# CELERY STUFF
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+HITCOUNT_KEEP_HIT_IN_DATABASE = { 'days': 1 }
+
+HITCOUNT_HITS_PER_IP_LIMIT = 0

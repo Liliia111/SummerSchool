@@ -13,7 +13,7 @@ function Footer() {
                                 <div>
                                     <h5 className="title">COMPANY INFO</h5>
                                 </div>
-                                <ul className="nav-list">
+                                <ul className="nav-list fetf">
                                     <li><a href="#">About Sport News</a></li>
                                     <li><a href="#">News/In the Press</a></li>
                                     <li><a href="#">Advertising</a></li>
@@ -25,7 +25,7 @@ function Footer() {
                                 <div>
                                     <h5 className="title">CONTRIBUTORS</h5>
                                 </div>
-                                <ul className="nav-list">
+                                <ul className="nav-list fetf">
                                     <li><a href="#">Featured Writers Program</a></li>
                                     <li><a href="#">Featured Team Writers Program</a></li>
                                     <li><a href="#">Internship Program</a></li>
@@ -35,7 +35,7 @@ function Footer() {
                                 <div>
                                     <h5 className="title">NEWSLETTER</h5>
                                 </div>
-                                <ul className="nav-list">
+                                <ul className="nav-list fetf">
                                     <li><a href="#">Sign up to recieve the latest in sport news</a></li>
                                     <form className="subscribe-form">
                                         <div className="subscribe">

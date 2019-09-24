@@ -15,22 +15,23 @@
     margin-left: -1px;
 }
 
-.nav-list li {
+.nav-list.fetf li {
     padding-top: 7px;
     color: black;
     padding-bottom: 6px;
     opacity: 0.60;
 }
 
-.nav-list li a:hover:before {
+.nav-list.fetf li a:hover:before {
     margin-left: 0;
     opacity: 1;
 }
 
-ul {
+ul.nav-list.fetf  {
     list-style: none;
+    list-style-type: none;
     padding: 0;
-    width: 400px;
+    min-width: 400px;
     margin-left: 10px;
 }
 
@@ -53,7 +54,7 @@ input[type=submit] {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.nav-list li a:before {
+.nav-list.fetf li a:before {
     content: "\f14f";
     font-family: Open Sans, serif;
     font-style: normal;
@@ -149,7 +150,7 @@ form.subscribe-form::after {
     color: black;
 }
 
-img {
+.sign-up img {
     vertical-align: middle;
     border-style: none;
     margin-right: 10px;

@@ -1,5 +1,5 @@
 import pytest
-from article.models import Article, Comment
+from articles.models import Article, Comment
 from user.models import User
 import random
 import string
@@ -38,7 +38,7 @@ def new_article(db, create_user):
 @pytest.mark.django_db
 def test_comment_post(client, new_article):
     data = {
-        'content': "This is new comment"
+        'comment': "This is new comment"
     }
     response = client.post('/api/v1/articles/{}/comments/'.format(new_article.id),
                            data=data,

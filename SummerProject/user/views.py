@@ -1,41 +1,73 @@
 # pylint: disable=C0111,E1101,R0201
 import json
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate, get_user_model
+from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate as auth, get_user_model
+from django.contrib.auth.hashers import check_password
 from django.views import View
-from django.utils.decorators import method_decorator
 from config.settings import DEFAULT_FROM_EMAIL, HOST
 from .models import User
+from .tasks import send_reset_email_task
 from .validator import is_user_data_valid_for_create, is_data_valid_for_login, is_valid_email_address, \
-    is_valid_password_for_reset
+    is_valid_password_for_reset, is_valid_data_for_update
 
 
 class UserView(View):
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super(UserView, self).dispatch(request, *args, **kwargs)
-
     def put(self, request):
         changes = json.loads(request.body.decode('utf-8'))
 
         first_name = changes['first_name']
         last_name = changes['last_name']
+        email = changes['email']
 
-        request.user.update(
-            first_name=first_name,
-            last_name=last_name,
-        )
-        return HttpResponse(status=200)
+        if is_valid_data_for_update(changes):
+
+            if User.objects.filter(email=changes['email']).exists():
+                return HttpResponseBadRequest()
+
+            request.user.update(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+            )
+            return HttpResponse(status=200)
+
+        else:
+            return HttpResponseBadRequest()
+
+    def get(self, request):
+        logged_user = request.user
+        data = {
+            'first_name': logged_user.first_name,
+            'last_name': logged_user.last_name,
+            'email': logged_user.email,
+        }
+        return JsonResponse(data, safe=False)
 
 
-@csrf_exempt
+def change_password(request):
+    if request.method == 'PUT':
+        changes = json.loads(request.body.decode('utf-8'))
+
+        old_password = changes['old_password']
+        new_password = changes['new_password']
+
+        if check_password(old_password, request.user.password):
+            request.user.update(
+                password=new_password
+            )
+            return HttpResponse(status=200)
+
+        return HttpResponseBadRequest()
+
+    return HttpResponseBadRequest()
+
+
 def registration(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
@@ -43,23 +75,43 @@ def registration(request):
             return HttpResponseBadRequest()
         if User.objects.filter(email=data['email']).exists():
             return HttpResponseBadRequest()
-        user = User.create(
+        User.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
             password=data['password'],
         )
-        return HttpResponse(status=201)
+        response = HttpResponse(status=201)
+        return response
+
     return HttpResponseBadRequest()
 
 
-@csrf_exempt
+def facebook_registration(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        user = User.objects.get(email=data['userId'])
+        if user:
+            auth_login(request, user)
+            return HttpResponse(status=100)
+        else:
+            User.create_user_via_facebook(
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                userId=data['userId'],
+            )
+            response = HttpResponse(status=201)
+            return response
+
+    return HttpResponseBadRequest()
+
+
 def login(request):
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8'))
         if not is_data_valid_for_login(data):
             return HttpResponseBadRequest()
-        user = authenticate(email=data["email"], password=data["password"])
+        user = auth(email=data["email"], password=data["password"])
         if user:
             auth_login(request, user)
             response = HttpResponse(status=200, content_type='application/json')
@@ -68,7 +120,6 @@ def login(request):
     return HttpResponseBadRequest()
 
 
-@csrf_exempt
 def logout(request):
     if request.method == "GET":
         auth_logout(request)
@@ -103,7 +154,7 @@ def forgot_password_email_send(request):
 
                 subject = ''.join(subject.splitlines())
                 email = render_to_string(email_template_name, content)
-                send_mail(subject, email, DEFAULT_FROM_EMAIL, [user.email], html_message=email, fail_silently=False)
+                send_reset_email_task.delay(subject, email, user.email)
 
             return HttpResponse(status=200)
 
@@ -143,3 +194,5 @@ def forgot_password_handler(request):
                 return HttpResponse(status=201)
 
     return HttpResponseBadRequest()
+
+

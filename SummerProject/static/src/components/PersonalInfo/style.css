@@ -1,0 +1,29 @@
+.tab_place {
+	position: absolute;
+	left: 25%;
+	top: 22%;
+	width: 50%;
+
+}
+
+.tab_place a{
+	text-align: center;
+}
+
+a.nav-link:hover {
+	color:#F00F00 !important;
+}
+
+a.change-pasword-nav{
+	text-decoration: none;
+	color: #343a40;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5%;
+}
+
+.change-pasword-nav:hover {
+	color:#F00F00 !important;
+}
+
